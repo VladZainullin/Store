@@ -1,4 +1,4 @@
-namespace Store.Domain.Products.ValueObjects;
+namespace Store.Domain.Entities;
 
 public sealed class ProductDescription
 {
@@ -6,9 +6,9 @@ public sealed class ProductDescription
     {
         Value = value;
     }
-    
+
     public string Value { get; }
-    
+
     public static implicit operator ProductDescription(string value)
     {
         return new ProductDescription(value);

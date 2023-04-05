@@ -1,4 +1,4 @@
-namespace Store.Domain.Products.ValueObjects;
+namespace Store.Domain.Entities;
 
 public sealed class ProductCost
 {
@@ -6,9 +6,9 @@ public sealed class ProductCost
     {
         Value = value;
     }
-    
+
     public decimal Value { get; }
-    
+
     public static implicit operator ProductCost(decimal value)
     {
         return new ProductCost(value);

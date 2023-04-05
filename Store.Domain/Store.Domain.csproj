@@ -6,4 +6,28 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <Compile Update="Entities\ApartmentNumber.cs">
+            <DependentUpon>Address.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Entities\HouseNumber.cs">
+            <DependentUpon>Address.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Entities\StreetName.cs">
+            <DependentUpon>Street.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Entities\CityName.cs">
+            <DependentUpon>City.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Entities\ProductCost.cs">
+            <DependentUpon>Product.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Entities\ProductDescription.cs">
+            <DependentUpon>Product.cs</DependentUpon>
+        </Compile>
+        <Compile Update="Entities\ProductTitle.cs">
+            <DependentUpon>Product.cs</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
 </Project>
