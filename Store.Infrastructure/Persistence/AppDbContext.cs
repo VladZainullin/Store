@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Store.Domain.Products;
 using static System.Reflection.Assembly;
 
 namespace Store.Infrastructure.Persistence;
@@ -12,7 +13,9 @@ internal sealed class AppDbContext : DbContext
     {
         _configuration = configuration;
     }
-    
+
+    public DbSet<Product> Products => Set<Product>();
+
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
         builder.UseNpgsql(_configuration.GetConnectionString("Postgres"));
