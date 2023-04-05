@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Infrastructure", "Sto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Domain", "Store.Domain\Store.Domain.csproj", "{7747369F-17D8-458F-8F84-DD2ABBBCC543}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E9CD21A-A3B8-4DE6-8126-AA1E79ADAC78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,10 @@ Global
 		{7747369F-17D8-458F-8F84-DD2ABBBCC543}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7747369F-17D8-458F-8F84-DD2ABBBCC543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7747369F-17D8-458F-8F84-DD2ABBBCC543}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7747369F-17D8-458F-8F84-DD2ABBBCC543} = {7E9CD21A-A3B8-4DE6-8126-AA1E79ADAC78}
+		{7C5CBF51-F753-41B6-A8C7-7D899A6A0C21} = {7E9CD21A-A3B8-4DE6-8126-AA1E79ADAC78}
+		{FF1F14B4-1E17-4D78-9CB8-5D8376F46453} = {7E9CD21A-A3B8-4DE6-8126-AA1E79ADAC78}
 	EndGlobalSection
 EndGlobal
