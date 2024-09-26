@@ -4,9 +4,11 @@ namespace Domain.Entities;
 
 public sealed class Vodka
 {
+    private Guid _id = Guid.NewGuid();
+    
     private string _title = default!;
     private string _description = default!;
-    
+
     private Vodka()
     {
     }
@@ -23,6 +25,8 @@ public sealed class Vodka
             Description = parameters.Description
         });
     }
+
+    public Guid Id => _id;
 
     public string Title => _title;
 
