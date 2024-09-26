@@ -20,7 +20,7 @@ public sealed class Vodka
             Title = parameters.Title
         });
         
-        SetTitle(new SetVodkaDescriptionParameters
+        SetDescription(new SetVodkaDescriptionParameters
         {
             Description = parameters.Description
         });
@@ -37,7 +37,7 @@ public sealed class Vodka
     
     public string Description => _description;
 
-    public void SetTitle(SetVodkaDescriptionParameters parameters)
+    public void SetDescription(SetVodkaDescriptionParameters parameters)
     {
         _description = parameters.Description.Trim();
     }

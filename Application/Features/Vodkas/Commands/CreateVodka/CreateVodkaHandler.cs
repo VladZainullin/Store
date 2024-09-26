@@ -11,7 +11,7 @@ file sealed class CreateVodkaHandler(IDbContext context) : IRequestHandler<Creat
 {
     public async Task<CreateVodkaResponseDto> Handle(CreateVodkaCommand request, CancellationToken cancellationToken)
     {
-        var oldVodka = await GetManufacturerAsync(request.BodyDto.Title, cancellationToken);
+        var oldVodka = await GetVodkaAsync(request.BodyDto.Title, cancellationToken);
         if (!ReferenceEquals(oldVodka, default))
             return new CreateVodkaResponseDto
             {
@@ -35,7 +35,7 @@ file sealed class CreateVodkaHandler(IDbContext context) : IRequestHandler<Creat
 
     }
     
-    private Task<Vodka?> GetManufacturerAsync(string manufacturerTitle, CancellationToken cancellationToken)
+    private Task<Vodka?> GetVodkaAsync(string manufacturerTitle, CancellationToken cancellationToken)
     {
         return context.Vodkas
             .AsTracking()
