@@ -1,6 +1,7 @@
 using Application.Contracts.Features.Vodkas.Commands.UpdateVodka;
 using Domain.Entities;
-using Domain.Entities.Parameters;
+using Domain.Entities.Vodkas;
+using Domain.Entities.Vodkas.Parameters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;

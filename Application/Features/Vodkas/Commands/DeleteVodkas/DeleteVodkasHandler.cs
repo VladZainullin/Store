@@ -1,5 +1,6 @@
 using Application.Contracts.Features.Vodkas.Commands.DeleteVodkas;
 using Domain.Entities;
+using Domain.Entities.Vodkas;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;

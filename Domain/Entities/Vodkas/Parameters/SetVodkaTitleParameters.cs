@@ -1,4 +1,4 @@
-namespace Domain.Entities.Parameters;
+namespace Domain.Entities.Vodkas.Parameters;
 
 public readonly struct SetVodkaTitleParameters
 {

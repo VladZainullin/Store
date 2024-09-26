@@ -1,6 +1,6 @@
-using Domain.Entities.Parameters;
+using Domain.Entities.Vodkas.Parameters;
 
-namespace Domain.Entities;
+namespace Domain.Entities.Vodkas;
 
 public sealed class Vodka
 {
