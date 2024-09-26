@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Contracts", "Application.Contracts\Application.Contracts.csproj", "{E4A6B05F-72CB-4C76-89ED-966418B0556E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{A311BCE1-B77F-4143-856E-955B1A02D3FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,7 @@ Global
 		{61237686-0B99-4CF0-8DB1-DBD009884D98} = {265478C0-7D19-47BC-ACCE-931F6AABEE39}
 		{BF0DAE24-6724-4E53-8C22-9EB796DF60AC} = {D31DC91A-FEC8-4E7B-9CC6-7D81F68602A9}
 		{E4A6B05F-72CB-4C76-89ED-966418B0556E} = {265478C0-7D19-47BC-ACCE-931F6AABEE39}
+		{A311BCE1-B77F-4143-856E-955B1A02D3FA} = {D31DC91A-FEC8-4E7B-9CC6-7D81F68602A9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{346D90DA-C5EF-4FE9-8E3B-30243402838F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -60,5 +63,9 @@ Global
 		{E4A6B05F-72CB-4C76-89ED-966418B0556E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4A6B05F-72CB-4C76-89ED-966418B0556E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4A6B05F-72CB-4C76-89ED-966418B0556E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A311BCE1-B77F-4143-856E-955B1A02D3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A311BCE1-B77F-4143-856E-955B1A02D3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A311BCE1-B77F-4143-856E-955B1A02D3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A311BCE1-B77F-4143-856E-955B1A02D3FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
