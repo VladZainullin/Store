@@ -1,3 +1,4 @@
+using Domain.Entities.VodkaPositions;
 using Domain.Entities.Vodkas.Parameters;
 
 namespace Domain.Entities.Vodkas;
@@ -8,6 +9,8 @@ public sealed class Vodka
     
     private string _title = default!;
     private string _description = default!;
+
+    private readonly List<VodkaPosition> _positions = []; 
 
     private Vodka()
     {
@@ -41,4 +44,6 @@ public sealed class Vodka
     {
         _description = parameters.Description.Trim();
     }
+
+    public IReadOnlyCollection<VodkaPosition> Positions => _positions.AsReadOnly();
 }
