@@ -7,7 +7,7 @@ public sealed class VodkaPosition
 {
     private Guid _id = Guid.NewGuid();
 
-    private Guid _volumeId;
+    private Guid _measurementUnitPositionId;
 
     private Guid _vodkaId;
     private Vodka _vodka = default!;
@@ -23,9 +23,9 @@ public sealed class VodkaPosition
             Vodka = parameters.Vodka
         });
         
-        SetVolumeId(new SetVodkaPositionVolumeIdParameters
+        SetMeasurementUnitId(new SetVodkaPositionMeasurementUnitPositionIdParameters
         {
-            VolumeId = parameters.MeasurementUnitPositionId
+            MeasurementUnitId = parameters.MeasurementUnitPositionId
         });
     }
 
@@ -41,10 +41,10 @@ public sealed class VodkaPosition
         _vodka = parameters.Vodka;
     }
 
-    public Guid VolumeId => _volumeId;
+    public Guid MeasurementUnitPositionId => _measurementUnitPositionId;
     
-    public void SetVolumeId(SetVodkaPositionVolumeIdParameters parameters)
+    public void SetMeasurementUnitId(SetVodkaPositionMeasurementUnitPositionIdParameters parameters)
     {
-        _volumeId = parameters.VolumeId;
+        _measurementUnitPositionId = parameters.MeasurementUnitId;
     }
 }

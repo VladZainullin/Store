@@ -9,12 +9,13 @@ internal sealed class VodkaPositionConfiguration : IEntityTypeConfiguration<Vodk
     public void Configure(EntityTypeBuilder<VodkaPosition> builder)
     {
         builder.Property(static m => m.Id).HasField("_id").ValueGeneratedNever();
-        builder.Property(static m => m.VolumeId).HasField("_volumeId");
+        builder.Property(static m => m.MeasurementUnitPositionId).HasField("_measurementUnitPositionId");
 
         builder
             .HasIndex(static m => new
             {
-                m.VodkaId, MeasurementUnitPositionId = m.VolumeId
+                m.VodkaId,
+                m.MeasurementUnitPositionId
             })
             .IsUnique();
 
