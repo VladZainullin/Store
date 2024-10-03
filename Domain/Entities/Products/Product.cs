@@ -73,6 +73,22 @@ public sealed class Product
             .ToArray();
         
         _positions.AddRange(addablePositions);
+
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+    
+    public void DeletePositions(DeletePositionsFromProductParameters parameters)
+    {
+        var removableBrands = _positions
+            .Intersect(parameters.ProductPositions)
+            .ToArray();
+        
+        foreach (var measurementUnitPosition in removableBrands)
+        {
+            _positions.Remove(measurementUnitPosition);
+        }
+
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
     
     public DateTimeOffset CreatedAt => _createdAt;
