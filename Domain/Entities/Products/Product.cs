@@ -1,4 +1,5 @@
 using Domain.Entities.ProductPositions;
+using Domain.Entities.ProductPositions.Parameters;
 using Domain.Entities.Products.Parameters;
 
 namespace Domain.Entities.Products;
@@ -55,6 +56,24 @@ public sealed class Product
     }
 
     public IReadOnlyCollection<ProductPosition> Positions => _positions.AsReadOnly();
+
+    public void AddPositions(AddPositionsToProductParameters parameters)
+    {
+        var addablePositions = parameters.Positions
+            .DistinctBy(static b => b.MeasurementUnitPositionId)
+            .ExceptBy(
+                _positions.Select(static b => b.MeasurementUnitPositionId), static b => b.MeasurementUnitPositionId)
+            .Select(p => new CreateProductPositionParameters
+            {
+                Product = this,
+                MeasurementUnitPositionId = p.MeasurementUnitPositionId,
+                TimeProvider = parameters.TimeProvider
+            })
+            .Select(static p => new ProductPosition(p))
+            .ToArray();
+        
+        _positions.AddRange(addablePositions);
+    }
     
     public DateTimeOffset CreatedAt => _createdAt;
     
