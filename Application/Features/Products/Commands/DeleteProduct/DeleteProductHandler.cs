@@ -10,7 +10,7 @@ file sealed class DeleteProductHandler(IDbContext context) : IRequestHandler<Del
 {
     public async Task Handle(DeleteProductCommand request, CancellationToken cancellationToken)
     {
-        var product = await GetProductAsync(request.RouteDto.ProductId, cancellationToken);
+        var product = await GetProductAsync(request.RequestRouteDto.ProductId, cancellationToken);
         if (ReferenceEquals(product, default)) return;
 
         context.Products.Remove(product);

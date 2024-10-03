@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-[Route("products")]
+[Route("api/products")]
 public sealed class ProductsController : AppController
 {
     [HttpPost]
