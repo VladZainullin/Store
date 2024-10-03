@@ -10,11 +10,13 @@ internal sealed class ProductPositionConfiguration : IEntityTypeConfiguration<Pr
     {
         builder.Property(static m => m.Id).HasField("_id").ValueGeneratedNever();
         builder.Property(static m => m.MeasurementUnitPositionId).HasField("_measurementUnitPositionId");
+        builder.Property(static m => m.UpdatedAt).HasField("_updatedAt");
+        builder.Property(static m => m.CreatedAt).HasField("_createdAt");
 
         builder
             .HasIndex(static m => new
             {
-                VodkaId = m.ProductId,
+                m.ProductId,
                 m.MeasurementUnitPositionId
             })
             .IsUnique();

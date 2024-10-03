@@ -2,9 +2,9 @@ namespace Application.Contracts.Features.Products.Commands.AddPositionsToProduct
 
 public sealed class AddPositionsToProductRequestBodyDto
 {
-    public required IReadOnlyCollection<VodkaPositionDto> Positions { get; init; }
+    public required IReadOnlyCollection<ProductPositionDto> Positions { get; init; }
     
-    public sealed class VodkaPositionDto
+    public sealed class ProductPositionDto
     {
         public required string Title { get; init; }
 

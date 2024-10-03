@@ -7,7 +7,7 @@ using Persistence.Contracts;
 
 namespace Application.Features.Products.Commands.UpdateProduct;
 
-file sealed class UpdateProductHandler(IDbContext context) : IRequestHandler<UpdateProductCommand>
+file sealed class UpdateProductHandler(IDbContext context, TimeProvider timeProvider) : IRequestHandler<UpdateProductCommand>
 {
     public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
@@ -16,13 +16,15 @@ file sealed class UpdateProductHandler(IDbContext context) : IRequestHandler<Upd
 
         var setTitleParameters = new SetProductTitleParameters
         {
-            Title = request.BodyDto.Title
+            Title = request.BodyDto.Title,
+            TimeProvider = timeProvider
         };
         product.SetTitle(setTitleParameters);
 
         var setDescriptionParameters = new SetProductDescriptionParameters
         {
-            Description = request.BodyDto.Description
+            Description = request.BodyDto.Description,
+            TimeProvider = timeProvider
         };
         product.SetDescription(setDescriptionParameters);
 
