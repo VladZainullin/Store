@@ -4,8 +4,4 @@
       <PackageReference Include="MediatR.Contracts" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Features\Vodkas\Commands\" />
-    </ItemGroup>
-
 </Project>

@@ -1,5 +1,5 @@
-using Domain.Entities.VodkaPositions;
-using Domain.Entities.Vodkas;
+using Domain.Entities.ProductPositions;
+using Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
 
@@ -7,14 +7,14 @@ namespace Persistence;
 
 public sealed class AppDbContext(DbContextOptions options) : DbContext(options)
 {
-    public DbSet<Vodka> Vodka => Set<Vodka>();
+    public DbSet<Product> Products => Set<Product>();
 
-    public DbSet<VodkaPosition> VodkaPositions => Set<VodkaPosition>();
+    public DbSet<ProductPosition> ProductPositions => Set<ProductPosition>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new VodkaConfiguration());
-        modelBuilder.ApplyConfiguration(new VodkaPositionConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductPositionConfiguration());
         
         base.OnModelCreating(modelBuilder);
     }

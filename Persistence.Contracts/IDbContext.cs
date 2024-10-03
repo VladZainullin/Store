@@ -1,11 +1,11 @@
 using Domain.Entities;
-using Domain.Entities.Vodkas;
+using Domain.Entities.Products;
 
 namespace Persistence.Contracts;
 
 public interface IDbContext
 {
-    IDbSet<Vodka> Vodkas { get; }
+    IDbSet<Product> Products { get; }
     
     Task SaveChangesAsync(CancellationToken cancellationToken);
 }

@@ -1,5 +1,5 @@
-using Domain.Entities.VodkaPositions;
-using Domain.Entities.Vodkas;
+using Domain.Entities.ProductPositions;
+using Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -10,11 +10,11 @@ internal sealed class DbContextAdapter(DbContext context) :
     IMigrationContext,
     ITransactionContext
 {
-    public IDbSet<Vodka> Vodkas { get; } =
-        new DbSetAdapter<Vodka>(context);
+    public IDbSet<Product> Products { get; } =
+        new DbSetAdapter<Product>(context);
     
-    public IDbSet<VodkaPosition> VodkaPositions { get; } =
-        new DbSetAdapter<VodkaPosition>(context);
+    public IDbSet<ProductPosition> ProductPositions { get; } =
+        new DbSetAdapter<ProductPosition>(context);
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {
