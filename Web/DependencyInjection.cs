@@ -6,6 +6,8 @@ internal static class DependencyInjection
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
+        services.AddTransient<TimeProvider>(s => TimeProvider.System);
+        
         services.AddHsts(static configureOptions =>
         {
             configureOptions.Preload = true;

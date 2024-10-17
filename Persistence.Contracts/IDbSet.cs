@@ -1,6 +1,6 @@
 namespace Persistence.Contracts;
 
-public interface IDbSet<T> : IQueryable<T>, IAsyncEnumerable<T>
+public interface IDbSet<in T>
 {
     void Update(T entity);
 

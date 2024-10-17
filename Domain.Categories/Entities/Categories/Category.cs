@@ -1,4 +1,5 @@
 using Domain.Categories.Entities.Categories.Parameters;
+using Domain.Categories.Entities.Products;
 
 namespace Domain.Categories.Entities.Categories;
 
@@ -11,6 +12,7 @@ public sealed class Category
     private Category? _parent;
 
     private readonly List<Category> _children = [];
+    private readonly List<Product> _products = [];
 
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
@@ -32,6 +34,8 @@ public sealed class Category
     }
 
     public Guid Id => _id;
+
+    public IReadOnlyCollection<Product> Products => _products.AsReadOnly();
 
     public void SetTitle(SetCategoryTitleParameters parameters)
     {

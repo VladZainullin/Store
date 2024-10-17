@@ -1,5 +1,5 @@
-using Domain.Entities.ProductPositions;
-using Domain.Entities.Products;
+using Domain.Categories.Entities.Categories;
+using Domain.Categories.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
 
@@ -9,12 +9,11 @@ public sealed class AppDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Product> Products => Set<Product>();
 
-    public DbSet<ProductPosition> ProductPositions => Set<ProductPosition>();
+    public DbSet<Category> Categories => Set<Category>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new ProductConfiguration());
-        modelBuilder.ApplyConfiguration(new ProductPositionConfiguration());
         
         base.OnModelCreating(modelBuilder);
     }

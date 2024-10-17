@@ -26,7 +26,6 @@ public static class Program
             builder.Host.UseSerilog(logger);
 
             builder.Services
-                .AddDomainServices()
                 .AddPersistenceServices()
                 .AddApplicationServices()
                 .AddWebServices();

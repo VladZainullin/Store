@@ -44,11 +44,6 @@ internal class DbSetAdapter<T>(DbContext context) : IDbSet<T> where T : class
         return ((IQueryable<T>)_set).GetEnumerator();
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
     public Type ElementType => ((IQueryable<T>)_set).ElementType;
     public Expression Expression => ((IQueryable<T>)_set).Expression;
     public IQueryProvider Provider => ((IQueryable<T>)_set).Provider;

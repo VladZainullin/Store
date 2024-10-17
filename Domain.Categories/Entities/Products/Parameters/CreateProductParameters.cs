@@ -1,4 +1,4 @@
-namespace Domain.Entities.Products.Parameters;
+namespace Domain.Categories.Entities.Products.Parameters;
 
 public readonly struct CreateProductParameters
 {
