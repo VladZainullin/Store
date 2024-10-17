@@ -1,5 +1,6 @@
 using Domain.Categories.Entities.Categories.Parameters;
 using Domain.Categories.Entities.Products;
+using Domain.Categories.Entities.Products.Parameters;
 
 namespace Domain.Categories.Entities.Categories;
 
@@ -21,7 +22,7 @@ public sealed class Category
     {
     }
 
-    public Category(CreateCategoryParameters parameters)
+    public Category(CreateCategoryParameters parameters) : this()
     {
         SetTitle(new SetCategoryTitleParameters
         {
@@ -59,6 +60,17 @@ public sealed class Category
                 TimeProvider = parameters.TimeProvider
             })));
 
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void AddProduct(AddProductToCategoryParameters parameters)
+    {
+        _products.Add(new Product(new CreateProductParameters
+        {
+            Title = parameters.Product.Title,
+            Description = parameters.Product.Description,
+            TimeProvider = parameters.TimeProvider
+        }));
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
