@@ -31,6 +31,8 @@ public sealed class Category
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
+    public Guid Id => _id;
+
     public void SetTitle(SetCategoryTitleParameters parameters)
     {
         _title = parameters.Title;

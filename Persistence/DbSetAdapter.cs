@@ -5,7 +5,7 @@ using Persistence.Contracts;
 
 namespace Persistence;
 
-internal sealed class DbSetAdapter<T>(DbContext context) : IDbSet<T> where T : class
+internal class DbSetAdapter<T>(DbContext context) : IDbSet<T> where T : class
 {
     private readonly DbSet<T> _set = context.Set<T>();
     

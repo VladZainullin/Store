@@ -2,6 +2,8 @@ using Domain.Entities.ProductPositions;
 using Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
+using Persistence.Contracts.DbSets.CategoryRepositories;
+using Persistence.DbSets;
 
 namespace Persistence;
 
@@ -15,6 +17,8 @@ internal sealed class DbContextAdapter(DbContext context) :
     
     public IDbSet<ProductPosition> ProductPositions { get; } =
         new DbSetAdapter<ProductPosition>(context);
+
+    public ICategoryDbSet Categories { get; } = new CategoryDbSetAdapter(context);
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {
