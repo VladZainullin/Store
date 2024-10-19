@@ -74,6 +74,11 @@ public sealed class Category
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
+    public void RemoveProduct(RemoveProductFromCategoryParameters parameters)
+    {
+        _products.Remove(parameters.Product);
+    }
+
     public void RemoveChildren(RemoveCategoryChildrenParameters parameters)
     {
         foreach (var child in parameters.Children)
