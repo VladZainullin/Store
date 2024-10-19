@@ -28,7 +28,7 @@ public static class Program
             builder.Services
                 .AddPersistenceServices()
                 .AddApplicationServices()
-                .AddWebServices();
+                .AddWebServices(builder.Configuration);
 
             await using var app = builder.Build();
 
