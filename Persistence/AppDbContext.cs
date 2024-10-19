@@ -5,7 +5,7 @@ using Persistence.Configurations;
 
 namespace Persistence;
 
-public sealed class AppDbContext(DbContextOptions options) : DbContext(options)
+internal sealed class AppDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Product> Products => Set<Product>();
 
@@ -14,6 +14,7 @@ public sealed class AppDbContext(DbContextOptions options) : DbContext(options)
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new ProductConfiguration());
+        modelBuilder.ApplyConfiguration(new CategoryConfiguration());
         
         base.OnModelCreating(modelBuilder);
     }
