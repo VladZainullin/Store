@@ -98,4 +98,62 @@ public sealed class Category
         
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
+
+    public void SetProductTitle(SetCategoryProductTitleParameters parameters)
+    {
+        var productWithSameTitle = _products.SingleOrDefault(p => p.Title == parameters.Title);
+        if (!ReferenceEquals(productWithSameTitle, default))
+        {
+            return;
+        }
+        
+        var product = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
+        if (ReferenceEquals(product, default))
+        {
+            return;
+        }
+
+        if (product.Title == parameters.Title)
+        {
+            return;
+        }
+        
+        if (parameters.Title == string.Empty)
+        {
+            return;
+        }
+        
+        product.SetTitle(new SetProductTitleParameters
+        {
+            Title = parameters.Title,
+            TimeProvider = parameters.TimeProvider
+        });
+
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void SetProductDescriptionTitle(SetCategoryProductDescriptionParameters parameters)
+    {
+        var product = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
+        if (ReferenceEquals(product, default))
+        {
+            return;
+        }
+
+        if (product.Description == parameters.Description)
+        {
+            return;
+        }
+        
+        if (parameters.Description == string.Empty)
+        {
+            return;
+        }
+        
+        product.SetDescription(new SetProductDescriptionParameters
+        {
+            Description = parameters.Description,
+            TimeProvider = parameters.TimeProvider
+        });
+    }
 }

@@ -36,22 +36,22 @@ public sealed class Product
     public Guid Id => _id;
 
     public string Title => _title;
-
-    public void SetTitle(SetProductTitleParameters parameters)
-    {
-        _title = parameters.Title.Trim();
-        _updatedAt = parameters.TimeProvider.GetUtcNow();
-    }
     
     public string Description => _description;
-
-    public void SetDescription(SetProductDescriptionParameters parameters)
-    {
-        _description = parameters.Description.Trim();
-        _updatedAt = parameters.TimeProvider.GetUtcNow();
-    }
     
     public DateTimeOffset CreatedAt => _createdAt;
     
     public DateTimeOffset UpdatedAt => _updatedAt;
+
+    internal void SetTitle(SetProductTitleParameters parameters)
+    {
+        _title = parameters.Title.Trim();
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    internal void SetDescription(SetProductDescriptionParameters parameters)
+    {
+        _description = parameters.Description.Trim();
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
 }
