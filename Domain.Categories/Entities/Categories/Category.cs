@@ -36,7 +36,17 @@ public sealed class Category
 
     public Guid Id => _id;
 
+    public string Title => _title;
+    
+    public DateTimeOffset CreatedAt => _createdAt;
+
+    public DateTimeOffset UpdatedAt => _updatedAt;
+
+    public Category? Parent => _parent;
+
     public IReadOnlyCollection<Product> Products => _products.AsReadOnly();
+
+    public IReadOnlyCollection<Category> Children => _children.AsReadOnly();
 
     public void SetTitle(SetCategoryTitleParameters parameters)
     {
