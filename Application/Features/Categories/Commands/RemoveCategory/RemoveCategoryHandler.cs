@@ -1,13 +1,13 @@
-using Application.Contracts.Features.Categories.Commands.DeleteCategory;
+using Application.Contracts.Features.Categories.Commands.RemoveCategory;
 using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Features.Categories.Commands.DeleteCategory;
+namespace Application.Features.Categories.Commands.RemoveCategory;
 
-internal sealed class DeleteCategoryHandler(IDbContext context) : IRequestHandler<DeleteCategoryCommand>
+internal sealed class RemoveCategoryHandler(IDbContext context) : IRequestHandler<RemoveCategoryCommand>
 {
-    public async Task Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
+    public async Task Handle(RemoveCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = await context.Categories.GetAsync(new GetCategoryByIdInputData
         {
