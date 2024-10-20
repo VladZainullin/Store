@@ -1,4 +1,3 @@
-using System.Net;
 using Application.Contracts.Features.Categories.Queries.GetCategoryLogo;
 using MediatR;
 using Minio;
@@ -32,7 +31,6 @@ internal sealed class GetCategoryLogoHandler(
 
         return new GetCategoryLogoResponseDto
         {
-            ContentType = "application/octet-stream",
             Stream = stream
         };
     }

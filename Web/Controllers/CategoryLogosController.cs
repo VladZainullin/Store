@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using Application.Contracts.Features.Categories.Queries.GetCategoryLogo;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +12,7 @@ public sealed class CategoryLogosController : AppController
         [FromRoute] GetCategoryLogoRequestRouteDto routeDto)
     {
         var response = await Sender.Send(new GetCategoryLogoQuery(routeDto), HttpContext.RequestAborted);
-
-        return File(response.Stream, response.ContentType);
+        
+        return File(response.Stream, MediaTypeNames.Application.Octet);
     }
 }
