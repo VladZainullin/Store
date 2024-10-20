@@ -1,0 +1,82 @@
+name: "store"
+
+services:
+  database:
+    image: postgres:14.8-alpine3.18
+    container_name: database
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "123456"
+    volumes:
+      - database_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - database-api-bridge
+  
+  minio:
+    image: 'bitnami/minio:latest'
+    container_name: minio
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    environment:
+      - MINIO_ROOT_USER=minio-root-user
+      - MINIO_ROOT_PASSWORD=minio-root-password
+    networks:
+      - minio-api-bridge
+    volumes:
+      - minio_data:/var/lib/minio/data
+        
+  api:
+    image: store
+    container_name: store
+    build:
+      context: .
+      dockerfile: Web/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+
+      Postgres__Host: "database"
+      Postgres__Port: "5432"
+      Postgres__Username: "postgres"
+      Postgres__Password: "123456"
+      Postgres__SearchPath: "public"
+      Postgres__Database: "postgres"
+
+      Minio__AccessKey: "store"
+      Minio__SecretKey: "TYIkGFpnFTReu9wZzOtJ3Bh6JFiDRqSKfqyxSvkM"
+      Minio__Endpoint: "minio:9000"
+      Minio__Ssl: "false"
+
+      Serilog__Using__0: "Serilog.Sinks.Console"
+      Serilog__Using__1: "Serilog.Sinks.File"
+      Serilog__Using__2: "Serilog.Sinks.Seq"
+      Serilog__Using__3: "Serilog.Exceptions"
+      Serilog__Using__4: "Serilog.Enrichers.Environment"
+      Serilog__Using__5: "Serilog.Enrichers.AssemblyName"
+      Serilog__MinimumLevel: "Debug"
+      Serilog__WriteTo__0__Name: "Console"
+      Serilog__WriteTo__0__Args__theme: "Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme::Code, Serilog.Sinks.Console"
+      Serilog__WriteTo__1__Name: "File"
+      Serilog__WriteTo__1__Args__path: "Logs/log-.txt"
+      Serilog__WriteTo__1__Args__rollingInterval: "Hour"
+      Serilog__WriteTo__2__Name: "Seq"
+      Serilog__WriteTo__2__Args__serverUrl: "http://localhost:5341"
+      Serilog__Enrich__0: "WithExceptionDetails"
+      Serilog__Enrich__1: "FromLogContext"
+      Serilog__Enrich__2: "WithEnvironmentName"
+      Serilog__Enrich__3: "WithEnvironmentUserName"
+      Serilog__Enrich__4: "WithMachineName"
+      Serilog__Enrich__5: "WithAssemblyName"
+      Serilog__Properties__ApplicationName: "Store"
+    ports:
+      - "7171:8080"
+    depends_on:
+      - database
+      - seq
+      - minio
+    networks:
+      - database-api-bridge
+      - minio-api-bridge
