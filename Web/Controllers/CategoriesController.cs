@@ -8,8 +8,9 @@ public sealed class CategoriesController : AppController
 {
     [HttpPost]
     public async Task<ActionResult<CreateCategoryResponseDto>> CreateCategoryAsync(
-        [FromBody] CreateCategoryRequestBodyDto bodyDto)
+        [FromForm] CreateCategoryRequestFormDto formDto)
     {
-        return Ok(await Sender.Send(new CreateCategoryCommand(bodyDto), HttpContext.RequestAborted));
+        return Ok(await Sender.Send(
+            new CreateCategoryCommand(formDto), HttpContext.RequestAborted));
     }
 }
