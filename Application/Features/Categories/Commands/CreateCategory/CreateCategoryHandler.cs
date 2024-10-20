@@ -17,13 +17,13 @@ internal sealed class CreateCategoryHandler(
     public async Task<CreateCategoryResponseDto> Handle(CreateCategoryCommand request,
         CancellationToken cancellationToken)
     {
-        var p = new PutObjectArgs()
+        var putObjectArgs = new PutObjectArgs()
             .WithBucket("categories")
-            .WithObject(request.FormDto.File.FileName)
-            .WithObjectSize(request.FormDto.File.Length)
-            .WithStreamData(request.FormDto.File.OpenReadStream());
+            .WithObject(request.FormDto.Logo.FileName)
+            .WithObjectSize(request.FormDto.Logo.Length)
+            .WithStreamData(request.FormDto.Logo.OpenReadStream());
         
-        await minioClient.PutObjectAsync(p, cancellationToken);
+        await minioClient.PutObjectAsync(putObjectArgs, cancellationToken);
         
         var category = new Category(new CreateCategoryParameters
         {

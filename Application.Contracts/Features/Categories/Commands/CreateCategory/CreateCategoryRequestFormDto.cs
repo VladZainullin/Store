@@ -7,5 +7,5 @@ public sealed class CreateCategoryRequestFormDto
 {
     public required string Title { get; init; }
 
-    public required IFormFile File { get; init; }
+    public required IFormFile Logo { get; init; }
 }
