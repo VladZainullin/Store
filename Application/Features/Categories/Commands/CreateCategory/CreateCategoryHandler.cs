@@ -17,14 +17,6 @@ internal sealed class CreateCategoryHandler(
     public async Task<CreateCategoryResponseDto> Handle(CreateCategoryCommand request,
         CancellationToken cancellationToken)
     {
-        var putObjectArgs = new PutObjectArgs()
-            .WithBucket("categories")
-            .WithObject(request.FormDto.Logo.FileName)
-            .WithObjectSize(request.FormDto.Logo.Length)
-            .WithStreamData(request.FormDto.Logo.OpenReadStream());
-        
-        await minioClient.PutObjectAsync(putObjectArgs, cancellationToken);
-        
         var category = new Category(new CreateCategoryParameters
         {
             Title = request.FormDto.Title,
@@ -32,6 +24,14 @@ internal sealed class CreateCategoryHandler(
         });
 
         context.Categories.Add(category);
+        
+        var putObjectArgs = new PutObjectArgs()
+            .WithBucket("categories")
+            .WithObject(category.LogoId.ToString())
+            .WithObjectSize(request.FormDto.Logo.Length)
+            .WithStreamData(request.FormDto.Logo.OpenReadStream());
+        
+        await minioClient.PutObjectAsync(putObjectArgs, cancellationToken);
 
         await context.SaveChangesAsync(cancellationToken);
 

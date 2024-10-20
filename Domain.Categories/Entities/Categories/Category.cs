@@ -18,7 +18,7 @@ public sealed class Category
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
 
-    private Guid _logoId;
+    private Guid _logoId = Guid.NewGuid();
 
     private Category()
     {
@@ -54,7 +54,7 @@ public sealed class Category
 
     public void SetTitle(SetCategoryTitleParameters parameters)
     {
-        if (_title != parameters.Title)
+        if (_title == parameters.Title)
         {
             return;
         }
@@ -65,7 +65,7 @@ public sealed class Category
 
     public void SetParent(SetCategoryParentParameters parameters)
     {
-        if (_parent != parameters.Parent)
+        if (_parent == parameters.Parent)
         {
             return;
         }
@@ -76,7 +76,7 @@ public sealed class Category
 
     public void SetLogoId(SetCategoryLogoIdParameters parameters)
     {
-        if (_logoId != parameters.LogoId)
+        if (_logoId == parameters.LogoId)
         {
             return;
         }
