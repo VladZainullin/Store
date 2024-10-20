@@ -26,13 +26,23 @@ internal sealed class CreateCategoryHandler(
         context.Categories.Add(category);
 
         await context.SaveChangesAsync(cancellationToken);
-        
+
+        var bucketExistsArgs = new BucketExistsArgs()
+            .WithBucket("categories");
+        var bucketExists = await minioClient.BucketExistsAsync(bucketExistsArgs, cancellationToken);
+        if (!bucketExists)
+        {
+            var makeBucketArgs = new MakeBucketArgs()
+                .WithBucket("categories");
+            await minioClient.MakeBucketAsync(makeBucketArgs, cancellationToken);
+        }
+
         var putObjectArgs = new PutObjectArgs()
             .WithBucket("categories")
             .WithObject(category.LogoId.ToString())
             .WithObjectSize(request.FormDto.Logo.Length)
             .WithStreamData(request.FormDto.Logo.OpenReadStream());
-        
+
         await minioClient.PutObjectAsync(putObjectArgs, cancellationToken);
 
         return new CreateCategoryResponseDto
