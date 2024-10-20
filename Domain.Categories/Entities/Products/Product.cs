@@ -9,10 +9,10 @@ public sealed class Product
     private string _title = default!;
     private string _description = default!;
     
+    private Guid _photo;
+    
     private DateTimeOffset _updatedAt;
     private DateTimeOffset _createdAt;
-
-    private readonly List<Guid> _photos = [];
 
     private Product()
     {
@@ -29,6 +29,12 @@ public sealed class Product
         SetDescription(new SetProductDescriptionParameters
         {
             Description = parameters.Description,
+            TimeProvider = parameters.TimeProvider
+        });
+        
+        SetPhoto(new SetProductPhotoParameters
+        {
+            Photo = parameters.Photo,
             TimeProvider = parameters.TimeProvider
         });
 
@@ -57,9 +63,9 @@ public sealed class Product
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    public void AddPhoto(AddPhotoToProductParameters parameters)
+    public void SetPhoto(SetProductPhotoParameters parameters)
     {
-        _photos.Add(parameters.Photo);
+        _photo = parameters.Photo;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 }

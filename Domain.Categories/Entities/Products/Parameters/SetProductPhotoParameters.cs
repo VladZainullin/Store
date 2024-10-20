@@ -1,6 +1,6 @@
 namespace Domain.Categories.Entities.Products.Parameters;
 
-public sealed class AddPhotoToProductParameters
+public sealed class SetProductPhotoParameters
 {
     public required Guid Photo { get; init; }
 

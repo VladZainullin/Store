@@ -104,7 +104,8 @@ public sealed class Category
         {
             Title = parameters.Product.Title,
             Description = parameters.Product.Description,
-            TimeProvider = parameters.TimeProvider
+            TimeProvider = parameters.TimeProvider,
+            Photo = parameters.Product.Photo
         }));
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
@@ -185,7 +186,7 @@ public sealed class Category
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    public void AddPhotoToProduct(AddPhotoToCategoryProductParameters parameters)
+    public void SetProductPhoto(SetCategoryProductPhotoParameters parameters)
     {
         var product = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
         if (ReferenceEquals(product, default))
@@ -193,7 +194,7 @@ public sealed class Category
             return;
         }
         
-        product.AddPhoto(new AddPhotoToProductParameters
+        product.SetPhoto(new SetProductPhotoParameters
         {
             Photo = parameters.Photo,
             TimeProvider = parameters.TimeProvider

@@ -24,7 +24,7 @@ internal sealed class AddPhotoToProductHandler(
 
         var newPhotoId = Guid.NewGuid();
         
-        category.AddPhotoToProduct(new AddPhotoToCategoryProductParameters
+        category.SetProductPhoto(new SetCategoryProductPhotoParameters
         {
             ProductId = request.RequestRouteDto.ProductId,
             Photo = newPhotoId,

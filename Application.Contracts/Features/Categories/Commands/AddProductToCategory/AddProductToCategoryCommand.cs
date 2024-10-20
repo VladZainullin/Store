@@ -4,4 +4,4 @@ namespace Application.Contracts.Features.Categories.Commands.AddProductToCategor
 
 public sealed record AddProductToCategoryCommand(
     AddProductToCategoryRequestRouteDto RouteDto,
-    AddProductToCategoryRequestBodyDto BodyDto) : IRequest;
+    AddProductToCategoryRequestFormDto FormDto) : IRequest<AddProductToCategoryResponseDto>;
