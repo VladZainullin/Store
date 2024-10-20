@@ -46,6 +46,8 @@ public sealed class Category
 
     public Category? Parent => _parent;
 
+    public Guid LogoId => _logoId;
+
     public IReadOnlyCollection<Product> Products => _products.AsReadOnly();
 
     public IReadOnlyCollection<Category> Children => _children.AsReadOnly();

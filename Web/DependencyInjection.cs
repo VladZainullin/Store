@@ -8,7 +8,7 @@ namespace Web;
 
 internal static class DependencyInjection
 {
-    public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
         if (!EF.IsDesignTime)
         {
@@ -23,6 +23,10 @@ internal static class DependencyInjection
                 s.WithEndpoint(minioOptions.Endpoint);
                 s.WithSSL(minioOptions.Ssl);
             });   
+        }
+        else
+        {
+            services.AddSingleton<IMinioClient>(s => new MinioClient());
         }
         
         services.AddTransient<TimeProvider>(s => TimeProvider.System);

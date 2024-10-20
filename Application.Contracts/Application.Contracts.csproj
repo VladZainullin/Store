@@ -2,8 +2,7 @@
 
     <ItemGroup>
       <PackageReference Include="MediatR.Contracts" />
-      <PackageReference Include="Microsoft.AspNetCore.App" />
-      <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Features" />
     </ItemGroup>
 
 </Project>

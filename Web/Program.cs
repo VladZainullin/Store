@@ -1,5 +1,4 @@
 using Application;
-using Domain;
 using Persistence;
 using Persistence.Contracts;
 using Serilog;
@@ -28,7 +27,7 @@ public static class Program
             builder.Services
                 .AddPersistenceServices()
                 .AddApplicationServices()
-                .AddWebServices(builder.Configuration);
+                .AddWebServices();
 
             await using var app = builder.Build();
 
