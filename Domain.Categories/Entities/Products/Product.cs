@@ -46,6 +46,8 @@ public sealed class Product
     public string Title => _title;
     
     public string Description => _description;
+
+    public Guid Photo => _photo;
     
     public DateTimeOffset CreatedAt => _createdAt;
     

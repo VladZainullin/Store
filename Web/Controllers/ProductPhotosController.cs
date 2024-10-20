@@ -1,4 +1,5 @@
-using Application.Contracts.Features.Categories.Commands.AddPhotoToProduct;
+using System.Net.Mime;
+using Application.Contracts.Features.Categories.Queries.GetProductPhoto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -6,11 +7,12 @@ namespace Web.Controllers;
 [Route("api/categories/{categoryId:guid}/products/{productId:guid}/photos")]
 public sealed class ProductPhotosController : AppController
 {
-    [HttpPost]
-    public async Task<ActionResult<AddPhotoToProductResponseDto>> AddPhotoToProductAsync(
-        [FromRoute] AddPhotoToProductRequestRouteDto routeDto,
-        [FromForm] AddPhotoToProductRequestFormDto formDto)
+    [HttpGet]
+    public async Task<FileResult> GetProductPhotoAsync(
+        [FromRoute] GetProductPhotoRequestRouteDto routeDto)
     {
-        return Ok(await Sender.Send(new AddPhotoToProductCommand(routeDto, formDto), HttpContext.RequestAborted));
+        var response = await Sender.Send(new GetProductPhotoQuery(routeDto));
+        
+        return File(response.Stream, MediaTypeNames.Application.Octet);
     }
 }
