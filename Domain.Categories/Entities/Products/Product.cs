@@ -12,6 +12,8 @@ public sealed class Product
     private DateTimeOffset _updatedAt;
     private DateTimeOffset _createdAt;
 
+    private readonly List<Guid> _photos = [];
+
     private Product()
     {
     }
@@ -52,6 +54,12 @@ public sealed class Product
     internal void SetDescription(SetProductDescriptionParameters parameters)
     {
         _description = parameters.Description.Trim();
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void AddPhoto(AddPhotoToProductParameters parameters)
+    {
+        _photos.Add(parameters.Photo);
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 }

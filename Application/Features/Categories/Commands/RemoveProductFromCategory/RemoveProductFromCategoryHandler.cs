@@ -6,7 +6,7 @@ using Persistence.Contracts.DbSets.Categories.Queries;
 
 namespace Application.Features.Categories.Commands.RemoveProductFromCategory;
 
-internal class RemoveProductFromCategoryHandler(IDbContext context) : IRequestHandler<RemoveProductFromCategoryCommand>
+internal class RemoveProductFromCategoryHandler(IDbContext context, TimeProvider timeProvider) : IRequestHandler<RemoveProductFromCategoryCommand>
 {
     public async Task Handle(RemoveProductFromCategoryCommand request, CancellationToken cancellationToken)
     {
@@ -25,7 +25,8 @@ internal class RemoveProductFromCategoryHandler(IDbContext context) : IRequestHa
         
         category.RemoveProduct(new RemoveProductFromCategoryParameters
         {
-            Product = removableProduct
+            Product = removableProduct,
+            TimeProvider = timeProvider
         });
 
         await context.SaveChangesAsync(cancellationToken);

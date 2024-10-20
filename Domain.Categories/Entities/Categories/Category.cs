@@ -112,6 +112,7 @@ public sealed class Category
     public void RemoveProduct(RemoveProductFromCategoryParameters parameters)
     {
         _products.Remove(parameters.Product);
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void RemoveChildren(RemoveCategoryChildrenParameters parameters)
@@ -180,5 +181,24 @@ public sealed class Category
             Description = parameters.Description,
             TimeProvider = parameters.TimeProvider
         });
+
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void AddPhotoToProduct(AddPhotoToCategoryProductParameters parameters)
+    {
+        var product = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
+        if (ReferenceEquals(product, default))
+        {
+            return;
+        }
+        
+        product.AddPhoto(new AddPhotoToProductParameters
+        {
+            Photo = parameters.Photo,
+            TimeProvider = parameters.TimeProvider
+        });
+
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 }
