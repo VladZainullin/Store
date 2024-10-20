@@ -24,6 +24,8 @@ internal sealed class CreateCategoryHandler(
         });
 
         context.Categories.Add(category);
+
+        await context.SaveChangesAsync(cancellationToken);
         
         var putObjectArgs = new PutObjectArgs()
             .WithBucket("categories")
@@ -32,8 +34,6 @@ internal sealed class CreateCategoryHandler(
             .WithStreamData(request.FormDto.Logo.OpenReadStream());
         
         await minioClient.PutObjectAsync(putObjectArgs, cancellationToken);
-
-        await context.SaveChangesAsync(cancellationToken);
 
         return new CreateCategoryResponseDto
         {
