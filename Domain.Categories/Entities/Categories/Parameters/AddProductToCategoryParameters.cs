@@ -1,7 +1,7 @@
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 namespace Domain.Categories.Entities.Categories.Parameters;
 
-public sealed class AddProductToCategoryParameters
+public readonly struct AddProductToCategoryParameters
 {
     public required ProductParameter Product { get; init; }
 

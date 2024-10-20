@@ -1,6 +1,6 @@
 namespace Domain.Categories.Entities.Categories.Parameters;
 
-public sealed class SetCategoryProductPhotoParameters
+public readonly struct SetCategoryProductPhotoParameters
 {
     public required Guid ProductId { get; init; }
     

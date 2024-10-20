@@ -1,3 +1,4 @@
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 namespace Domain.Categories.Entities.Categories.Parameters;
 
 public readonly struct SetCategoryParentParameters
