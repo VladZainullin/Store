@@ -76,12 +76,6 @@ public sealed class Category
 
     public void SetLogoId(SetCategoryLogoIdParameters parameters)
     {
-        if (_logoId == parameters.LogoId)
-        {
-            return;
-        }
-        
-        _logoId = parameters.LogoId;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 

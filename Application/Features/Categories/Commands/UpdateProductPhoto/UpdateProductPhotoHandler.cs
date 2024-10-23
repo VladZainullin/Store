@@ -32,6 +32,8 @@ internal sealed class UpdateProductPhotoHandler(IDbContext context, IMinioClient
             ProductId = request.RouteDto.ProductId,
         });
 
+        await context.SaveChangesAsync(cancellationToken);
+
         const string productPhotosBucket = "product-photos";
         var bucketExists = await minioClient.BucketExistsAsync(
             new BucketExistsArgs()
