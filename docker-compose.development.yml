@@ -14,6 +14,17 @@ services:
       - "5432:5432"
     networks:
       - database-api-bridge
+        
+  seq:
+    image: datalust/seq:2024.3
+    container_name: seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "8020:80"
+      - "5341:5341"
+    volumes:
+      - seq_data:/var/lib/seq/data
   
   minio:
     image: 'bitnami/minio:latest'
@@ -80,3 +91,8 @@ services:
     networks:
       - database-api-bridge
       - minio-api-bridge
+
+volumes:
+  database_data:
+  seq_data:
+  minio_data:
