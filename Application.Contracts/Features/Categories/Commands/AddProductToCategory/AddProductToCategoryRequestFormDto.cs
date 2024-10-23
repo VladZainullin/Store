@@ -8,5 +8,7 @@ public sealed class AddProductToCategoryRequestFormDto
 {
     public required string Title { get; init; }
 
+    public required string Description { get; init; }
+
     public required IFormFile Photo { get; init; }
 }

@@ -26,7 +26,7 @@ public sealed class AddProductToCategoryHandler(
         var productParameter = new AddProductToCategoryParameters.ProductParameter
         {
             Title = request.FormDto.Title,
-            Description = request.FormDto.Title
+            Description = request.FormDto.Description
         };
         category.AddProduct(new AddProductToCategoryParameters
         {
