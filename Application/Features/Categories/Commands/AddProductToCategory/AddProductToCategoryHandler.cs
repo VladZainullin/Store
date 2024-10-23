@@ -31,7 +31,8 @@ public sealed class AddProductToCategoryHandler(
         category.AddProduct(new AddProductToCategoryParameters
         {
             Product = productParameter,
-            TimeProvider = timeProvider
+            TimeProvider = timeProvider,
+            Quantity = request.FormDto.Quantity
         });
 
         await context.SaveChangesAsync(cancellationToken);
