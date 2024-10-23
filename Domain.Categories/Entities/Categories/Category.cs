@@ -105,7 +105,8 @@ public sealed class Category
             Title = parameters.Product.Title,
             Description = parameters.Product.Description,
             TimeProvider = parameters.TimeProvider,
-            Photo = parameters.Product.Photo
+            Photo = parameters.Product.Photo,
+            Quantity = parameters.Quantity
         }));
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
@@ -183,6 +184,32 @@ public sealed class Category
             TimeProvider = parameters.TimeProvider
         });
 
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void SetProductQuantity(SetCategoryProductQuantityParameters parameters)
+    {
+        var product = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
+        if (ReferenceEquals(product, default))
+        {
+            return;
+        }
+
+        if (product.Quantity == parameters.Quantity)
+        {
+            return;
+        }
+
+        if (product.Quantity < 0)
+        {
+            return;
+        }
+        
+        product.SetQuantity(new SetProductQuantityParameters
+        {
+            Quantity = parameters.Quantity,
+            TimeProvider = parameters.TimeProvider
+        });
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 

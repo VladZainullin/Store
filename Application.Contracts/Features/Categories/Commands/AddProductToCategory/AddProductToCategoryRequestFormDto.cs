@@ -10,5 +10,7 @@ public sealed class AddProductToCategoryRequestFormDto
 
     public required string Description { get; init; }
 
+    public required int Quantity { get; init; }
+
     public required IFormFile Photo { get; init; }
 }

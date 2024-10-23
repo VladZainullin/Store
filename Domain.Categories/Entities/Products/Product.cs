@@ -14,6 +14,8 @@ public sealed class Product
     private DateTimeOffset _updatedAt;
     private DateTimeOffset _createdAt;
 
+    private int _quantity;
+
     private Product()
     {
     }
@@ -29,6 +31,12 @@ public sealed class Product
         SetDescription(new SetProductDescriptionParameters
         {
             Description = parameters.Description,
+            TimeProvider = parameters.TimeProvider
+        });
+        
+        SetQuantity(new SetProductQuantityParameters
+        {
+            Quantity = parameters.Quantity,
             TimeProvider = parameters.TimeProvider
         });
         
@@ -53,6 +61,8 @@ public sealed class Product
     
     public DateTimeOffset UpdatedAt => _updatedAt;
 
+    public int Quantity => _quantity;
+
     internal void SetTitle(SetProductTitleParameters parameters)
     {
         _title = parameters.Title.Trim();
@@ -62,6 +72,12 @@ public sealed class Product
     internal void SetDescription(SetProductDescriptionParameters parameters)
     {
         _description = parameters.Description.Trim();
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    internal void SetQuantity(SetProductQuantityParameters parameters)
+    {
+        _quantity = parameters.Quantity;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 

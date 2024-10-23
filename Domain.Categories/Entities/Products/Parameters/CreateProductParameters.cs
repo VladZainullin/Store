@@ -6,6 +6,8 @@ public readonly struct CreateProductParameters
 
     public required string Description { get; init; }
 
+    public required int Quantity { get; init; }
+
     public required Guid Photo { get; init; }
 
     public required TimeProvider TimeProvider { get; init; }
