@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Categories.Commands.UpdateProduct;
+using Application.Contracts.Features.Categories.Commands.UpdateProductInCategory;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -7,11 +7,11 @@ namespace Web.Controllers;
 public sealed class ProductController : AppController
 {
     [HttpPut]
-    public async Task<NoContentResult> UpdateProductAsync(
-        [FromRoute] UpdateProductRequestRouteDto routeDto,
-        [FromBody] UpdateProductRequestBodyDto bodyDto)
+    public async Task<NoContentResult> UpdateProductInCategoryAsync(
+        [FromRoute] UpdateProductInCategoryRequestRouteDto routeDto,
+        [FromBody] UpdateProductInCategoryRequestBodyDto bodyDto)
     {
-        await Sender.Send(new UpdateProductCommand(routeDto, bodyDto), HttpContext.RequestAborted);
+        await Sender.Send(new UpdateProductInCategoryCommand(routeDto, bodyDto), HttpContext.RequestAborted);
 
         return NoContent();
     }

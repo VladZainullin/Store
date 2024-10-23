@@ -1,15 +1,15 @@
-using Application.Contracts.Features.Categories.Commands.UpdateProduct;
+using Application.Contracts.Features.Categories.Commands.UpdateProductInCategory;
 using Domain.Categories.Entities.Categories.Parameters;
 using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Features.Categories.Commands.UpdateProduct;
+namespace Application.Features.Categories.Commands.UpdateProductInCategory;
 
-internal sealed class UpdateProductHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<UpdateProductCommand>
+internal sealed class UpdateProductInCategoryHandler(IDbContext context, TimeProvider timeProvider) : 
+    IRequestHandler<UpdateProductInCategoryCommand>
 {
-    public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateProductInCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = await context.Categories.GetAsync(new GetCategoryByIdInputData
         {
@@ -29,6 +29,13 @@ internal sealed class UpdateProductHandler(IDbContext context, TimeProvider time
         {
             ProductId = request.RouteDto.ProductId,
             Description = request.BodyDto.Description,
+            TimeProvider = timeProvider
+        });
+        
+        category.SetProductQuantity(new SetCategoryProductQuantityParameters
+        {
+            ProductId = request.RouteDto.ProductId,
+            Quantity = request.BodyDto.Quantity,
             TimeProvider = timeProvider
         });
 
