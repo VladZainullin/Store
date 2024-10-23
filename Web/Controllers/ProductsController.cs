@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-[Route("api/categories/{categoryId:guid}/products/{productId:guid}")]
+[Route("api/categories/{categoryId:guid}/products")]
 public sealed class ProductsController : AppController
 {
     [HttpPost]
