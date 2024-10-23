@@ -1,5 +1,6 @@
 using Application.Contracts.Features.Categories.Commands.RemoveCategory;
 using Application.Contracts.Features.Categories.Commands.UpdateCategory;
+using Application.Contracts.Features.Categories.Queries.GetCategory;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -7,6 +8,13 @@ namespace Web.Controllers;
 [Route("api/categories/{categoryId:guid}")]
 public sealed class CategoryController : AppController
 {
+    [HttpGet]
+    public async Task<ActionResult<GetCategoryResponseDto>> GetCategoryAsync(
+        [FromRoute] GetCategoryRequestRouteDto routeDto)
+    {
+        return Ok(await Sender.Send(new GetCategoryQuery(routeDto), HttpContext.RequestAborted));
+    }
+    
     [HttpDelete]
     public async Task<NoContentResult> RemoveCategoryAsync(
         [FromRoute] RemoveCategoryRequestRouteDto routeDto)

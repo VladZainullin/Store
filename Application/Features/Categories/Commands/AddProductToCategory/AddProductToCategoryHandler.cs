@@ -36,17 +36,17 @@ public sealed class AddProductToCategoryHandler(
 
         await context.SaveChangesAsync(cancellationToken);
 
-        var bucketExistsArgs = new BucketExistsArgs().WithBucket("product_photos");
+        var bucketExistsArgs = new BucketExistsArgs().WithBucket("product-photos");
         var exists = await minioClient.BucketExistsAsync(bucketExistsArgs, cancellationToken);
         if (!exists)
         {
             var makeBucketArgs = new MakeBucketArgs()
-                .WithBucket("product_photos");
+                .WithBucket("product-photos");
             await minioClient.MakeBucketAsync(makeBucketArgs, cancellationToken);
         }
 
         var putObjectArgs = new PutObjectArgs()
-            .WithBucket("product_photos")
+            .WithBucket("product-photos")
             .WithObject(productParameter.Photo.ToString())
             .WithObjectSize(request.FormDto.Photo.Length)
             .WithStreamData(request.FormDto.Photo.OpenReadStream());
