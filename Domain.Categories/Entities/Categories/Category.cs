@@ -221,9 +221,8 @@ public sealed class Category
             return;
         }
         
-        product.SetPhoto(new SetProductPhotoParameters
+        product.UpdatePhoto(new SetProductPhotoParameters
         {
-            Photo = parameters.Photo,
             TimeProvider = parameters.TimeProvider
         });
 
