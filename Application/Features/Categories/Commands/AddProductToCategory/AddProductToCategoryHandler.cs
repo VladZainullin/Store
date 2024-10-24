@@ -23,17 +23,15 @@ public sealed class AddProductToCategoryHandler(
             IncludeProducts = true
         }, cancellationToken);
 
-        var productParameter = new AddProductToCategoryParameters.ProductParameter
+        var parameters = new AddProductToCategoryParameters
         {
             Title = request.FormDto.Title,
-            Description = request.FormDto.Description
+            Description = request.FormDto.Description,
+            Quantity = request.FormDto.Quantity,
+            Cost = request.FormDto.Cost,
+            TimeProvider = timeProvider
         };
-        category.AddProduct(new AddProductToCategoryParameters
-        {
-            Product = productParameter,
-            TimeProvider = timeProvider,
-            Quantity = request.FormDto.Quantity
-        });
+        category.AddProduct(parameters);
 
         await context.SaveChangesAsync(cancellationToken);
 
@@ -48,14 +46,14 @@ public sealed class AddProductToCategoryHandler(
 
         var putObjectArgs = new PutObjectArgs()
             .WithBucket("product-photos")
-            .WithObject(productParameter.Photo.ToString())
+            .WithObject(parameters.Photo.ToString())
             .WithObjectSize(request.FormDto.Photo.Length)
             .WithStreamData(request.FormDto.Photo.OpenReadStream());
         await minioClient.PutObjectAsync(putObjectArgs, cancellationToken);
 
         return new AddProductToCategoryResponseDto
         {
-            Photo = productParameter.Photo
+            Photo = parameters.Photo
         };
     }
 }

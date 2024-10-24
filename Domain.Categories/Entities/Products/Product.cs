@@ -16,6 +16,8 @@ public sealed class Product
 
     private int _quantity;
 
+    private decimal _cost;
+
     private Product()
     {
     }
@@ -77,6 +79,12 @@ public sealed class Product
     internal void SetQuantity(SetProductQuantityParameters parameters)
     {
         _quantity = parameters.Quantity;
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    internal void SetCost(SetProductCostParameters parameters)
+    {
+        _cost = parameters.Cost;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 

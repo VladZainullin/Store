@@ -12,5 +12,7 @@ public sealed class AddProductToCategoryRequestFormDto
 
     public required int Quantity { get; init; }
 
+    public required decimal Cost { get; init; }
+
     public required IFormFile Photo { get; init; }
 }

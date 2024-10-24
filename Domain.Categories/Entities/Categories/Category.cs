@@ -94,14 +94,17 @@ public sealed class Category
 
     public void AddProduct(AddProductToCategoryParameters parameters)
     {
-        _products.Add(new Product(new CreateProductParameters
+        var product = new Product(new CreateProductParameters
         {
-            Title = parameters.Product.Title,
-            Description = parameters.Product.Description,
+            Title = parameters.Title,
+            Description = parameters.Description,
             TimeProvider = parameters.TimeProvider,
-            Photo = parameters.Product.Photo,
-            Quantity = parameters.Quantity
-        }));
+            Photo = parameters.Photo,
+            Quantity = parameters.Quantity,
+            Cost = parameters.Cost
+        });
+        
+        _products.Add(product);
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
