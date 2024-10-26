@@ -14,6 +14,18 @@ services:
       - "5432:5432"
     networks:
       - database-api-bridge
+      
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.2
+    container_name: identity_server
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    command: start-dev
+    volumes:
+      - keycloak_data:/var/lib/postgresql/data
         
   seq:
     image: datalust/seq:2024.3
@@ -91,8 +103,15 @@ services:
     networks:
       - database-api-bridge
       - minio-api-bridge
+        
+networks:
+  minio-api-bridge:
+    driver: bridge
+  database-api-bridge:
+    driver: bridge
 
 volumes:
   database_data:
   seq_data:
   minio_data:
+  keycloak_data:
