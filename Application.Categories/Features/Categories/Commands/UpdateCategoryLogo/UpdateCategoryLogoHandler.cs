@@ -20,7 +20,7 @@ internal sealed class UpdateCategoryLogoHandler(IDbContext context, IMinioClient
             IncludeProducts = true
         }, cancellationToken);
         
-        category.SetLogoId(new SetCategoryLogoIdParameters
+        category.SetLogoId(new SetCategoryProductLogoIdParameters
         {
             TimeProvider = timeProvider,
         });

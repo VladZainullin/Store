@@ -1,3 +1,4 @@
+using Domain.Entities.Categories.Events;
 using Domain.Entities.Categories.Parameters;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
@@ -15,6 +16,8 @@ public sealed class Category
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
 
+    private List<object> _domainEvents = [];
+
     private Guid _logoId = Guid.NewGuid();
 
     private Category()
@@ -31,6 +34,12 @@ public sealed class Category
 
         _createdAt = parameters.TimeProvider.GetUtcNow();
         _updatedAt = parameters.TimeProvider.GetUtcNow();
+        
+        _domainEvents.Add(new CategoryCreatedEvent
+        {
+            CategoryId = Id,
+            Title = Title
+        });
     }
 
     public Guid Id => _id;
@@ -54,9 +63,15 @@ public sealed class Category
         
         _title = parameters.Title;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
+        
+        _domainEvents.Add(new CategoryTitleSetEvent
+        {
+            CategoryId = Id,
+            Title = Title
+        });
     }
 
-    public void SetLogoId(SetCategoryLogoIdParameters parameters)
+    public void SetLogoId(SetCategoryProductLogoIdParameters parameters)
     {
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
@@ -120,6 +135,12 @@ public sealed class Category
         });
 
         _updatedAt = parameters.TimeProvider.GetUtcNow();
+        
+        _domainEvents.Add(new ProductTitleSetEvent
+        {
+            ProductId = product.Id,
+            Title = product.Title
+        });
     }
 
     public void SetProductDescriptionTitle(SetCategoryProductDescriptionParameters parameters)
@@ -147,6 +168,12 @@ public sealed class Category
         });
 
         _updatedAt = parameters.TimeProvider.GetUtcNow();
+        
+        _domainEvents.Add(new ProductDescriptionSetEvent
+        {
+            ProductId = product.Id,
+            Description = product.Description
+        });
     }
 
     public void SetProductCost(SetCategoryProductCostParameters parameters)
@@ -174,6 +201,12 @@ public sealed class Category
         });
         
         _updatedAt = parameters.TimeProvider.GetUtcNow();
+        
+        _domainEvents.Add(new ProductCostSetEvent
+        {
+            ProductId = product.Id,
+            Cost = product.Cost
+        });
     }
 
     public void SetProductQuantity(SetCategoryProductQuantityParameters parameters)
@@ -200,6 +233,12 @@ public sealed class Category
             TimeProvider = parameters.TimeProvider
         });
         _updatedAt = parameters.TimeProvider.GetUtcNow();
+        
+        _domainEvents.Add(new ProductQuantitySetEvent
+        {
+            ProductId = product.Id,
+            Quantity = product.Quantity
+        });
     }
 
     public void SetProductPhoto(SetCategoryProductPhotoParameters parameters)
