@@ -1,5 +1,5 @@
+using Domain.Buckets.Entities.Buckets;
 using Domain.Categories.Entities.Categories;
-using Domain.Categories.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
 
@@ -7,12 +7,14 @@ namespace Persistence;
 
 internal sealed class AppDbContext(DbContextOptions options) : DbContext(options)
 {
-    public DbSet<Product> Products => Set<Product>();
-
+    public DbSet<Bucket> Buckets => Set<Bucket>();
+    
     public DbSet<Category> Categories => Set<Category>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new ProductInBucketConfiguration());
+        modelBuilder.ApplyConfiguration(new BucketConfiguration());
         modelBuilder.ApplyConfiguration(new ProductConfiguration());
         modelBuilder.ApplyConfiguration(new CategoryConfiguration());
         
