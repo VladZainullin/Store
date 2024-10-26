@@ -11,8 +11,7 @@ public sealed class Category
     private string _title = default!;
 
     private Category? _parent;
-
-    private readonly List<Category> _children = [];
+    
     private readonly List<Product> _products = [];
 
     private DateTimeOffset _createdAt;
@@ -50,8 +49,6 @@ public sealed class Category
 
     public IReadOnlyCollection<Product> Products => _products.AsReadOnly();
 
-    public IReadOnlyCollection<Category> Children => _children.AsReadOnly();
-
     public void SetTitle(SetCategoryTitleParameters parameters)
     {
         if (_title == parameters.Title)
@@ -79,19 +76,6 @@ public sealed class Category
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    public void AddChildren(AddCategoryChildrenParameters parameters)
-    {
-        _children.AddRange(parameters.Children
-            .DistinctBy(static c => c.Title)
-            .Select(c => new Category(new CreateCategoryParameters
-            {
-                Title = c.Title,
-                TimeProvider = parameters.TimeProvider
-            })));
-
-        _updatedAt = parameters.TimeProvider.GetUtcNow();
-    }
-
     public void AddProduct(AddProductToCategoryParameters parameters)
     {
         var product = new Product(new CreateProductParameters
@@ -111,16 +95,6 @@ public sealed class Category
     public void RemoveProduct(RemoveProductFromCategoryParameters parameters)
     {
         _products.Remove(parameters.Product);
-        _updatedAt = parameters.TimeProvider.GetUtcNow();
-    }
-
-    public void RemoveChildren(RemoveCategoryChildrenParameters parameters)
-    {
-        foreach (var child in parameters.Children)
-        {
-            _children.Remove(child);
-        }
-        
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 

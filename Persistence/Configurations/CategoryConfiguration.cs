@@ -16,6 +16,5 @@ internal sealed class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder.HasIndex(static c => c.Title).IsUnique();
 
         builder.HasMany(static c => c.Products).WithOne();
-        builder.HasMany(static c => c.Children).WithOne(static c => c.Parent);
     }
 }

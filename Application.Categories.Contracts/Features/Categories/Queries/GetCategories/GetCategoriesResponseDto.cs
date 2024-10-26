@@ -9,7 +9,5 @@ public sealed class GetCategoriesResponseDto
         public required Guid Id { get; init; }
 
         public required string Title { get; init; }
-
-        public required bool HasChildren { get; init; }
     }
 }

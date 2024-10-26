@@ -24,7 +24,6 @@ internal sealed class GetCategoriesHandler(IDbContext context)
             {
                 Id = c.Id,
                 Title = c.Title,
-                HasChildren = c.Children.Count != default
             })
         };
     }
