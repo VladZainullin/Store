@@ -3,7 +3,7 @@ using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Categories.Features.Categories.Queries.GetCategory;
+namespace Application.Features.Categories.Queries.GetCategory;
 
 internal sealed class GetCategoryHandler(IDbContext context) : 
     IRequestHandler<GetCategoryQuery, GetCategoryResponseDto>

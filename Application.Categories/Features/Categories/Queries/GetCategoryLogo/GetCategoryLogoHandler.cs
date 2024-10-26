@@ -5,7 +5,7 @@ using Minio.DataModel.Args;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Categories.Features.Categories.Queries.GetCategoryLogo;
+namespace Application.Features.Categories.Queries.GetCategoryLogo;
 
 internal sealed class GetCategoryLogoHandler(
     IDbContext context,

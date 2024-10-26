@@ -6,7 +6,7 @@ using Minio;
 using Minio.DataModel.Args;
 using Persistence.Contracts;
 
-namespace Application.Categories.Features.Categories.Commands.CreateCategory;
+namespace Application.Features.Categories.Commands.CreateCategory;
 
 internal sealed class CreateCategoryHandler(
     IDbContext context,

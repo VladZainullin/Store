@@ -6,7 +6,7 @@ using Minio.DataModel.Args;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Categories.Features.Categories.Commands.UpdateProductPhoto;
+namespace Application.Features.Categories.Commands.UpdateProductPhoto;
 
 internal sealed class UpdateProductPhotoHandler(IDbContext context, IMinioClient minioClient, TimeProvider timeProvider)
     : IRequestHandler<UpdateProductPhotoCommand>

@@ -5,7 +5,7 @@ using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Buckets.Queries;
 
-namespace Application.Buckets.Features.Buckets.Commands.RemoveProductFromBucket;
+namespace Application.Features.Buckets.Commands.RemoveProductFromBucket;
 
 internal sealed class RemoveProductFromBucketHandler(
     IDbContext context,

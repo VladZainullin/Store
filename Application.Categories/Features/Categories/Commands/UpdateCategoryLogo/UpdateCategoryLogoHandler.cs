@@ -6,7 +6,7 @@ using Minio.DataModel.Args;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Categories.Features.Categories.Commands.UpdateCategoryLogo;
+namespace Application.Features.Categories.Commands.UpdateCategoryLogo;
 
 internal sealed class UpdateCategoryLogoHandler(IDbContext context, IMinioClient minioClient, TimeProvider timeProvider) : 
     IRequestHandler<UpdateCategoryLogoCommand>

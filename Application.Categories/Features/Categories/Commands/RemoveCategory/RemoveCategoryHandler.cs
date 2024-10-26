@@ -3,7 +3,7 @@ using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Categories.Features.Categories.Commands.RemoveCategory;
+namespace Application.Features.Categories.Commands.RemoveCategory;
 
 internal sealed class RemoveCategoryHandler(IDbContext context) : IRequestHandler<RemoveCategoryCommand>
 {

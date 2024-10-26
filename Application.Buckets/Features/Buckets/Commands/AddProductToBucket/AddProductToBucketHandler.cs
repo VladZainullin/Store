@@ -5,7 +5,7 @@ using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Buckets.Queries;
 
-namespace Application.Buckets.Features.Buckets.Commands.AddProductToBucket;
+namespace Application.Features.Buckets.Commands.AddProductToBucket;
 
 internal sealed class AddProductToBucketHandler(
     IDbContext context,

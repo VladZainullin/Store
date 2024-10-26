@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.Buckets;
+namespace Application;
 
 public static class DependencyInjection
 {

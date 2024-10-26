@@ -6,7 +6,7 @@ using Minio.DataModel.Args;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Categories.Features.Categories.Commands.AddProductToCategory;
+namespace Application.Features.Categories.Commands.AddProductToCategory;
 
 public sealed class AddProductToCategoryHandler(
     IDbContext context,

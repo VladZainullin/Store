@@ -4,7 +4,7 @@ using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Categories.Features.Categories.Commands.UpdateProductInCategory;
+namespace Application.Features.Categories.Commands.UpdateProductInCategory;
 
 internal sealed class UpdateProductInCategoryHandler(IDbContext context, TimeProvider timeProvider) : 
     IRequestHandler<UpdateProductInCategoryCommand>

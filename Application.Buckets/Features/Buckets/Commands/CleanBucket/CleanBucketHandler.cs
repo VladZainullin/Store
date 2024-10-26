@@ -5,7 +5,7 @@ using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Buckets.Queries;
 
-namespace Application.Buckets.Features.Buckets.Commands.CleanBucket;
+namespace Application.Features.Buckets.Commands.CleanBucket;
 
 internal sealed class CleanBucketHandler(
     IDbContext context,

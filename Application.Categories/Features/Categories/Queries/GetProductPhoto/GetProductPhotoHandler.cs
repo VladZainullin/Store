@@ -5,7 +5,7 @@ using Minio.DataModel.Args;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Categories.Features.Categories.Queries.GetProductPhoto;
+namespace Application.Features.Categories.Queries.GetProductPhoto;
 
 internal sealed class GetProductPhotoHandler(IDbContext context, IMinioClient minioClient) :
     IRequestHandler<GetProductPhotoQuery, GetProductPhotoResponseDto>

@@ -4,7 +4,7 @@ using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
-namespace Application.Categories.Features.Categories.Commands.RemoveProductFromCategory;
+namespace Application.Features.Categories.Commands.RemoveProductFromCategory;
 
 internal class RemoveProductFromCategoryHandler(IDbContext context, TimeProvider timeProvider) : IRequestHandler<RemoveProductFromCategoryCommand>
 {
