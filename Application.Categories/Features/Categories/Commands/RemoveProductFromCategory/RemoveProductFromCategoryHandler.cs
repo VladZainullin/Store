@@ -16,16 +16,10 @@ internal class RemoveProductFromCategoryHandler(IDbContext context, TimeProvider
             AsTracking = true,
             IncludeProducts = true
         }, cancellationToken);
-
-        var removableProduct = category.Products.SingleOrDefault(p => p.Id == request.RouteDto.ProductId);
-        if (ReferenceEquals(removableProduct, default))
-        {
-            return;
-        }
         
         category.RemoveProduct(new RemoveProductFromCategoryParameters
         {
-            Product = removableProduct,
+            ProductId = request.RouteDto.ProductId,
             TimeProvider = timeProvider
         });
 

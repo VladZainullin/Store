@@ -79,7 +79,13 @@ public sealed class Category
 
     public void RemoveProduct(RemoveProductFromCategoryParameters parameters)
     {
-        _products.Remove(parameters.Product);
+        var product = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
+        if (ReferenceEquals(product, default))
+        {
+            return;
+        }
+        
+        _products.Remove(product);
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
