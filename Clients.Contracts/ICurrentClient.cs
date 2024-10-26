@@ -1,6 +1,6 @@
 ﻿namespace Clients.Contracts;
 
-public interface ICurrentClient
+public interface ICurrentClient<out T> where T : unmanaged
 {
-    Guid ClientId { get; }
+    T ClientId { get; }
 }

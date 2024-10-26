@@ -9,7 +9,7 @@ namespace Application.Features.Buckets.Commands.AddProductToBucket;
 
 internal sealed class AddProductToBucketHandler(
     IDbContext context,
-    ICurrentClient currentClient,
+    ICurrentClient<Guid> currentClient,
     TimeProvider timeProvider) : 
     IRequestHandler<AddProductToBucketCommand>
 {
