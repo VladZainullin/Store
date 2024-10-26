@@ -9,8 +9,6 @@ public sealed class Category
     private Guid _id = Guid.NewGuid();
 
     private string _title = default!;
-
-    private Category? _parent;
     
     private readonly List<Product> _products = [];
 
@@ -43,8 +41,6 @@ public sealed class Category
 
     public DateTimeOffset UpdatedAt => _updatedAt;
 
-    public Category? Parent => _parent;
-
     public Guid LogoId => _logoId;
 
     public IReadOnlyCollection<Product> Products => _products.AsReadOnly();
@@ -57,17 +53,6 @@ public sealed class Category
         }
         
         _title = parameters.Title;
-        _updatedAt = parameters.TimeProvider.GetUtcNow();
-    }
-
-    public void SetParent(SetCategoryParentParameters parameters)
-    {
-        if (_parent == parameters.Parent)
-        {
-            return;
-        }
-        
-        _parent = parameters.Parent;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
