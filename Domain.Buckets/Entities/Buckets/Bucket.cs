@@ -86,5 +86,10 @@ public sealed class Bucket
             Quantity = parameters.Quantity,
             TimeProvider = parameters.TimeProvider
         });
+
+        if (productInBucket.Quantity == default)
+        {
+            _products.Remove(productInBucket);
+        }
     }
 }
