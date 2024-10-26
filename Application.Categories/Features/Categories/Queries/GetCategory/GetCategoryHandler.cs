@@ -25,7 +25,8 @@ internal sealed class GetCategoryHandler(IDbContext context) :
             {
                 Id = p.Id,
                 Title = p.Title,
-                Description = p.Description
+                Cost = p.Cost,
+                Quantity = p.Quantity
             })
         };
     }

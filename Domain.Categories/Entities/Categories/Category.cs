@@ -149,6 +149,33 @@ public sealed class Category
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
+    public void SetProductCost(SetCategoryProductCostParameters parameters)
+    {
+        var product = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
+        if (ReferenceEquals(product, default))
+        {
+            return;
+        }
+        
+        if (product.Cost == parameters.Cost)
+        {
+            return;
+        }
+
+        if (product.Cost < 0)
+        {
+            return;
+        }
+        
+        product.SetCost(new SetProductCostParameters
+        {
+            Cost = parameters.Cost,
+            TimeProvider = parameters.TimeProvider
+        });
+        
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
     public void SetProductQuantity(SetCategoryProductQuantityParameters parameters)
     {
         var product = _products.SingleOrDefault(p => p.Id == parameters.ProductId);

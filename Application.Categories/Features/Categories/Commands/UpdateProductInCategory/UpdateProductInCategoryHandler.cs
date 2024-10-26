@@ -38,6 +38,13 @@ internal sealed class UpdateProductInCategoryHandler(IDbContext context, TimePro
             Quantity = request.BodyDto.Quantity,
             TimeProvider = timeProvider
         });
+        
+        category.SetProductCost(new SetCategoryProductCostParameters
+        {
+            ProductId = request.RouteDto.ProductId,
+            Cost = request.BodyDto.Cost,
+            TimeProvider = timeProvider
+        });
 
         await context.SaveChangesAsync(cancellationToken);
     }

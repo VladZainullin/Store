@@ -42,6 +42,12 @@ public sealed class Product
             TimeProvider = parameters.TimeProvider
         });
         
+        SetCost(new SetProductCostParameters
+        {
+            Cost = parameters.Cost,
+            TimeProvider = parameters.TimeProvider
+        });
+        
         UpdatePhoto(new SetProductPhotoParameters
         {
             TimeProvider = parameters.TimeProvider
@@ -63,6 +69,8 @@ public sealed class Product
     public DateTimeOffset UpdatedAt => _updatedAt;
 
     public int Quantity => _quantity;
+    
+    public decimal Cost => _cost;
 
     internal void SetTitle(SetProductTitleParameters parameters)
     {

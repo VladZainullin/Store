@@ -2,7 +2,7 @@ namespace Domain.Categories.Entities.Products.Parameters;
 
 public readonly struct SetProductCostParameters
 {
-    public decimal Cost { get; init; }
+    public required decimal Cost { get; init; }
 
-    public TimeProvider TimeProvider { get; init; }
+    public required TimeProvider TimeProvider { get; init; }
 }

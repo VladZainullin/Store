@@ -8,4 +8,6 @@ public sealed class UpdateProductInCategoryRequestBodyDto
     public required string Description { get; init; }
 
     public required int Quantity { get; init; }
+
+    public required decimal Cost { get; init; }
 }
