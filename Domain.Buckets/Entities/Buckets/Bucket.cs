@@ -33,6 +33,14 @@ public sealed class Bucket
 
     public Guid Id => _id;
 
+    public Guid ClientId => _clientId;
+
+    public DateTimeOffset CreatedAt => _createdAt;
+
+    public DateTimeOffset UpdatedAt => _updatedAt;
+
+    public IReadOnlyCollection<ProductInBucket> Products => _products.AsReadOnly();
+
     private void SetClient(SetBucketClientParameters parameters)
     {
         _clientId = parameters.ClientId;

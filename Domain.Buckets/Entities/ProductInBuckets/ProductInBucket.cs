@@ -38,6 +38,15 @@ public sealed class ProductInBucket
 
     public Guid Id => _id;
     
+    public Guid BucketId => _bucketId;
+    public Guid ProductId => _productId;
+
+    public int Quantity => _quantity;
+    
+    public DateTimeOffset CreatedAt => _createdAt;
+
+    public DateTimeOffset UpdatedAt => _updatedAt;
+    
     private void SetProduct(SetProductInBucketProductParameters parameters)
     {
         _productId = parameters.ProductId;
