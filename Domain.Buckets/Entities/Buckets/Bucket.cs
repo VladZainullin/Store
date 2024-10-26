@@ -92,4 +92,10 @@ public sealed class Bucket
             _products.Remove(productInBucket);
         }
     }
+
+    public void Clean(CleanBucketParameters parameters)
+    {
+        _products.Clear();
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
 }
