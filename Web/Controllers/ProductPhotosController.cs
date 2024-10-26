@@ -1,6 +1,6 @@
 using System.Net.Mime;
-using Application.Categories.Contracts.Features.Categories.Commands.UpdateProductPhoto;
-using Application.Categories.Contracts.Features.Categories.Queries.GetProductPhoto;
+using Application.Contracts.Features.Categories.Commands.UpdateProductPhoto;
+using Application.Contracts.Features.Categories.Queries.GetProductPhoto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;

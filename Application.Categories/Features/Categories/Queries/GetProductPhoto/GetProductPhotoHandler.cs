@@ -1,4 +1,4 @@
-using Application.Categories.Contracts.Features.Categories.Queries.GetProductPhoto;
+using Application.Contracts.Features.Categories.Queries.GetProductPhoto;
 using MediatR;
 using Minio;
 using Minio.DataModel.Args;

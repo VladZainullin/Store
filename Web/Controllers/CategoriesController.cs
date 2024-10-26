@@ -1,5 +1,5 @@
-using Application.Categories.Contracts.Features.Categories.Commands.CreateCategory;
-using Application.Categories.Contracts.Features.Categories.Queries.GetCategories;
+using Application.Contracts.Features.Categories.Commands.CreateCategory;
+using Application.Contracts.Features.Categories.Queries.GetCategories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace Application.Categories.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
+namespace Application.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
 
 public class UpdateCategoryLogoRequestFormDto
 {

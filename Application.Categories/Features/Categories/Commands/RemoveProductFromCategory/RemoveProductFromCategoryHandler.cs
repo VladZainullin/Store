@@ -1,4 +1,4 @@
-using Application.Categories.Contracts.Features.Categories.Commands.RemoveProductFromCategory;
+using Application.Contracts.Features.Categories.Commands.RemoveProductFromCategory;
 using Domain.Entities.Categories.Parameters;
 using MediatR;
 using Persistence.Contracts;

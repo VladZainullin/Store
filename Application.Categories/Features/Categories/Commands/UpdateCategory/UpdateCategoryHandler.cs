@@ -1,4 +1,4 @@
-using Application.Categories.Contracts.Features.Categories.Commands.UpdateCategory;
+using Application.Contracts.Features.Categories.Commands.UpdateCategory;
 using Domain.Entities.Categories.Parameters;
 using MediatR;
 using Persistence.Contracts;

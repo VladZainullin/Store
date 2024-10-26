@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Application.Categories.Contracts.Features.Categories.Commands.UpdateCategory;
+namespace Application.Contracts.Features.Categories.Commands.UpdateCategory;
 
 public sealed record UpdateCategoryCommand(
     UpdateCategoryRequestRouteDto RouteDto,

@@ -1,4 +1,4 @@
-namespace Application.Buckets.Contracts.Features.Buckets.Commands.RemoveProductFromBucket;
+namespace Application.Contracts.Features.Buckets.Commands.RemoveProductFromBucket;
 
 public sealed record RemoveProductFromBucketRequestBodyDto
 {

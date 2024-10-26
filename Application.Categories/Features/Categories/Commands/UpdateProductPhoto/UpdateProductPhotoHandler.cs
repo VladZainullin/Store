@@ -1,4 +1,4 @@
-using Application.Categories.Contracts.Features.Categories.Commands.UpdateProductPhoto;
+using Application.Contracts.Features.Categories.Commands.UpdateProductPhoto;
 using Domain.Entities.Categories.Parameters;
 using MediatR;
 using Minio;

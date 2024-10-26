@@ -1,6 +1,6 @@
 using System.Net.Mime;
-using Application.Categories.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
-using Application.Categories.Contracts.Features.Categories.Queries.GetCategoryLogo;
+using Application.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
+using Application.Contracts.Features.Categories.Queries.GetCategoryLogo;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;

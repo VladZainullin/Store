@@ -1,6 +1,6 @@
-using Application.Categories.Contracts.Features.Categories.Commands.RemoveCategory;
-using Application.Categories.Contracts.Features.Categories.Commands.UpdateCategory;
-using Application.Categories.Contracts.Features.Categories.Queries.GetCategory;
+using Application.Contracts.Features.Categories.Commands.RemoveCategory;
+using Application.Contracts.Features.Categories.Commands.UpdateCategory;
+using Application.Contracts.Features.Categories.Queries.GetCategory;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;

@@ -1,4 +1,4 @@
-using Application.Buckets.Contracts.Features.Buckets.Commands.AddProductToBucket;
+using Application.Contracts.Features.Buckets.Commands.AddProductToBucket;
 using Clients.Contracts;
 using Domain.Entities.Buckets.Parameters;
 using MediatR;

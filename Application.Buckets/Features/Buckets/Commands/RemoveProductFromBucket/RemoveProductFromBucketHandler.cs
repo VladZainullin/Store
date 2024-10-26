@@ -1,4 +1,4 @@
-using Application.Buckets.Contracts.Features.Buckets.Commands.RemoveProductFromBucket;
+using Application.Contracts.Features.Buckets.Commands.RemoveProductFromBucket;
 using Clients.Contracts;
 using Domain.Entities.Buckets.Parameters;
 using MediatR;

@@ -1,4 +1,4 @@
-namespace Application.Categories.Contracts.Features.Categories.Queries.GetProductPhoto;
+namespace Application.Contracts.Features.Categories.Queries.GetProductPhoto;
 
 public sealed class GetProductPhotoRequestRouteDto
 {

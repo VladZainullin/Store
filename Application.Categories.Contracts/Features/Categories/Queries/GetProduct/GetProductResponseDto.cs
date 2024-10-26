@@ -1,4 +1,4 @@
-namespace Application.Categories.Contracts.Features.Categories.Queries.GetProduct;
+namespace Application.Contracts.Features.Categories.Queries.GetProduct;
 
 public sealed class GetProductResponseDto
 {

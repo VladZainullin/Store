@@ -1,5 +1,5 @@
-using Application.Categories.Contracts.Features.Categories.Commands.AddProductToCategory;
-using Application.Categories.Contracts.Features.Categories.Commands.RemoveProductFromCategory;
+using Application.Contracts.Features.Categories.Commands.AddProductToCategory;
+using Application.Contracts.Features.Categories.Commands.RemoveProductFromCategory;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;

@@ -1,4 +1,4 @@
-using Application.Categories.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
+using Application.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
 using Domain.Entities.Categories.Parameters;
 using MediatR;
 using Minio;

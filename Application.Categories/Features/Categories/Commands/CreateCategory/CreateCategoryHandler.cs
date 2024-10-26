@@ -1,4 +1,4 @@
-using Application.Categories.Contracts.Features.Categories.Commands.CreateCategory;
+using Application.Contracts.Features.Categories.Commands.CreateCategory;
 using Domain.Entities.Categories;
 using Domain.Entities.Categories.Parameters;
 using MediatR;
