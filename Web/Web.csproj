@@ -10,7 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Application\Application.csproj" />
+      <ProjectReference Include="..\Application.Categories\Application.Categories.csproj" />
+      <ProjectReference Include="..\Application.Buckets\Application.Buckets.csproj" />
       <ProjectReference Include="..\Persistence.Contracts\Persistence.Contracts.csproj" />
       <ProjectReference Include="..\Persistence\Persistence.csproj" />
     </ItemGroup>

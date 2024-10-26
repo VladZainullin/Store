@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Categories.Commands.UpdateProductInCategory;
+using Application.Categories.Contracts.Features.Categories.Commands.UpdateProductInCategory;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
