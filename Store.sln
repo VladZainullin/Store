@@ -26,13 +26,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Buckets.Contrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{A311BCE1-B77F-4143-856E-955B1A02D3FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Orders", "Domain.Orders\Domain.Orders.csproj", "{C4581E3A-ECB3-42A7-9207-CA93A23C0AA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Orders.DesignTime", "Domain.Orders.DesignTime\Domain.Orders.DesignTime.csproj", "{C4581E3A-ECB3-42A7-9207-CA93A23C0AA1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{3A95BF9F-D71E-45B2-AB1B-4525A6A843C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Categories", "Domain.Categories\Domain.Categories.csproj", "{79D81721-65C0-46E1-9C7E-02F0A6EF0DB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Categories.DesignTime", "Domain.Categories.DesignTime\Domain.Categories.DesignTime.csproj", "{79D81721-65C0-46E1-9C7E-02F0A6EF0DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Buckets", "Domain.Buckets\Domain.Buckets.csproj", "{CC144E31-7EDE-4945-9E72-6B043C98B275}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Buckets.DesignTime", "Domain.Buckets.DesignTime\Domain.Buckets.DesignTime.csproj", "{CC144E31-7EDE-4945-9E72-6B043C98B275}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clients.Contracts", "Clients.Contracts\Clients.Contracts.csproj", "{212355E5-3363-457C-B075-298F5F8BAEA8}"
 EndProject

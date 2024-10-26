@@ -1,6 +1,6 @@
 using Application.Categories.Contracts.Features.Categories.Commands.CreateCategory;
-using Domain.Categories.Entities.Categories;
-using Domain.Categories.Entities.Categories.Parameters;
+using Domain.Entities.Categories;
+using Domain.Entities.Categories.Parameters;
 using MediatR;
 using Minio;
 using Minio.DataModel.Args;

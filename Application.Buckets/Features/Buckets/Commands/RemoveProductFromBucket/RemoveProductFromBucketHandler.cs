@@ -1,6 +1,6 @@
 using Application.Buckets.Contracts.Features.Buckets.Commands.RemoveProductFromBucket;
 using Clients.Contracts;
-using Domain.Buckets.Entities.Buckets.Parameters;
+using Domain.Entities.Buckets.Parameters;
 using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Buckets.Queries;

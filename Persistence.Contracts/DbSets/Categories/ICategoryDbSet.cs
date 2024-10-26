@@ -1,4 +1,4 @@
-using Domain.Categories.Entities.Categories;
+using Domain.Entities.Categories;
 using Persistence.Contracts.DbSets.Categories.Queries;
 
 namespace Persistence.Contracts.DbSets.Categories;

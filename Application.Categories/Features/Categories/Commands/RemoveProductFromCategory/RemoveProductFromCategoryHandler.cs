@@ -1,5 +1,5 @@
 using Application.Categories.Contracts.Features.Categories.Commands.RemoveProductFromCategory;
-using Domain.Categories.Entities.Categories.Parameters;
+using Domain.Entities.Categories.Parameters;
 using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;

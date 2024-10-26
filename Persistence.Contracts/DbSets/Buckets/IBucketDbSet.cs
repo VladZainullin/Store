@@ -1,4 +1,4 @@
-using Domain.Buckets.Entities.Buckets;
+using Domain.Entities.Buckets;
 using Persistence.Contracts.DbSets.Buckets.Queries;
 
 namespace Persistence.Contracts.DbSets.Buckets;

@@ -1,4 +1,4 @@
-using Domain.Buckets.Entities.Buckets;
+using Domain.Entities.Buckets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

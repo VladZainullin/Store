@@ -1,4 +1,4 @@
-using Domain.Buckets.Entities.Buckets;
+using Domain.Entities.Buckets;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts.DbSets.Buckets;
 using Persistence.Contracts.DbSets.Buckets.Queries;

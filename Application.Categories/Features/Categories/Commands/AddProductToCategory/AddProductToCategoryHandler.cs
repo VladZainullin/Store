@@ -1,5 +1,5 @@
 using Application.Categories.Contracts.Features.Categories.Commands.AddProductToCategory;
-using Domain.Categories.Entities.Categories.Parameters;
+using Domain.Entities.Categories.Parameters;
 using MediatR;
 using Minio;
 using Minio.DataModel.Args;

@@ -1,5 +1,5 @@
-using Domain.Buckets.Entities.Buckets;
-using Domain.Categories.Entities.Categories;
+using Domain.Entities.Buckets;
+using Domain.Entities.Categories;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
 

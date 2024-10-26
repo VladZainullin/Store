@@ -7,7 +7,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Domain.Buckets\Domain.Buckets.csproj" />
+      <ProjectReference Include="..\Domain.Buckets.DesignTime\Domain.Buckets.DesignTime.csproj" />
       <ProjectReference Include="..\Persistence.Contracts\Persistence.Contracts.csproj" />
     </ItemGroup>
 
