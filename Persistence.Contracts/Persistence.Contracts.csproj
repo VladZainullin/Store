@@ -2,7 +2,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain.Buckets.DesignTime\Domain.Buckets.DesignTime.csproj" />
-      <ProjectReference Include="..\Domain.Categories.DesignTime\Domain.Categories.DesignTime.csproj" />
+      <ProjectReference Include="..\Categories.DesignTime.Domain\Categories.DesignTime.Domain.csproj" />
     </ItemGroup>
 
 </Project>
