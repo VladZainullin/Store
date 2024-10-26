@@ -1,4 +1,4 @@
-namespace Domain.Entities.Categories.Events;
+namespace Domain.Categories.Events;
 
 public sealed class ProductCreatedEvent
 {
@@ -12,5 +12,9 @@ public sealed class ProductCreatedEvent
 
     public required decimal Cost { get; init; }
 
-    public required decimal Quantity { get; init; }
+    public required int Quantity { get; init; }
+
+    public required Guid CetegoryId { get; init; }
+
+    public required string CategoryTitle { get; set; }
 }

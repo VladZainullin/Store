@@ -1,8 +1,8 @@
-namespace Domain.Entities.Categories.Events;
+namespace Domain.Categories.Events;
 
 public sealed class ProductQuantitySetEvent
 {
     public required Guid ProductId { get; init; }
 
-    public required decimal Quantity { get; init; }
+    public required int Quantity { get; init; }
 }

@@ -1,4 +1,4 @@
-namespace Domain.Entities.Categories.Events;
+namespace Domain.Categories.Events;
 
 public sealed class ProductCostSetEvent
 {
