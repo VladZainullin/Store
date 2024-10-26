@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
+      <ProjectReference Include="..\Domain.Buckets\Domain.Buckets.csproj" />
       <ProjectReference Include="..\Domain.Categories\Domain.Categories.csproj" />
     </ItemGroup>
 

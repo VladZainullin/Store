@@ -1,6 +1,7 @@
 using Domain.Categories.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
+using Persistence.Contracts.DbSets.Buckets;
 using Persistence.Contracts.DbSets.Categories;
 using Persistence.DbSets;
 
@@ -15,6 +16,7 @@ internal sealed class DbContextAdapter(AppDbContext context) :
         new DbSetAdapter<Product>(context);
 
     public ICategoryDbSet Categories { get; } = new CategoryDbSetAdapter(context);
+    public IBucketDbSet Buckets { get; } = new BucketDbSetAdapter(context);
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {
