@@ -26,15 +26,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Buckets.Contrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{A311BCE1-B77F-4143-856E-955B1A02D3FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Categories.DesignTime.Domain", "Categories.DesignTime.Domain\Categories.DesignTime.Domain.csproj", "{79D81721-65C0-46E1-9C7E-02F0A6EF0DB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Categories.DesignTime", "Domain.Categories.DesignTime\Domain.Categories.DesignTime.csproj", "{79D81721-65C0-46E1-9C7E-02F0A6EF0DB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Buckets.DesignTime", "Domain.Buckets.DesignTime\Domain.Buckets.DesignTime.csproj", "{CC144E31-7EDE-4945-9E72-6B043C98B275}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clients.Contracts", "Clients.Contracts\Clients.Contracts.csproj", "{212355E5-3363-457C-B075-298F5F8BAEA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Categories.DesignTime.Application", "Categories.DesignTime.Application\Categories.DesignTime.Application.csproj", "{931EA953-02BD-4077-97EA-5FCE441FCF43}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{AF8D0C9E-4ACF-47FB-9356-9153A6AF77F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Categories.DesignTime.Application.Contracts", "Categories.DesignTime.Application.Contracts\Categories.DesignTime.Application.Contracts.csproj", "{9043F00B-867A-4B3E-B90F-4E54B72B5FE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Categories", "Application.Categories\Application.Categories.csproj", "{931EA953-02BD-4077-97EA-5FCE441FCF43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Categories.Contracts", "Application.Categories.Contracts\Application.Categories.Contracts.csproj", "{9043F00B-867A-4B3E-B90F-4E54B72B5FE4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainEvents.Contracts", "DomainEvents.Contracts\DomainEvents.Contracts.csproj", "{58771510-C680-411D-9E7C-83F932B4DF27}"
 EndProject
@@ -64,6 +66,7 @@ Global
 		{61237686-0B99-4CF0-8DB1-DBD009884D98} = {265478C0-7D19-47BC-ACCE-931F6AABEE39}
 		{A311BCE1-B77F-4143-856E-955B1A02D3FA} = {D31DC91A-FEC8-4E7B-9CC6-7D81F68602A9}
 		{212355E5-3363-457C-B075-298F5F8BAEA8} = {265478C0-7D19-47BC-ACCE-931F6AABEE39}
+		{AF8D0C9E-4ACF-47FB-9356-9153A6AF77F4} = {D31DC91A-FEC8-4E7B-9CC6-7D81F68602A9}
 		{58771510-C680-411D-9E7C-83F932B4DF27} = {265478C0-7D19-47BC-ACCE-931F6AABEE39}
 		{F7E6CF21-EB32-4760-9619-42761065216B} = {D31DC91A-FEC8-4E7B-9CC6-7D81F68602A9}
 		{E0614521-4450-447A-86FB-751098B61052} = {F7E6CF21-EB32-4760-9619-42761065216B}
