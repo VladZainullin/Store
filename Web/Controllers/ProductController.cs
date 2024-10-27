@@ -1,5 +1,5 @@
-using Application.Contracts.Features.Categories.Commands.UpdateProductInCategory;
-using Application.Contracts.Features.Categories.Queries.GetProduct;
+using Application.Categories.Contracts.Features.Categories.Commands.UpdateProductInCategory;
+using Application.Categories.Contracts.Features.Categories.Queries.GetProduct;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;

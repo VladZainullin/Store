@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Application.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
+namespace Application.Categories.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
 
 public sealed record UpdateCategoryLogoCommand(
     UpdateCategoryLogoRequestRouteDto RouteDto,

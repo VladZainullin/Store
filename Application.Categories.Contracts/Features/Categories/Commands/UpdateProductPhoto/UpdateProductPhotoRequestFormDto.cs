@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace Application.Contracts.Features.Categories.Commands.UpdateProductPhoto;
+namespace Application.Categories.Contracts.Features.Categories.Commands.UpdateProductPhoto;
 
 public sealed class UpdateProductPhotoRequestFormDto
 {

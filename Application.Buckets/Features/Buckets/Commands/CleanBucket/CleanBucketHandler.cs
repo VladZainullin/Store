@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Buckets.Commands.CleanBucket;
+using Application.Buckets.Contracts.Features.Buckets.Commands.CleanBucket;
 using Clients.Contracts;
 using Domain.Entities.Buckets.Parameters;
 using MediatR;

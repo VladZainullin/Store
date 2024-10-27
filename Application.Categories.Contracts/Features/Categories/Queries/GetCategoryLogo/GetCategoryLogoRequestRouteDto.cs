@@ -1,4 +1,4 @@
-namespace Application.Contracts.Features.Categories.Queries.GetCategoryLogo;
+namespace Application.Categories.Contracts.Features.Categories.Queries.GetCategoryLogo;
 
 public sealed class GetCategoryLogoRequestRouteDto
 {

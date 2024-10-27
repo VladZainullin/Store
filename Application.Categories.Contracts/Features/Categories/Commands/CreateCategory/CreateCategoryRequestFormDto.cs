@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
-namespace Application.Contracts.Features.Categories.Commands.CreateCategory;
+namespace Application.Categories.Contracts.Features.Categories.Commands.CreateCategory;
 
 public sealed class CreateCategoryRequestFormDto
 {

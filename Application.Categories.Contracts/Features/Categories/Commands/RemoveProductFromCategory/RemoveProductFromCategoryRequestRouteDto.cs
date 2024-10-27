@@ -1,4 +1,4 @@
-namespace Application.Contracts.Features.Categories.Commands.RemoveProductFromCategory;
+namespace Application.Categories.Contracts.Features.Categories.Commands.RemoveProductFromCategory;
 
 public sealed class RemoveProductFromCategoryRequestRouteDto
 {

@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Http;
 
-namespace Application.Contracts.Features.Categories.Commands.AddProductToCategory;
+namespace Application.Categories.Contracts.Features.Categories.Commands.AddProductToCategory;
 
 public sealed class AddProductToCategoryRequestFormDto
 {

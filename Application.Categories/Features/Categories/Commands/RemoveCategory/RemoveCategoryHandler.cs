@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Categories.Commands.RemoveCategory;
+using Application.Categories.Contracts.Features.Categories.Commands.RemoveCategory;
 using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;

@@ -1,5 +1,5 @@
 // ReSharper disable UnusedAutoPropertyAccessor.Global
-namespace Application.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
+namespace Application.Categories.Contracts.Features.Categories.Commands.UpdateCategoryLogo;
 
 public sealed class UpdateCategoryLogoRequestRouteDto
 {

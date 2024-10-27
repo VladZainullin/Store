@@ -1,4 +1,4 @@
-namespace Application.Contracts.Features.Buckets.Commands.AddProductToBucket;
+namespace Application.Buckets.Contracts.Features.Buckets.Commands.AddProductToBucket;
 
 public sealed class AddProductToBucketRequestBodyDto
 {

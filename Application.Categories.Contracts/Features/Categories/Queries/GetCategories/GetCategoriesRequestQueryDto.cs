@@ -1,4 +1,4 @@
-namespace Application.Contracts.Features.Categories.Queries.GetCategories;
+namespace Application.Categories.Contracts.Features.Categories.Queries.GetCategories;
 
 public sealed class GetCategoriesRequestQueryDto
 {

@@ -1,4 +1,4 @@
-namespace Application.Contracts.Features.Categories.Queries.GetProductPhoto;
+namespace Application.Categories.Contracts.Features.Categories.Queries.GetProductPhoto;
 
 public sealed class GetProductPhotoResponseDto
 {

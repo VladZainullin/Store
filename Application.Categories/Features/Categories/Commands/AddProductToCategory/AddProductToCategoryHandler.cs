@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Categories.Commands.AddProductToCategory;
+using Application.Categories.Contracts.Features.Categories.Commands.AddProductToCategory;
 using Domain.Entities.Categories.Parameters;
 using MediatR;
 using Minio;

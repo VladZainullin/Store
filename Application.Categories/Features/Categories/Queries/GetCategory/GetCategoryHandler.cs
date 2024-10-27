@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Categories.Queries.GetCategory;
+using Application.Categories.Contracts.Features.Categories.Queries.GetCategory;
 using MediatR;
 using Persistence.Contracts;
 using Persistence.Contracts.DbSets.Categories.Queries;

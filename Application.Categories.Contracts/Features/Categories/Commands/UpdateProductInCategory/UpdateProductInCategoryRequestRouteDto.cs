@@ -1,5 +1,5 @@
 // ReSharper disable UnusedAutoPropertyAccessor.Global
-namespace Application.Contracts.Features.Categories.Commands.UpdateProductInCategory;
+namespace Application.Categories.Contracts.Features.Categories.Commands.UpdateProductInCategory;
 
 public sealed class UpdateProductInCategoryRequestRouteDto
 {

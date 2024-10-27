@@ -1,4 +1,4 @@
-namespace Application.Contracts.Features.Categories.Commands.UpdateCategory;
+namespace Application.Categories.Contracts.Features.Categories.Commands.UpdateCategory;
 
 public sealed class UpdateCategoryRequestRouteDto
 {

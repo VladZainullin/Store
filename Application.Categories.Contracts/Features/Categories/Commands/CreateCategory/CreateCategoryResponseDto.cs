@@ -1,4 +1,4 @@
-namespace Application.Contracts.Features.Categories.Commands.CreateCategory;
+namespace Application.Categories.Contracts.Features.Categories.Commands.CreateCategory;
 
 public sealed class CreateCategoryResponseDto
 {

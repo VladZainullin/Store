@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Application.Contracts.Features.Categories.Commands.AddProductToCategory;
+namespace Application.Categories.Contracts.Features.Categories.Commands.AddProductToCategory;
 
 public sealed record AddProductToCategoryCommand(
     AddProductToCategoryRequestRouteDto RouteDto,

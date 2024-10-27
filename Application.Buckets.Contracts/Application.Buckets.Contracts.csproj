@@ -1,7 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <RootNamespace>Application.Contracts</RootNamespace>
-    </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="MediatR.Contracts" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Features" />
