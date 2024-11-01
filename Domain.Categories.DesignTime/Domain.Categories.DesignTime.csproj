@@ -1,8 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <RootNamespace>Domain</RootNamespace>
-    </PropertyGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\Domain.Categories.Events\Domain.Categories.Events.csproj" />
-    </ItemGroup>
-</Project>

@@ -1,8 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <ItemGroup>
-      <ProjectReference Include="..\Domain.Buckets.DesignTime\Domain.Buckets.DesignTime.csproj" />
-      <ProjectReference Include="..\Domain.Categories.DesignTime\Domain.Categories.DesignTime.csproj" />
-    </ItemGroup>
-
-</Project>
