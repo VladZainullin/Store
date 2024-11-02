@@ -1,11 +1,12 @@
 using Application.Contracts.Features.Products.Queries.GetProducts;
+using Clients.Contracts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Products.Queries.GetProducts;
 
-internal sealed class GetProductsHandler(IDbContext context) :
+internal sealed class GetProductsHandler(IDbContext context, ICurrentClient<Guid> currentClient) :
     IRequestHandler<GetProductsQuery, GetProductsResponseDto>
 {
     public async Task<GetProductsResponseDto> Handle(GetProductsQuery request, CancellationToken cancellationToken)
@@ -30,13 +31,24 @@ internal sealed class GetProductsHandler(IDbContext context) :
                 ProductId = p.Id,
                 Title = p.Title,
                 Cost = p.Cost,
-                InCart = 1
+                InCart = default
             })
             .ToListAsync(cancellationToken);
+        
+        var productInCartQuantities = await context.Carts
+            .AsNoTracking()
+            .Where(c => c.ClientId == currentClient.ClientId)
+            .SelectMany(static c => c.Products)
+            .ToDictionaryAsync(
+                static c => c.Product.Id,
+                static c => c.Quantity, cancellationToken);
 
         return new GetProductsResponseDto
         {
-            Products = products
+            Products = products.Select(p => p with
+            {
+                InCart = productInCartQuantities.GetValueOrDefault(p.ProductId)
+            })
         };
     }
 }

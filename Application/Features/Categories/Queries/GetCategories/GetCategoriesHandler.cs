@@ -10,7 +10,7 @@ internal sealed class GetCategoriesHandler(IDbContext context) :
 {
     public async Task<GetCategoriesResponseDto> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
     {
-        var queryable = context.Categories.AsQueryable();
+        var queryable = context.Categories.AsNoTracking();
 
         if (request.QueryDto.GreaterThat != default 
             && request.QueryDto.GreaterThat != default(DateTimeOffset)
@@ -22,7 +22,7 @@ internal sealed class GetCategoriesHandler(IDbContext context) :
         }
 
         queryable = queryable.OrderBy(static c => c.Title);
-
+        
         var categories = await queryable
             .Select(static c => new GetCategoriesResponseDto.CategoryDto
             {

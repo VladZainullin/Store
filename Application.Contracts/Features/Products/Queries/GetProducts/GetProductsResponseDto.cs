@@ -4,7 +4,7 @@ public sealed class GetProductsResponseDto
 {
     public required IEnumerable<ProductDto> Products { get; init; }
     
-    public sealed class ProductDto
+    public sealed record ProductDto
     {
         public required Guid ProductId { get; init; }
 
