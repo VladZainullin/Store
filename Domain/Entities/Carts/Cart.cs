@@ -51,13 +51,13 @@ public sealed class Cart
     {
         if (_products.Count == default) return;
         
-        var productInBucket = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
+        var productInBucket = _products.SingleOrDefault(p => p.Product == parameters.Product);
         if (ReferenceEquals(productInBucket, default))
         {
             var newProductInBucket = new ProductInCart(new CreateProductInCartParameters
             {
                 Quantity = parameters.Quantity,
-                ProductId = parameters.ProductId,
+                Product = parameters.Product,
                 BucketId = Id,
                 TimeProvider = parameters.TimeProvider
             });
@@ -78,18 +78,18 @@ public sealed class Cart
     {
         if (_products.Count == default) return;
         
-        var productInBucket = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
-        if (ReferenceEquals(productInBucket, default)) return;
+        var productInCart = _products.SingleOrDefault(p => p.Id == parameters.ProductId);
+        if (ReferenceEquals(productInCart, default)) return;
         
-        productInBucket.RemoveProduct(new RemoveProductInCartQuantityParameters()
+        productInCart.RemoveProduct(new RemoveProductInCartQuantityParameters()
         {
             Quantity = parameters.Quantity,
             TimeProvider = parameters.TimeProvider
         });
 
-        if (productInBucket.Quantity == default)
+        if (productInCart.Quantity == default)
         {
-            _products.Remove(productInBucket);
+            _products.Remove(productInCart);
         }
     }
 

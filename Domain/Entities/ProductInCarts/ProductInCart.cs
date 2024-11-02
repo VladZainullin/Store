@@ -1,4 +1,5 @@
 using Domain.Entities.ProductInCarts.Parameters;
+using Domain.Entities.Products;
 
 namespace Domain.Entities.ProductInCarts;
 
@@ -6,7 +7,7 @@ public sealed class ProductInCart
 {
     private Guid _id = Guid.NewGuid();
 
-    private Guid _productId;
+    private Product _product = default!;
     private Guid _bucketId;
 
     private int _quantity;
@@ -28,7 +29,7 @@ public sealed class ProductInCart
         
         SetProduct(new SetProductInBucketProductParameters
         {
-            ProductId = parameters.ProductId,
+            Product = parameters.Product,
             TimeProvider = parameters.TimeProvider
         });
         
@@ -39,7 +40,7 @@ public sealed class ProductInCart
     public Guid Id => _id;
     
     public Guid BucketId => _bucketId;
-    public Guid ProductId => _productId;
+    public Product Product => _product;
 
     public int Quantity => _quantity;
     
@@ -49,7 +50,7 @@ public sealed class ProductInCart
     
     private void SetProduct(SetProductInBucketProductParameters parameters)
     {
-        _productId = parameters.ProductId;
+        _product = parameters.Product;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
@@ -61,13 +62,23 @@ public sealed class ProductInCart
 
     public void AddProduct(AddProductInCartQuantityParameters parameters)
     {
-        _quantity = parameters.Quantity;
+        SetQuantity(new SetProductInBucketQuantityParameters
+        {
+            Quantity = _quantity + parameters.Quantity,
+            TimeProvider = parameters.TimeProvider
+        });
+        
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
     
     public void RemoveProduct(RemoveProductInCartQuantityParameters parameters)
     {
-        _quantity = parameters.Quantity;
+        SetQuantity(new SetProductInBucketQuantityParameters
+        {
+            Quantity = _quantity - parameters.Quantity,
+            TimeProvider = parameters.TimeProvider
+        });
+        
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
@@ -76,6 +87,13 @@ public sealed class ProductInCart
         if (parameters.Quantity < 0)
         {
             _quantity = default;
+            _updatedAt = parameters.TimeProvider.GetUtcNow();
+            return;
+        }
+
+        if (parameters.Quantity > _product.Quantity)
+        {
+            _quantity = _product.Quantity;
             _updatedAt = parameters.TimeProvider.GetUtcNow();
             return;
         }
