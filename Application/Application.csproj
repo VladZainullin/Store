@@ -1,10 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
       <ProjectReference Include="..\Application.Contracts\Application.Contracts.csproj" />
+      <ProjectReference Include="..\Clients.Contracts\Clients.Contracts.csproj" />
       <ProjectReference Include="..\Persistence.Contracts\Persistence.Contracts.csproj" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="MediatR" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" />
+      <PackageReference Include="Minio" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Features\Carts\Queries\GetBucket\" />
+      <Folder Include="Features\Products\" />
     </ItemGroup>
 
 </Project>

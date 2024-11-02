@@ -8,6 +8,11 @@
 
     <ItemGroup>
       <PackageReference Include="MediatR.Contracts" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Features" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\Products\" />
     </ItemGroup>
 
 </Project>
