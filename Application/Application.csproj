@@ -11,7 +11,6 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Features\Carts\Queries\GetBucket\" />
-      <Folder Include="Features\Products\" />
     </ItemGroup>
 
 </Project>
