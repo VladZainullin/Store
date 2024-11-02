@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Application.Contracts.Features.Commands.UpdateProduct;
+namespace Application.Contracts.Features.Products.Commands.UpdateProduct;
 
 public sealed record UpdateProductCommand(
     UpdateProductRequestRouteDto RouteDto,

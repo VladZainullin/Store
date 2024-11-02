@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Commands.CreateProduct;
+using Application.Contracts.Features.Products.Commands.CreateProduct;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
 using MediatR;

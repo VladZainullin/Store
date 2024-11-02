@@ -1,4 +1,4 @@
-namespace Application.Contracts.Features.Commands.CreateProduct;
+namespace Application.Contracts.Features.Products.Commands.CreateProduct;
 
 public sealed class CreateProductResponseDto
 {

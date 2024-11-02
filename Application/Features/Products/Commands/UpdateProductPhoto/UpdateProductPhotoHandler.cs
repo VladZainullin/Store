@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Commands.UpdateProductPhoto;
+using Application.Contracts.Features.Products.Commands.UpdateProductPhoto;
 using Domain.Entities.Products.Parameters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Commands.RemoveProduct;
+using Application.Contracts.Features.Products.Commands.RemoveProduct;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;

@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Commands.UpdateProduct;
+using Application.Contracts.Features.Products.Commands.UpdateProduct;
 using Domain.Entities.Products.Parameters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
