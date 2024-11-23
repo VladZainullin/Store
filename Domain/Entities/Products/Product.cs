@@ -13,6 +13,7 @@ public sealed class Product
     
     private DateTimeOffset _updatedAt;
     private DateTimeOffset _createdAt;
+    private DateTimeOffset? _removedAt;
 
     private int _quantity;
 
@@ -67,6 +68,10 @@ public sealed class Product
     public DateTimeOffset CreatedAt => _createdAt;
     
     public DateTimeOffset UpdatedAt => _updatedAt;
+    
+    public DateTimeOffset? RemovedAt => _removedAt;
+    
+    public bool IsRemoved => _removedAt != default;
 
     public int Quantity => _quantity;
     
@@ -99,5 +104,18 @@ public sealed class Product
     public void UpdatePhoto(SetProductPhotoParameters parameters)
     {
         _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void Remove(RemoveProductParameters parameters)
+    {
+        if (IsRemoved) return;
+        
+        _removedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void Restore(RestoreProductParameters parameters)
+    {
+        _removedAt = default;
+        _createdAt = parameters.TimeProvider.GetUtcNow();
     }
 }
