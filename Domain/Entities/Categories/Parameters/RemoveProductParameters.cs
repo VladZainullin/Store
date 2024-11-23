@@ -1,8 +1,6 @@
 namespace Domain.Entities.Categories.Parameters;
 
-public readonly struct SetCategoryProductPhotoParameters
+public readonly struct RemoveProductParameters
 {
-    public required Guid ProductId { get; init; }
-
     public required TimeProvider TimeProvider { get; init; }
 }

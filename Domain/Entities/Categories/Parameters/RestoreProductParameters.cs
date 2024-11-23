@@ -1,7 +1,6 @@
-// ReSharper disable UnusedAutoPropertyAccessor.Global
 namespace Domain.Entities.Categories.Parameters;
 
-public readonly struct SetCategoryProductLogoIdParameters
+public readonly struct RestoreProductParameters
 {
     public required TimeProvider TimeProvider { get; init; }
 }
