@@ -52,11 +52,15 @@ public sealed class FavoriteProduct
 
     public void Remove(RemoveFavoriteProductParameters parameters)
     {
+        if (IsRemoved) return;
+        
         _removedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void Restore(RestoreFavoriteProductParameters parameters)
     {
+        if (!IsRemoved) return;
+        
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
     }
