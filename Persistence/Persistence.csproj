@@ -18,6 +18,11 @@
 
     <ItemGroup>
       <Compile Remove="Migrations\20241123142804_Initial.Designer.cs" />
+      <Compile Remove="Migrations\20241123161925_Initial.Designer.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations\" />
     </ItemGroup>
 
 </Project>

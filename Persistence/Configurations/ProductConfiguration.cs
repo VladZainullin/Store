@@ -11,9 +11,11 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(static m => m.Id).HasField("_id").ValueGeneratedNever();
         builder.Property(static m => m.Title).HasField("_title");
         builder.Property(static p => p.Cost).HasField("_cost");
+        builder.Property(static p => p.Quantity).HasField("_quantity");
         builder.Property(static m => m.Description).HasField("_description");
         builder.Property(static m => m.UpdatedAt).HasField("_updatedAt");
         builder.Property(static m => m.CreatedAt).HasField("_createdAt");
+        builder.Property(static m => m.RemovedAt).HasField("_removedAt");
 
         builder.HasIndex(static m => m.Title).IsUnique();
         
