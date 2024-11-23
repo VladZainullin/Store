@@ -75,7 +75,7 @@ public sealed class Category
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    public void AddProduct(AddProductToCategoryParameters parameters)
+    public Guid AddProduct(AddProductToCategoryParameters parameters)
     {
         var productInCategory = _products.SingleOrDefault(p => p.Product == parameters.Product);
         if (!ReferenceEquals(productInCategory, default))
@@ -85,7 +85,7 @@ public sealed class Category
                 TimeProvider = parameters.TimeProvider
             });
             
-            return;
+            return productInCategory.Id;
         }
 
         var newProductInCategory = new ProductInCategory(new CreateProductInCategoryParameters
@@ -98,5 +98,7 @@ public sealed class Category
         _products.Add(newProductInCategory);
 
         _updatedAt = parameters.TimeProvider.GetUtcNow();
+
+        return newProductInCategory.Id;
     }
 }
