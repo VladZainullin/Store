@@ -82,7 +82,7 @@ public sealed class Product
     {
         if (IsRemoved) throw new SetTitleForRemovedProductException();
 
-        if (parameters.Title == string.Empty) throw new SetWhiteSpacesTitleForProductException();
+        if (parameters.Title == string.Empty) throw new SetEmptyTitleForProductException();
         
         var trimmedTitle = parameters.Title.Trim();
         if (trimmedTitle == string.Empty) throw new SetWhiteSpacesTitleForProductException();
