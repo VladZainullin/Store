@@ -1,3 +1,4 @@
+using Domain.Entities.Products.Exceptions;
 using Domain.Entities.Products.Parameters;
 
 namespace Domain.Entities.Products;
@@ -79,7 +80,14 @@ public sealed class Product
 
     public void SetTitle(SetProductTitleParameters parameters)
     {
-        _title = parameters.Title.Trim();
+        if (IsRemoved) throw new SetTitleForRemovedProductException();
+
+        if (parameters.Title == string.Empty) throw new SetWhiteSpacesTitleForProductException();
+        
+        var title = parameters.Title.Trim();
+        if (title == string.Empty) throw new SetWhiteSpacesTitleForProductException();
+        
+        _title = title;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
