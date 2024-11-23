@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-[Route("api/categories")]
+[Route("api/v1/categories")]
 public sealed class CategoriesController : AppController
 {
     [HttpGet]

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-[Route("api/categories/{categoryId:guid}")]
+[Route("api/v1/categories/{categoryId:guid}")]
 public sealed class CategoryController : AppController
 {
     [HttpDelete]

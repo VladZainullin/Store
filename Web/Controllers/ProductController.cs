@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-[Route("api/products/{productId:guid}")]
+[Route("api/v1/products/{productId:guid}")]
 public sealed class ProductController : AppController
 {
     [HttpGet]
