@@ -5,9 +5,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
-namespace Application.Features.Carts.Commands.RemoveProductFromBucket;
+namespace Application.Features.Carts.Commands.RemoveProductFromCart;
 
-internal sealed class RemoveProductFromBucketHandler(
+internal sealed class RemoveProductFromCartHandler(
     IDbContext context,
     ICurrentClient<Guid> currentClient,
     TimeProvider timeProvider) : 

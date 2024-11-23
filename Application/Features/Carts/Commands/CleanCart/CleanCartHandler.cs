@@ -5,9 +5,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
-namespace Application.Features.Carts.Commands.CleanBucket;
+namespace Application.Features.Carts.Commands.CleanCart;
 
-internal sealed class CleanBucketHandler(
+internal sealed class CleanCartHandler(
     IDbContext context,
     ICurrentClient<Guid> currentClient,
     TimeProvider timeProvider) : IRequestHandler<CleanCartCommand>
