@@ -11,14 +11,17 @@ internal sealed class GetProductsHandler(IDbContext context, ICurrentClient<Guid
 {
     public async Task<GetProductsResponseDto> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
-        var queryable = context.Products.AsQueryable();
+        var queryable = context.Products.AsNoTracking();
         
-        if (request.QueryDto.GreaterThat.HasValue)
+        if (request.QueryDto.Skip is > 0)
         {
-            queryable = queryable.Where(p => p.CreatedAt >= request.QueryDto.GreaterThat);
+            queryable = queryable.Skip(request.QueryDto.Skip.Value);
         }
 
-        queryable = queryable.Take(request.QueryDto.Take);
+        if (request.QueryDto.Take is > 0)
+        {
+            queryable = queryable.Take(request.QueryDto.Take.Value);
+        }
 
         var products = await queryable
             .Select(static p => new GetProductsResponseDto.ProductDto
