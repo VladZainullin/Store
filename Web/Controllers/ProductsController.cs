@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-[Route("api/categories/{categoryId:guid}/products")]
+[Route("api/products")]
 public sealed class ProductsController : AppController
 {
     [HttpGet]
@@ -16,16 +16,15 @@ public sealed class ProductsController : AppController
     }
     
     [HttpPost]
-    public async Task<NoContentResult> AddProductToCategoryAsync(
-        [FromForm] CreateProductRequestBodyDto bodyDto)
+    public async Task<ActionResult<CreateProductResponseDto>> CreateProductAsync(
+        [FromBody] CreateProductRequestBodyDto bodyDto)
     {
-        await Sender.Send(new CreateProductCommand(bodyDto), HttpContext.RequestAborted);
-
-        return NoContent();
+        var response = await Sender.Send(new CreateProductCommand(bodyDto), HttpContext.RequestAborted);
+        return StatusCode(StatusCodes.Status201Created, response);
     }
 
     [HttpDelete]
-    public async Task<NoContentResult> RemoveProductFromCategoryAsync(
+    public async Task<NoContentResult> RemoveProductAsync(
         [FromRoute] RemoveProductRequestRouteDto routeDto)
     {
         await Sender.Send(new RemoveProductCommand(routeDto), HttpContext.RequestAborted);

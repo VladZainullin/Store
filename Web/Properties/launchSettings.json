@@ -12,7 +12,7 @@
         "Postgres__Port": "5432",
         "Postgres__Username": "postgres",
         "Postgres__Password": "123456",
-        "Postgres__SearchPath": "categories_design_time",
+        "Postgres__SearchPath": "store",
         "Postgres__Database": "store",
 
         "MinioOptions__AccessKey": "store",
