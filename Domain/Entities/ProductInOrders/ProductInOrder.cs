@@ -9,6 +9,7 @@ public sealed class ProductInOrder
     private Guid _id = Guid.NewGuid();
 
     private int _quantity = 1;
+    private decimal _cost = default!;
     
     private Product _product = default!;
     private Order _order = default!;
@@ -45,6 +46,8 @@ public sealed class ProductInOrder
     public Order Order => _order;
 
     public int Quantity => _quantity;
+    
+    public decimal Cost => _cost;
 
     public DateTimeOffset CreatedAt => _createdAt;
 

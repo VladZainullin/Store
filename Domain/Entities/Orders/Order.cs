@@ -23,6 +23,12 @@ public sealed class Order
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
+    public Guid Id => _id;
+    
+    public DateTimeOffset CreatedAt => _createdAt;
+    
+    public DateTimeOffset UpdatedAt => _updatedAt;
+
     public void AddProduct(AddProductToOrderParameters parameters)
     {
         var productInOrder = _products
