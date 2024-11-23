@@ -87,6 +87,8 @@ public sealed class Product
         var title = parameters.Title.Trim();
         if (title == string.Empty) throw new SetWhiteSpacesTitleForProductException();
         
+        if (title.Length > 256) throw new SetMoreThanMaxLenghtTitleForProductException();
+        
         _title = title;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
@@ -99,12 +101,18 @@ public sealed class Product
 
     public void SetQuantity(SetProductQuantityParameters parameters)
     {
+        if (parameters.Quantity < 0) throw new SetLessThanZeroQuantityForProductException();
+        
         _quantity = parameters.Quantity;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void SetCost(SetProductCostParameters parameters)
     {
+        if (IsRemoved) throw new SetCostForRemovedProductException();
+        
+        if (parameters.Cost <= 0) throw new SetLessOrEqualZeroCostForProductException();
+        
         _cost = parameters.Cost;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
