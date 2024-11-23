@@ -18,7 +18,7 @@ public sealed class ProductInCategory
     {
     }
 
-    public ProductInCategory(CreateProductInCategoryParameters parameters)
+    public ProductInCategory(CreateProductInCategoryParameters parameters) : this()
     {
         _product = parameters.Product;
         _category = parameters.Category;

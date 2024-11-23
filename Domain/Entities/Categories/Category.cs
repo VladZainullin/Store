@@ -1,4 +1,5 @@
 using Domain.Entities.Categories.Parameters;
+using Domain.Entities.ProductInCategories;
 
 namespace Domain.Entities.Categories;
 
@@ -7,6 +8,8 @@ public sealed class Category
     private Guid _id = Guid.NewGuid();
 
     private string _title = default!;
+
+    private List<ProductInCategory> _products = [];
 
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
@@ -50,8 +53,7 @@ public sealed class Category
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    public void SetLogoId(SetCategoryProductLogoIdParameters parameters)
+    public void AddProduct(AddProductToCategoryParameters parameters)
     {
-        _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 }

@@ -12,11 +12,6 @@ internal sealed class GetProductsHandler(IDbContext context, ICurrentClient<Guid
     public async Task<GetProductsResponseDto> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
         var queryable = context.Products.AsQueryable();
-
-        if (request.QueryDto.CategoryId.HasValue)
-        {
-            queryable = queryable.Where(p => p.CategoryId == request.QueryDto.CategoryId);
-        }
         
         if (request.QueryDto.GreaterThat.HasValue)
         {

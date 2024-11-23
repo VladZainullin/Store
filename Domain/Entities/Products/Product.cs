@@ -15,8 +15,6 @@ public sealed class Product
     private DateTimeOffset _createdAt;
 
     private int _quantity;
-    
-    private Guid _categoryId;
 
     private decimal _cost;
 
@@ -74,8 +72,6 @@ public sealed class Product
     
     public decimal Cost => _cost;
 
-    public Guid CategoryId => _categoryId;
-
     public void SetTitle(SetProductTitleParameters parameters)
     {
         _title = parameters.Title.Trim();
@@ -97,12 +93,6 @@ public sealed class Product
     public void SetCost(SetProductCostParameters parameters)
     {
         _cost = parameters.Cost;
-        _updatedAt = parameters.TimeProvider.GetUtcNow();
-    }
-
-    public void SetCategory(SetProductCategoryParameters parameters)
-    {
-        _categoryId = parameters.CategoryId;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
