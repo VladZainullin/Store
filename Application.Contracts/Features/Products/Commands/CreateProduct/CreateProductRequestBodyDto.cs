@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Http;
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace Application.Contracts.Features.Products.Commands.CreateProduct;
 
-public sealed class CreateProductRequestFormDto
+public sealed class CreateProductRequestBodyDto
 {
     public required string Title { get; init; }
 
@@ -12,6 +11,4 @@ public sealed class CreateProductRequestFormDto
     public required int Quantity { get; init; }
 
     public required decimal Cost { get; init; }
-
-    public required IFormFile Photo { get; init; }
 }

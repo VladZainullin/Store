@@ -17,9 +17,9 @@ public sealed class ProductsController : AppController
     
     [HttpPost]
     public async Task<NoContentResult> AddProductToCategoryAsync(
-        [FromForm] CreateProductRequestFormDto formDto)
+        [FromForm] CreateProductRequestBodyDto bodyDto)
     {
-        await Sender.Send(new CreateProductCommand(formDto), HttpContext.RequestAborted);
+        await Sender.Send(new CreateProductCommand(bodyDto), HttpContext.RequestAborted);
 
         return NoContent();
     }
