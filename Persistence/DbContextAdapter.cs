@@ -1,5 +1,6 @@
 using Domain.Entities.Carts;
 using Domain.Entities.Categories;
+using Domain.Entities.Orders;
 using Domain.Entities.ProductInCarts;
 using Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ internal sealed class DbContextAdapter(AppDbContext context) :
     public IDbSet<Cart> Carts { get; } = new DbSetAdapter<Cart>(context);
     
     public IDbSet<ProductInCart> ProductInCarts { get; } = new DbSetAdapter<ProductInCart>(context);
+    public IDbSet<Order> Orders { get; } = new DbSetAdapter<Order>(context);
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {

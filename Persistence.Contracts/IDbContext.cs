@@ -1,5 +1,6 @@
 using Domain.Entities.Carts;
 using Domain.Entities.Categories;
+using Domain.Entities.Orders;
 using Domain.Entities.ProductInCarts;
 using Domain.Entities.Products;
 
@@ -14,6 +15,8 @@ public interface IDbContext
     IDbSet<Cart> Carts { get; }
     
     IDbSet<ProductInCart> ProductInCarts { get; }
+    
+    IDbSet<Order> Orders { get; }
     
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }
