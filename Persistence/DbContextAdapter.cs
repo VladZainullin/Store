@@ -25,9 +25,19 @@ internal sealed class DbContextAdapter(AppDbContext context) :
         return context.SaveChangesAsync(cancellationToken: cancellationToken);
     }
 
-    public Task MigrateAsync(CancellationToken cancellationToken = default)
+    public async Task MigrateAsync(CancellationToken cancellationToken = default)
     {
-        return context.Database.MigrateAsync(cancellationToken);
+        await BeginTransactionAsync(cancellationToken);
+        try
+        {
+            await context.Database.MigrateAsync(cancellationToken);
+            await CommitTransactionAsync(cancellationToken);
+        }
+        catch
+        {
+            await RollbackTransactionAsync(cancellationToken);
+            throw;
+        }
     }
 
     public Task BeginTransactionAsync(CancellationToken cancellationToken)
