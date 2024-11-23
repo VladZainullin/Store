@@ -8,17 +8,20 @@ namespace Application.Features.Categories.Queries.GetCategories;
 internal sealed class GetCategoriesHandler(IDbContext context) :
     IRequestHandler<GetCategoriesQuery, GetCategoriesResponseDto>
 {
-    public async Task<GetCategoriesResponseDto> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
+    public async Task<GetCategoriesResponseDto> Handle(
+        GetCategoriesQuery request,
+        CancellationToken cancellationToken)
     {
         var queryable = context.Categories.AsNoTracking();
 
-        if (request.QueryDto.GreaterThat != default 
-            && request.QueryDto.GreaterThat != default(DateTimeOffset)
-            && request.QueryDto.Take > 0)
+        if (request.QueryDto.Skip != default)
         {
-            queryable = queryable
-                .Where(c => c.CreatedAt >= request.QueryDto.GreaterThat)
-                .Take(request.QueryDto.Take.Value);
+            queryable = queryable.Skip(request.QueryDto.Skip.Value);
+        }
+
+        if (request.QueryDto.Take != default)
+        {
+            queryable = queryable.Take(request.QueryDto.Take.Value);
         }
 
         queryable = queryable.OrderBy(static c => c.Title);

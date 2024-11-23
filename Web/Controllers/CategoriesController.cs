@@ -9,7 +9,7 @@ public sealed class CategoriesController : AppController
 {
     [HttpGet]
     public async Task<ActionResult<GetCategoriesResponseDto>> GetCategoriesAsync(
-        GetCategoriesRequestQueryDto queryDto)
+        [FromQuery] GetCategoriesRequestQueryDto queryDto)
     {
         return Ok(await Sender.Send(new GetCategoriesQuery(queryDto), HttpContext.RequestAborted));
     }
