@@ -1,3 +1,4 @@
+using Domain.Entities.Categories.Exceptions;
 using Domain.Entities.Categories.Parameters;
 using Domain.Entities.ProductInCategories;
 using Domain.Entities.ProductInCategories.Parameters;
@@ -77,6 +78,10 @@ public sealed class Category
 
     public Guid AddProduct(AddProductToCategoryParameters parameters)
     {
+        if (IsRemoved) throw new AddProductToRemovedCategoryException();
+
+        if (parameters.Product.IsRemoved) throw new AddRemovedProductToCategoryException();
+        
         var productInCategory = _products.SingleOrDefault(p => p.Product == parameters.Product);
         if (!ReferenceEquals(productInCategory, default))
         {
@@ -100,5 +105,21 @@ public sealed class Category
         _updatedAt = parameters.TimeProvider.GetUtcNow();
 
         return newProductInCategory.Id;
+    }
+
+    public void RemoveProduct(RemoveProductFromCategoryParameters parameters)
+    {
+        if (IsRemoved) throw new RemoveProductFromRemovedCategoryException();
+
+        if (parameters.Product.IsRemoved) throw new RemoveRemovedProductFromCategoryException();
+        
+        var productInCategory = _products.SingleOrDefault(p => p.Product == parameters.Product);
+
+        if (ReferenceEquals(productInCategory, default)) return;
+        
+        productInCategory.Remove(new RemoveProductInCategoryParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
     }
 }
