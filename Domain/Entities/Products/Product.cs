@@ -84,17 +84,26 @@ public sealed class Product
 
         if (parameters.Title == string.Empty) throw new SetWhiteSpacesTitleForProductException();
         
-        var title = parameters.Title.Trim();
-        if (title == string.Empty) throw new SetWhiteSpacesTitleForProductException();
+        var trimmedTitle = parameters.Title.Trim();
+        if (trimmedTitle == string.Empty) throw new SetWhiteSpacesTitleForProductException();
         
-        if (title.Length > 256) throw new SetMoreThanMaxLenghtTitleForProductException();
+        if (trimmedTitle.Length > 200) throw new SetMoreThanMaxLenghtTitleForProductException();
         
-        _title = title;
+        _title = trimmedTitle;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void SetDescription(SetProductDescriptionParameters parameters)
     {
+        if (IsRemoved) throw new SetDescriptionForRemovedProductException();
+        
+        if (parameters.Description == string.Empty) throw new SetEmptyDescriptionForProductException();
+        
+        var trimmedDescription = parameters.Description.Trim();
+        if (trimmedDescription == string.Empty) throw new SetWhiteSpacesDescriptionForProductException();
+        
+        if (trimmedDescription.Length > 6000) throw new SetMoreThanMaxLenghtDescriptionForProductException();
+        
         _description = parameters.Description.Trim();
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
@@ -131,6 +140,8 @@ public sealed class Product
 
     public void Restore(RestoreProductParameters parameters)
     {
+        if (!IsRemoved) return;
+        
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
     }
