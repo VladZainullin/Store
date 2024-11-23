@@ -89,6 +89,8 @@ public sealed class Product
         
         if (trimmedTitle.Length > 200) throw new SetMoreThanMaxLenghtTitleForProductException();
         
+        if (trimmedTitle == Title) return;
+        
         _title = trimmedTitle;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
@@ -104,6 +106,8 @@ public sealed class Product
         
         if (trimmedDescription.Length > 6000) throw new SetMoreThanMaxLenghtDescriptionForProductException();
         
+        if (trimmedDescription == Description) return;
+        
         _description = parameters.Description.Trim();
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
@@ -111,6 +115,8 @@ public sealed class Product
     public void SetQuantity(SetProductQuantityParameters parameters)
     {
         if (parameters.Quantity < 0) throw new SetLessThanZeroQuantityForProductException();
+        
+        if (parameters.Quantity == Quantity) return;
         
         _quantity = parameters.Quantity;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
@@ -121,6 +127,8 @@ public sealed class Product
         if (IsRemoved) throw new SetCostForRemovedProductException();
         
         if (parameters.Cost <= 0) throw new SetLessOrEqualZeroCostForProductException();
+        
+        if (parameters.Cost == Cost) return;
         
         _cost = parameters.Cost;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
