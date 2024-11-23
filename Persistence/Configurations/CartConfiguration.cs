@@ -14,5 +14,7 @@ internal sealed class CartConfiguration : IEntityTypeConfiguration<Cart>
         builder.Property(static c => c.CreatedAt).HasField("_createdAt");
 
         builder.HasMany(static c => c.Products).WithOne();
+
+        builder.ToTable("carts");
     }
 }

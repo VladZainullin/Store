@@ -16,5 +16,7 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(static m => m.CreatedAt).HasField("_createdAt");
 
         builder.HasIndex(static m => m.Title).IsUnique();
+        
+        builder.ToTable("products");
     }
 }

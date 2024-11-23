@@ -13,5 +13,7 @@ internal sealed class ProductInCartConfiguration : IEntityTypeConfiguration<Prod
         builder.Property(static c => c.CreatedAt).HasField("_createdAt");
         builder.Property(static c => c.UpdatedAt).HasField("_updatedAt");
         builder.Property(static c => c.Quantity).HasField("_quantity");
+        
+        builder.ToTable("product_in_carts");
     }
 }
