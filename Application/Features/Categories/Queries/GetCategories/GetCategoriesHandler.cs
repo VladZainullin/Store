@@ -14,15 +14,15 @@ internal sealed class GetCategoriesHandler(IDbContext context) :
     {
         var queryable = context.Categories.AsNoTracking();
 
-        if (request.QueryDto.Skip is > 0)
+        if (request.QueryDto.Skip > 0)
         {
-            var queryDtoSkip = request.QueryDto.Skip.Value;
+            var queryDtoSkip = request.QueryDto.Skip;
             queryable = queryable.Skip(queryDtoSkip);
         }
 
-        if (request.QueryDto.Take is > 0)
+        if (request.QueryDto.Take > 0)
         {
-            queryable = queryable.Take(request.QueryDto.Take.Value);
+            queryable = queryable.Take(request.QueryDto.Take);
         }
 
         queryable = queryable.OrderBy(static c => c.Title);
