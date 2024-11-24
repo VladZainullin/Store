@@ -12,7 +12,10 @@ internal sealed class GetProductsInCategoryHandler(IDbContext context) :
         GetProductsInCategoryQuery request,
         CancellationToken cancellationToken)
     {
-        var queryable = context.Products.AsQueryable();
+        var queryable = context.ProductInCategories
+            .AsNoTracking()
+            .Where(pic => pic.Category.Id == request.Route.CategoryId)
+            .Select(pic => pic.Product);
 
         if (request.Query.Skip > 0)
         {

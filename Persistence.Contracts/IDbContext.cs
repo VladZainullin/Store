@@ -2,6 +2,8 @@ using Domain.Entities.Carts;
 using Domain.Entities.Categories;
 using Domain.Entities.Orders;
 using Domain.Entities.ProductInCarts;
+using Domain.Entities.ProductInCategories;
+using Domain.Entities.ProductInOrders;
 using Domain.Entities.Products;
 
 namespace Persistence.Contracts;
@@ -17,6 +19,10 @@ public interface IDbContext
     IDbSet<ProductInCart> ProductInCarts { get; }
     
     IDbSet<Order> Orders { get; }
+    
+    IDbSet<ProductInOrder> ProductInOrders { get; }
+    
+    IDbSet<ProductInCategory> ProductInCategories { get; }
     
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }
