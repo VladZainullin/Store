@@ -31,6 +31,17 @@ public sealed class MeasurementUnit
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
+    public Guid Id => _id;
+    
+    public string ShortTitle => _shortTitle;
+    public string FullTitle => _fullTitle;
+    
+    public DateTimeOffset CreatedAt => _createdAt;
+    public DateTimeOffset UpdatedAt => _updatedAt;
+    public DateTimeOffset? RemovedAt => _removedAt;
+    
+    public bool IsRemoved => _removedAt != default;
+
     public void SetShortTitle(SetShortTitleForMeasurementUnitParameters parameters)
     {
         _shortTitle = parameters.ShortTitle.Trim();
