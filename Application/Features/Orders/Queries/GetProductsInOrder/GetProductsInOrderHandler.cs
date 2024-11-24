@@ -14,8 +14,7 @@ internal sealed class GetProductsInOrderHandler(IDbContext context) :
     {
         var queryable = context.ProductInOrders
             .AsNoTracking()
-            .Where(p => p.Order.Id == request.Route.OrderId)
-            .Select(p => p.Product);
+            .Where(pic => pic.Order.Id == request.Route.OrderId);
 
         if (request.Query.Skip > 0)
         {
@@ -30,12 +29,12 @@ internal sealed class GetProductsInOrderHandler(IDbContext context) :
         return new GetProductsInOrderResponseDto
         {
             Products = await queryable
-                .Select(static p => new GetProductsInOrderResponseDto.ProductDto
+                .Select(static pic => new GetProductsInOrderResponseDto.ProductDto
                 {
-                    ProductId = p.Id,
-                    Title = p.Title,
-                    Cost = p.Cost,
-                    Quantity = p.Quantity
+                    ProductId = pic.Product.Id,
+                    Title = pic.Product.Title,
+                    Cost = pic.Cost,
+                    Quantity = pic.Quantity
                 })
                 .ToListAsync(cancellationToken)
         };
