@@ -33,13 +33,13 @@ public sealed class MeasurementUnit
 
     public void SetShortTitle(SetShortTitleForMeasurementUnitParameters parameters)
     {
-        _shortTitle = parameters.ShortTitle;
+        _shortTitle = parameters.ShortTitle.Trim();
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
     
     public void SetFullTitle(SetFullTitleForMeasurementUnitParameters parameters)
     {
-        _fullTitle = parameters.FullTitle;
+        _fullTitle = parameters.FullTitle.Trim();
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
