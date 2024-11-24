@@ -12,8 +12,12 @@ public sealed class MeasurementUnit
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
     private DateTimeOffset? _removedAt;
+
+    private MeasurementUnit()
+    {
+    }
     
-    public MeasurementUnit(CreateMeasurementUnitParameters parameters)
+    public MeasurementUnit(CreateMeasurementUnitParameters parameters) : this()
     {
         SetShortTitle(new SetShortTitleForMeasurementUnitParameters
         {

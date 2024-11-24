@@ -21,7 +21,7 @@ public sealed class ProductInOrder
     {
     }
 
-    public ProductInOrder(CreateProductInOrderParameters parameters)
+    public ProductInOrder(CreateProductInOrderParameters parameters) : this()
     {
         SetProduct(new SetProductInOrderProductParameters
         {

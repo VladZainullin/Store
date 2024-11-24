@@ -14,8 +14,12 @@ public sealed class MeasurementUnitPosition
     private DateTimeOffset? _removedAt;
 
     private MeasurementUnit _measurementUnit = default!;
+
+    private MeasurementUnitPosition()
+    {
+    }
     
-    public MeasurementUnitPosition(CreateMeasurementUnitPositionParameters parameters)
+    public MeasurementUnitPosition(CreateMeasurementUnitPositionParameters parameters) : this()
     {
         SetValue(new SetValueForMeasurementUnitPositionParameters
         {

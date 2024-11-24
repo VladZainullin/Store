@@ -19,7 +19,7 @@ public sealed class Order
     {
     }
 
-    public Order(CreateOrderParameters parameters)
+    public Order(CreateOrderParameters parameters) : this()
     {
         SetClient(new SetClientForOrderParameters
         {
