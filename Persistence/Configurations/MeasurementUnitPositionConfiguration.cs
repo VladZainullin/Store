@@ -1,12 +1,12 @@
-using Domain.Entities.MeasurementUnitValues;
+using Domain.Entities.MeasurementUnitPositions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Configurations;
 
-internal sealed class MeasurementUnitValueConfiguration : IEntityTypeConfiguration<MeasurementUnitValue>
+internal sealed class MeasurementUnitPositionConfiguration : IEntityTypeConfiguration<MeasurementUnitPosition>
 {
-    public void Configure(EntityTypeBuilder<MeasurementUnitValue> builder)
+    public void Configure(EntityTypeBuilder<MeasurementUnitPosition> builder)
     {
         builder.Property(static mu => mu.Id).HasField("_id");
         builder.Property(static mu => mu.Value).HasField("_value");

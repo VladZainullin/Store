@@ -1,9 +1,9 @@
+using Domain.Entities.MeasurementUnitPositions.Parameters;
 using Domain.Entities.MeasurementUnits;
-using Domain.Entities.MeasurementUnitValues.Parameters;
 
-namespace Domain.Entities.MeasurementUnitValues;
+namespace Domain.Entities.MeasurementUnitPositions;
 
-public sealed class MeasurementUnitValue
+public sealed class MeasurementUnitPosition
 {
     private Guid _id = Guid.NewGuid();
 
@@ -15,15 +15,15 @@ public sealed class MeasurementUnitValue
 
     private MeasurementUnit _measurementUnit = default!;
     
-    public MeasurementUnitValue(CreateMeasurementUnitValueParameters parameters)
+    public MeasurementUnitPosition(CreateMeasurementUnitPositionParameters parameters)
     {
-        SetValue(new SetValueForMeasurementUnitValueParameters
+        SetValue(new SetValueForMeasurementUnitPositionParameters
         {
             Value = parameters.Value,
             TimeProvider = parameters.TimeProvider
         });
         
-        SetMeasurementUnit(new SetMeasurementUnitForMeasurementUnitValueParameters
+        SetMeasurementUnit(new SetMeasurementUnitForMeasurementUnitPositionParameters
         {
             MeasurementUnit = parameters.MeasurementUnit,
             TimeProvider = parameters.TimeProvider
@@ -47,24 +47,24 @@ public sealed class MeasurementUnitValue
     
     public MeasurementUnit MeasurementUnit => _measurementUnit;
 
-    public void Remove(RemoveMeasurementUnitValueParameters parameters)
+    public void Remove(RemoveMeasurementUnitPositionParameters parameters)
     {
         _removedAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    public void Restore(RestoreMeasurementUnitValueParameters parameters)
+    public void Restore(RestoreMeasurementUnitPositionParameters parameters)
     {
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    public void SetValue(SetValueForMeasurementUnitValueParameters parameters)
+    public void SetValue(SetValueForMeasurementUnitPositionParameters parameters)
     {
         _value = parameters.Value.Trim();
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
     
-    public void SetMeasurementUnit(SetMeasurementUnitForMeasurementUnitValueParameters parameters)
+    public void SetMeasurementUnit(SetMeasurementUnitForMeasurementUnitPositionParameters parameters)
     {
         _measurementUnit = parameters.MeasurementUnit;
         _updatedAt = parameters.TimeProvider.GetUtcNow();

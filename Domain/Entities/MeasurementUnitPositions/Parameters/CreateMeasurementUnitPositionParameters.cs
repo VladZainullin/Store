@@ -1,8 +1,8 @@
 using Domain.Entities.MeasurementUnits;
 
-namespace Domain.Entities.MeasurementUnitValues.Parameters;
+namespace Domain.Entities.MeasurementUnitPositions.Parameters;
 
-public readonly struct CreateMeasurementUnitValueParameters
+public readonly struct CreateMeasurementUnitPositionParameters
 {
     public required MeasurementUnit MeasurementUnit { get; init; }
 
