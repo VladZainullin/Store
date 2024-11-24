@@ -44,6 +44,8 @@ public sealed class MeasurementUnitValue
     public DateTimeOffset? RemovedAt => _removedAt;
     
     public bool IsRemoved => _removedAt != default;
+    
+    public MeasurementUnit MeasurementUnit => _measurementUnit;
 
     public void Remove(RemoveMeasurementUnitValueParameters parameters)
     {

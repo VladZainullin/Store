@@ -13,7 +13,9 @@ internal sealed class AppDbContext(DbContextOptions options) : DbContext(options
             .ApplyConfiguration(new CartConfiguration())
             .ApplyConfiguration(new ProductInCartConfiguration())
             .ApplyConfiguration(new ProductInCategoryConfiguration())
-            .ApplyConfiguration(new OrderConfiguration());
+            .ApplyConfiguration(new OrderConfiguration())
+            .ApplyConfiguration(new MeasurementUnitConfiguration())
+            .ApplyConfiguration(new MeasurementUnitValueConfiguration());
         
         base.OnModelCreating(modelBuilder);
     }
