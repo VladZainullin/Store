@@ -4,7 +4,7 @@ using Domain.Entities.Products;
 
 namespace Domain.Entities.ProductInCarts.Parameters;
 
-public readonly struct SetProductInBucketProductParameters
+public readonly struct SetProductForProductInCartParameters
 {
     public required Product Product { get; init; }
 

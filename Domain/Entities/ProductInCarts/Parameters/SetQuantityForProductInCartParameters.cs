@@ -1,6 +1,6 @@
 namespace Domain.Entities.ProductInCarts.Parameters;
 
-public readonly struct SetProductInBucketQuantityParameters
+public readonly struct SetQuantityForProductInCartParameters
 {
     public required int Quantity { get; init; }
 

@@ -1,3 +1,4 @@
+using Domain.Entities.Carts;
 using Domain.Entities.ProductInCarts.Parameters;
 using Domain.Entities.Products;
 
@@ -8,26 +9,28 @@ public sealed class ProductInCart
     private Guid _id = Guid.NewGuid();
 
     private Product _product = default!;
-    private Guid _bucketId;
 
     private int _quantity;
     
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
+    private DateTimeOffset? _removedAt;
     
+    private Cart _cart = default!;
+
     private ProductInCart()
     {
     }
 
     internal ProductInCart(CreateProductInCartParameters parameters) : this()
     {
-        SetBucket(new SetProductInCartBucketParameters
+        SetCart(new SetCartForProductInCartParameters
         {
-            BucketId = parameters.BucketId,
+            Cart = parameters.Cart,
             TimeProvider = parameters.TimeProvider
         });
         
-        SetProduct(new SetProductInBucketProductParameters
+        SetProduct(new SetProductForProductInCartParameters
         {
             Product = parameters.Product,
             TimeProvider = parameters.TimeProvider
@@ -39,7 +42,7 @@ public sealed class ProductInCart
 
     public Guid Id => _id;
     
-    public Guid BucketId => _bucketId;
+    public Cart Cart => _cart;
     public Product Product => _product;
 
     public int Quantity => _quantity;
@@ -48,21 +51,25 @@ public sealed class ProductInCart
 
     public DateTimeOffset UpdatedAt => _updatedAt;
     
-    private void SetProduct(SetProductInBucketProductParameters parameters)
+    public DateTimeOffset? RemovedAt => _removedAt;
+    
+    public bool IsRemoved => _removedAt != default;
+    
+    private void SetProduct(SetProductForProductInCartParameters parameters)
     {
         _product = parameters.Product;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    private void SetBucket(SetProductInCartBucketParameters parameters)
+    private void SetCart(SetCartForProductInCartParameters parameters)
     {
-        _bucketId = parameters.BucketId;
+        _cart = parameters.Cart;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void AddProduct(AddProductInCartQuantityParameters parameters)
     {
-        SetQuantity(new SetProductInBucketQuantityParameters
+        SetQuantity(new SetQuantityForProductInCartParameters
         {
             Quantity = _quantity + parameters.Quantity,
             TimeProvider = parameters.TimeProvider
@@ -73,7 +80,7 @@ public sealed class ProductInCart
     
     public void RemoveProduct(RemoveProductInCartQuantityParameters parameters)
     {
-        SetQuantity(new SetProductInBucketQuantityParameters
+        SetQuantity(new SetQuantityForProductInCartParameters
         {
             Quantity = _quantity - parameters.Quantity,
             TimeProvider = parameters.TimeProvider
@@ -82,7 +89,18 @@ public sealed class ProductInCart
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    private void SetQuantity(SetProductInBucketQuantityParameters parameters)
+    public void Remove(RemoveProductInCartParameters parameters)
+    {
+        _removedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void Restore(RestoreProductInCartParameters parameters)
+    {
+        _removedAt = default;
+        _createdAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    private void SetQuantity(SetQuantityForProductInCartParameters parameters)
     {
         if (parameters.Quantity < 0)
         {

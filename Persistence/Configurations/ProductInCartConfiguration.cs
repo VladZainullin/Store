@@ -8,11 +8,13 @@ internal sealed class ProductInCartConfiguration : IEntityTypeConfiguration<Prod
 {
     public void Configure(EntityTypeBuilder<ProductInCart> builder)
     {
-        builder.Property(static c => c.Id).HasField("_id").ValueGeneratedNever();
-        builder.Property(static c => c.BucketId).HasField("_bucketId");
-        builder.Property(static c => c.CreatedAt).HasField("_createdAt");
-        builder.Property(static c => c.UpdatedAt).HasField("_updatedAt");
-        builder.Property(static c => c.Quantity).HasField("_quantity");
+        builder.Property(static pic => pic.Id).HasField("_id").ValueGeneratedNever();
+        builder.Property(static pic => pic.CreatedAt).HasField("_createdAt");
+        builder.Property(static pic => pic.UpdatedAt).HasField("_updatedAt");
+        builder.Property(static pic => pic.Quantity).HasField("_quantity");
+        
+        builder.HasOne(static pic => pic.Cart).WithMany();
+        builder.HasOne(static pic => pic.Product).WithMany();
         
         builder.ToTable("product_in_carts");
     }

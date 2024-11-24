@@ -3,7 +3,4 @@
       <PackageReference Include="MediatR.Contracts" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Features" />
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Features\Carts\Queries\" />
-    </ItemGroup>
 </Project>

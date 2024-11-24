@@ -9,8 +9,5 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore" />
       <PackageReference Include="Minio" />
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Features\Carts\Queries\GetBucket\" />
-    </ItemGroup>
 
 </Project>

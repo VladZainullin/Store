@@ -58,7 +58,7 @@ public sealed class Cart
             {
                 Quantity = parameters.Quantity,
                 Product = parameters.Product,
-                BucketId = Id,
+                Cart = this,
                 TimeProvider = parameters.TimeProvider
             });
             
