@@ -81,6 +81,8 @@ public sealed class Product
     public int Quantity => _quantity;
     
     public decimal Cost => _cost;
+    
+    public IReadOnlyCollection<FavoriteProduct> Favorites => _favorites.AsReadOnly();
 
     public void SetTitle(SetProductTitleParameters parameters)
     {
@@ -193,12 +195,9 @@ public sealed class Product
         if (IsRemoved) return;
         
         var favorite = _favorites.SingleOrDefault(f => f.ClientId == parameters.ClientId);
-        if (!ReferenceEquals(favorite, default))
+        favorite?.Remove(new RemoveFavoriteProductParameters
         {
-            favorite.Remove(new RemoveFavoriteProductParameters
-            {
-                TimeProvider = parameters.TimeProvider
-            });
-        }
+            TimeProvider = parameters.TimeProvider
+        });
     }
 }
