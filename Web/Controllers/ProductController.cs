@@ -1,6 +1,9 @@
+using Application.Contracts.Features.Products.Commands.FavoriteProduct;
+using Application.Contracts.Features.Products.Commands.UnFavoriteProduct;
 using Application.Contracts.Features.Products.Commands.UpdateProduct;
 using Application.Contracts.Features.Products.Queries.GetProduct;
 using Microsoft.AspNetCore.Mvc;
+using Web.HttpMethods;
 
 namespace Web.Controllers;
 
@@ -20,6 +23,24 @@ public sealed class ProductController : AppController
         [FromBody] UpdateProductRequestBodyDto bodyDto)
     {
         await Sender.Send(new UpdateProductCommand(routeDto, bodyDto), HttpContext.RequestAborted);
+
+        return NoContent();
+    }
+
+    [HttpFavorite]
+    public async Task<NoContentResult> FavoriteProductAsync(
+        [FromRoute] FavoriteProductRequestRouteDto routeDto)
+    {
+        await Sender.Send(new FavoriteProductCommand(routeDto), HttpContext.RequestAborted);
+
+        return NoContent();
+    }
+    
+    [HttpUnFavorite]
+    public async Task<NoContentResult> UnFavoriteProductAsync(
+        [FromRoute] UnFavoriteProductRequestRouteDto routeDto)
+    {
+        await Sender.Send(new UnFavoriteProductCommand(routeDto), HttpContext.RequestAborted);
 
         return NoContent();
     }
