@@ -3,7 +3,6 @@ using Application.Contracts.Features.Products.Commands.UnFavoriteProduct;
 using Application.Contracts.Features.Products.Commands.UpdateProduct;
 using Application.Contracts.Features.Products.Queries.GetProduct;
 using Microsoft.AspNetCore.Mvc;
-using Web.HttpMethods;
 
 namespace Web.Controllers;
 
@@ -27,7 +26,7 @@ public sealed class ProductController : AppController
         return NoContent();
     }
 
-    [HttpFavorite]
+    [HttpPut("favorite")]
     public async Task<NoContentResult> FavoriteProductAsync(
         [FromRoute] FavoriteProductRequestRouteDto routeDto)
     {
@@ -36,7 +35,7 @@ public sealed class ProductController : AppController
         return NoContent();
     }
     
-    [HttpUnFavorite]
+    [HttpPut("unfavorite")]
     public async Task<NoContentResult> UnFavoriteProductAsync(
         [FromRoute] UnFavoriteProductRequestRouteDto routeDto)
     {
