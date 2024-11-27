@@ -1,3 +1,5 @@
+using Domain.Entities.FavoriteProducts;
+using Domain.Entities.FavoriteProducts.Parameters;
 using Domain.Entities.Products.Exceptions;
 using Domain.Entities.Products.Parameters;
 
@@ -19,6 +21,8 @@ public sealed class Product
     private int _quantity;
 
     private decimal _cost;
+
+    private readonly List<FavoriteProduct> _favorites = [];
 
     private Product()
     {
@@ -152,5 +156,49 @@ public sealed class Product
         
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public FavoriteProduct Favorite(FavoriteProductParameters parameters)
+    {
+        if (IsRemoved) throw new FavoriteRemovedProductException();
+        
+        var favorite = _favorites.SingleOrDefault(f => f.ClientId == parameters.ClientId);
+        if (!ReferenceEquals(favorite, default))
+        {
+            if (favorite.IsRemoved)
+            {
+                favorite.Restore(new RestoreFavoriteProductParameters
+                {
+                    TimeProvider = parameters.TimeProvider
+                });
+            }
+
+            return favorite;
+        }
+
+        var newFavorite = new FavoriteProduct(new CreateFavoriteProductParameters
+        {
+            Product = this,
+            ClientId = parameters.ClientId,
+            TimeProvider = parameters.TimeProvider
+        });
+        
+        _favorites.Add(newFavorite);
+        
+        return newFavorite;
+    }
+
+    public void UnFavorite(UnFavoriteProductParameters parameters)
+    {
+        if (IsRemoved) return;
+        
+        var favorite = _favorites.SingleOrDefault(f => f.ClientId == parameters.ClientId);
+        if (!ReferenceEquals(favorite, default))
+        {
+            favorite.Remove(new RemoveFavoriteProductParameters
+            {
+                TimeProvider = parameters.TimeProvider
+            });
+        }
     }
 }
