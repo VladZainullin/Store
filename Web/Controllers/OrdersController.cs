@@ -1,3 +1,4 @@
+using Application.Contracts.Features.Orders.Commands.CreateOrder;
 using Application.Contracts.Features.Orders.Queries.GetOrders;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,5 +12,11 @@ public sealed class OrdersController : AppController
         [FromQuery] GetOrdersRequestQueryDto query)
     {
         return await Sender.Send(new GetOrdersQuery(query), HttpContext.RequestAborted);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<CreateOrderResponseDto>> CreateOrderAsync()
+    {
+        return await Sender.Send(new CreateOrderCommand(), HttpContext.RequestAborted);
     }
 }

@@ -1,4 +1,6 @@
 using Domain.Entities.Carts.Parameters;
+using Domain.Entities.Orders;
+using Domain.Entities.Orders.Parameters;
 using Domain.Entities.ProductInCarts;
 using Domain.Entities.ProductInCarts.Parameters;
 
@@ -91,6 +93,23 @@ public sealed class Cart
         {
             _products.Remove(productInCart);
         }
+    }
+
+    public Order CreateOrder(CreateOrderFromCartParameters parameters)
+    {
+        var order = new Order(new CreateOrderParameters
+        {
+            ClientId = ClientId,
+            TimeProvider = parameters.TimeProvider,
+            Products = _products.Select(p => p.Product).ToArray()
+        });
+        
+        Clean(new CleanCartParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
+        
+        return order;
     }
 
     public void Clean(CleanCartParameters parameters)

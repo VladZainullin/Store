@@ -23,7 +23,7 @@ public sealed class Order
     {
         SetClient(new SetClientForOrderParameters
         {
-            ClientId = parameters.Cart.ClientId,
+            ClientId = parameters.ClientId,
             TimeProvider = parameters.TimeProvider
         });
         
