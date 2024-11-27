@@ -16,6 +16,6 @@ internal sealed class MeasurementUnitPositionConfiguration : IEntityTypeConfigur
 
         builder.HasOne(static mu => mu.MeasurementUnit).WithMany();
         
-        builder.ToTable("measurement_units");
+        builder.ToTable("measurement_unit_positions");
     }
 }
