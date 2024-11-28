@@ -1,9 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-      <RootNamespace>Application</RootNamespace>
-    </PropertyGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Application.Clients.Contracts\Application.Clients.Contracts.csproj" />
+      <ProjectReference Include="..\Application.Contracts\Application.Contracts.csproj" />
       <ProjectReference Include="..\Clients.Contracts\Clients.Contracts.csproj" />
       <ProjectReference Include="..\Persistence.Contracts\Persistence.Contracts.csproj" />
     </ItemGroup>
