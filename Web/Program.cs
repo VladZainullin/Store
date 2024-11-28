@@ -26,6 +26,7 @@ public static class Program
 
             builder.Services
                 .AddPersistenceServices()
+                .AddApplicationDeliverersServices()
                 .AddApplicationServices()
                 .AddWebServices();
 
