@@ -1,3 +1,4 @@
+using Domain.Entities.Deliverers;
 using Domain.Entities.Orders.Parameters;
 using Domain.Entities.ProductInOrders;
 using Domain.Entities.ProductInOrders.Parameters;
@@ -13,6 +14,8 @@ public sealed class Order
     
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
+    
+    private Deliverer? _deliverer;
 
     private readonly List<ProductInOrder> _products = [];
 
@@ -53,6 +56,8 @@ public sealed class Order
     
     public OrderStatus Status => _status;
     
+    public Deliverer? Deliverer => _deliverer;
+    
     public IReadOnlyList<ProductInOrder> Products => _products.AsReadOnly();
 
     public void SetClient(SetClientForOrderParameters parameters)
@@ -84,6 +89,19 @@ public sealed class Order
     public void Cancel(CancelOrderParameters parameters)
     {
         _status = _status.ToCanceled();
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void Delivering(DeliveringOrderParameters parameters)
+    {
+        _status = _status.ToDelivering();
+        _deliverer = parameters.Deliverer;
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void Delivered(DeliveredOrderParameters parameters)
+    {
+        _status = _status.ToDelivered();
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 }
