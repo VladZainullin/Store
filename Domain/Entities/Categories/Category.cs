@@ -8,11 +8,11 @@ namespace Domain.Entities.Categories;
 
 public sealed class Category
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
 
     private string _title = default!;
     
-    private Guid _logoId = Guid.NewGuid();
+    private Guid _logoId = Guid.CreateVersion7();
 
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;

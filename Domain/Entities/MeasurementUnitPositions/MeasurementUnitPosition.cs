@@ -5,7 +5,7 @@ namespace Domain.Entities.MeasurementUnitPositions;
 
 public sealed class MeasurementUnitPosition
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
 
     private string _value = default!;
     

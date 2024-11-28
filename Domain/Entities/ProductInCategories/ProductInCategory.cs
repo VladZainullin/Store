@@ -6,7 +6,7 @@ namespace Domain.Entities.ProductInCategories;
 
 public sealed class ProductInCategory
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
     
     private Product _product = default!;
     private Category _category = default!;

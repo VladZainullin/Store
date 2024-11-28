@@ -7,7 +7,7 @@ namespace Domain.Entities.Products;
 
 public sealed class Product
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
     
     private string _title = default!;
     private string _description = default!;

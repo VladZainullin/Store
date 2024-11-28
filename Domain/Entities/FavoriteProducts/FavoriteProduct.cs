@@ -5,7 +5,7 @@ namespace Domain.Entities.FavoriteProducts;
 
 public sealed class FavoriteProduct
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
     
     private Guid _clientId;
 

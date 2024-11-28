@@ -7,7 +7,7 @@ namespace Domain.Entities.Orders;
 
 public sealed class Order
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
 
     private Guid _clientId;
     

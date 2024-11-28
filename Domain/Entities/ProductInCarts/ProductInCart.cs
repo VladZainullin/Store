@@ -6,7 +6,7 @@ namespace Domain.Entities.ProductInCarts;
 
 public sealed class ProductInCart
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
 
     private Product _product = default!;
 

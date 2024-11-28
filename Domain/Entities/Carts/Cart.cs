@@ -8,7 +8,7 @@ namespace Domain.Entities.Carts;
 
 public sealed class Cart
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
 
     private Guid _clientId;
 

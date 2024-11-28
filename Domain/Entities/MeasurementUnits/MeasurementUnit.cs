@@ -4,7 +4,7 @@ namespace Domain.Entities.MeasurementUnits;
 
 public sealed class MeasurementUnit
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
 
     private string _shortTitle = default!;
     private string _fullTitle = default!;

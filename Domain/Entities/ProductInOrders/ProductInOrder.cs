@@ -6,7 +6,7 @@ namespace Domain.Entities.ProductInOrders;
 
 public sealed class ProductInOrder
 {
-    private Guid _id = Guid.NewGuid();
+    private Guid _id = Guid.CreateVersion7();
 
     private int _quantity = 1;
     private decimal _cost = default!;
