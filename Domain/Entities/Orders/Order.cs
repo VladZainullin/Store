@@ -1,6 +1,7 @@
 using Domain.Entities.Orders.Parameters;
 using Domain.Entities.ProductInOrders;
 using Domain.Entities.ProductInOrders.Parameters;
+using Domain.Enums.OrderStatuses;
 
 namespace Domain.Entities.Orders;
 
@@ -13,7 +14,9 @@ public sealed class Order
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
 
-    private List<ProductInOrder> _products = [];
+    private readonly List<ProductInOrder> _products = [];
+
+    private OrderStatus _status = OrderStatus.Created;
     
     private Order()
     {
@@ -26,6 +29,15 @@ public sealed class Order
             ClientId = parameters.ClientId,
             TimeProvider = parameters.TimeProvider
         });
+
+        foreach (var product in parameters.Products)
+        {
+            AddProduct(new AddProductToOrderParameters
+            {
+                Product = product,
+                TimeProvider = parameters.TimeProvider
+            });
+        }
         
         _createdAt = parameters.TimeProvider.GetUtcNow();
         _updatedAt = parameters.TimeProvider.GetUtcNow();
@@ -38,6 +50,8 @@ public sealed class Order
     public DateTimeOffset CreatedAt => _createdAt;
     
     public DateTimeOffset UpdatedAt => _updatedAt;
+    
+    public OrderStatus Status => _status;
     
     public IReadOnlyList<ProductInOrder> Products => _products.AsReadOnly();
 
@@ -63,5 +77,7 @@ public sealed class Order
             
             _products.Add(newProductInOrder);
         }
+        
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 }

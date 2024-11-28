@@ -5,67 +5,59 @@ namespace Domain.Enums.OrderStatuses;
 
 public abstract class OrderStatus : SmartEnum<OrderStatus>
 {
+    public static readonly CreatedOrder Created = new();
+    public static readonly DeliveringOrder Delivering = new();
+    public static readonly DeliveredOrder Delivered = new();
+    public static readonly CanceledOrder Canceled = new();
+    
     private OrderStatus(string name, int value) : base(name, value)
     {
     }
-    
-    public abstract DeliveringOrder ToDelivering();
-    
-    public abstract DeliveredOrder ToDelivered();
 
-    public abstract CanceledOrder ToCanceled();
+    public virtual DeliveringOrder ToDelivering()
+    {
+        return Delivering;
+    }
+
+    public virtual DeliveredOrder ToDelivered()
+    {
+        return Delivered;
+    }
+
+    public virtual CanceledOrder ToCanceled()
+    {
+        return Canceled;
+    }
 
     public sealed class CreatedOrder : OrderStatus
     {
-        private CreatedOrder() : base("Новый", 1)
+        internal CreatedOrder() : base("Новый", 1)
         {
-            
-        }
-        
-        public override DeliveringOrder ToDelivering()
-        {
-            return new DeliveringOrder();
         }
 
         public override DeliveredOrder ToDelivered()
         {
             throw new CreatedToDeliveredOrderStatusException();
         }
+    }
 
-        public override CanceledOrder ToCanceled()
+    public sealed class DeliveringOrder : OrderStatus
+    {
+        internal DeliveringOrder() : base("Доставляется", 2)
         {
-            return new CanceledOrder();
         }
     }
 
-    public sealed class DeliveringOrder() : OrderStatus("Доставляется", 2)
+    public sealed class DeliveredOrder : OrderStatus
     {
-        public override DeliveringOrder ToDelivering()
+        internal DeliveredOrder() : base("Доставлен", 3)
         {
-            return this;
+            
         }
-
-        public override DeliveredOrder ToDelivered()
-        {
-            return new DeliveredOrder();
-        }
-
-        public override CanceledOrder ToCanceled()
-        {
-            return new CanceledOrder();
-        }
-    }
-
-    public sealed class DeliveredOrder() : OrderStatus("Доставлен", 3)
-    {
+        
         public override DeliveringOrder ToDelivering()
         {
             throw new DeliveredToDeliveringOrderStatusException();
-        }
-
-        public override DeliveredOrder ToDelivered()
-        {
-            return this;
         }
 
         public override CanceledOrder ToCanceled()
@@ -74,8 +66,12 @@ public abstract class OrderStatus : SmartEnum<OrderStatus>
         }
     }
 
-    public sealed class CanceledOrder() : OrderStatus("Отменён", 4)
+    public sealed class CanceledOrder : OrderStatus
     {
+        internal CanceledOrder() : base("Отменён", 4)
+        {
+        }
+        
         public override DeliveringOrder ToDelivering()
         {
             throw new CanceledToDeliveringOrderStatusException();
@@ -84,11 +80,6 @@ public abstract class OrderStatus : SmartEnum<OrderStatus>
         public override DeliveredOrder ToDelivered()
         {
             throw new CanceledToDeliveredOrderStatusException();
-        }
-
-        public override CanceledOrder ToCanceled()
-        {
-            return this;
         }
     }
 }
