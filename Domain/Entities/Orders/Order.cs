@@ -80,4 +80,10 @@ public sealed class Order
         
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
+
+    public void Cancel(CancelOrderParameters parameters)
+    {
+        _status = _status.ToCanceled();
+        _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
 }
