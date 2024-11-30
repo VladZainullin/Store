@@ -1,5 +1,6 @@
 using Domain.Entities.FavoriteProducts.Parameters;
 using Domain.Entities.Products;
+using Domain.Entities.Products.Parameters;
 
 namespace Domain.Entities.FavoriteProducts;
 
@@ -63,6 +64,11 @@ public sealed class FavoriteProduct
         
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
+        
+        _product.Restore(new RestoreProductParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
     }
     
     public void SetProduct(SetProductForFavoriteProductParameters parameters)
