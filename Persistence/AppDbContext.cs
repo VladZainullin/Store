@@ -18,7 +18,8 @@ internal sealed class AppDbContext(DbContextOptions options) : DbContext(options
             .ApplyConfiguration(new MeasurementUnitPositionConfiguration())
             .ApplyConfiguration(new ProductInOrderConfiguration())
             .ApplyConfiguration(new FavoriteProductConfiguration())
-            .ApplyConfiguration(new CharacteristicConfiguration());
+            .ApplyConfiguration(new CharacteristicConfiguration())
+            .ApplyConfiguration(new ProductCharacteristicConfiguration());
         
         base.OnModelCreating(modelBuilder);
     }

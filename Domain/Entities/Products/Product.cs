@@ -1,5 +1,7 @@
 using Domain.Entities.FavoriteProducts;
 using Domain.Entities.FavoriteProducts.Parameters;
+using Domain.Entities.ProductCharacteristics;
+using Domain.Entities.ProductCharacteristics.Parameters;
 using Domain.Entities.Products.Exceptions;
 using Domain.Entities.Products.Parameters;
 
@@ -23,6 +25,8 @@ public sealed class Product
     private decimal _cost;
 
     private readonly List<FavoriteProduct> _favorites = [];
+    
+    private readonly List<ProductCharacteristic> _characteristics = [];
 
     private Product()
     {
@@ -196,6 +200,49 @@ public sealed class Product
         
         var favorite = _favorites.SingleOrDefault(f => f.ClientId == parameters.ClientId);
         favorite?.Remove(new RemoveFavoriteProductParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
+    }
+
+    public void AddCharacteristic(AddCharacteristicForProductParameters parameters)
+    {
+        if (IsRemoved) return;
+
+        var characteristic = _characteristics
+            .SingleOrDefault(pc => pc.Characteristic == parameters.Characteristic);
+        if (!ReferenceEquals(characteristic, default))
+        {
+            if (characteristic.IsRemoved)
+            {
+                characteristic.Restore(new RestoreProductCharacteristicParameters
+                {
+                    TimeProvider = parameters.TimeProvider
+                });
+            }
+            
+            return;
+        }
+
+        var newCharacteristic = new ProductCharacteristic(new CreateProductCharacteristicParameters
+        {
+            Product = this,
+            Characteristic = parameters.Characteristic,
+            TimeProvider = parameters.TimeProvider
+        });
+        
+        _characteristics.Add(newCharacteristic);
+    }
+
+    public void RemoveCharacteristic(RemoveCharacteristicForProductParameters parameters)
+    {
+        if (IsRemoved) return;
+        
+        var characteristic = _characteristics
+            .SingleOrDefault(pc => pc.Characteristic.Id == parameters.CharacteristicId);
+        if (ReferenceEquals(characteristic, default)) return;
+        
+        characteristic.Remove(new RemoveProductCharacteristicParameters
         {
             TimeProvider = parameters.TimeProvider
         });
