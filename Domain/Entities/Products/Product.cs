@@ -198,6 +198,14 @@ public sealed class Product
                 TimeProvider = parameters.TimeProvider,
             });
         }
+
+        foreach (var productCharacteristic in _characteristics)
+        {
+            productCharacteristic.Remove(new RemoveProductCharacteristicParameters
+            {
+                TimeProvider = parameters.TimeProvider
+            });
+        }
     }
 
     public void Restore(RestoreProductParameters parameters)
