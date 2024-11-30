@@ -14,7 +14,7 @@ COPY Application.Contracts/Application.Contracts.csproj Application.Contracts/
 COPY Web/Web.csproj Web/
 RUN dotnet restore Web/Web.csproj
 COPY . .
-RUN dotnet build Web/Web.csproj -c Release -o app/build --no-restore
+RUN dotnet build Web/Web.csproj -c Release -o app/build
 
 FROM build AS publish
 RUN dotnet publish Web/Web.csproj -c Release -o /app/publish /p:UseAppHost=false
