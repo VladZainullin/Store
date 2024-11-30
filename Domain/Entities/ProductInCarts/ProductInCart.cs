@@ -91,11 +91,15 @@ public sealed class ProductInCart
 
     public void Remove(RemoveProductInCartParameters parameters)
     {
+        if (IsRemoved) return;
+        
         _removedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void Restore(RestoreProductInCartParameters parameters)
     {
+        if (!IsRemoved) return;
+        
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
     }

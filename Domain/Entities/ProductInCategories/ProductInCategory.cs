@@ -40,11 +40,15 @@ public sealed class ProductInCategory
 
     public void Remove(RemoveProductInCategoryParameters parameters)
     {
+        if (IsRemoved) return;
+        
         _removedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void Restore(RestoreProductInCategoryParameters parameters)
     {
+        if (!IsRemoved) return;
+        
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
     }

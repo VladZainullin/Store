@@ -2,6 +2,12 @@ using Domain.Entities.FavoriteProducts;
 using Domain.Entities.FavoriteProducts.Parameters;
 using Domain.Entities.ProductCharacteristics;
 using Domain.Entities.ProductCharacteristics.Parameters;
+using Domain.Entities.ProductInCarts;
+using Domain.Entities.ProductInCarts.Parameters;
+using Domain.Entities.ProductInCategories;
+using Domain.Entities.ProductInCategories.Parameters;
+using Domain.Entities.ProductInOrders;
+using Domain.Entities.ProductInOrders.Parameters;
 using Domain.Entities.Products.Exceptions;
 using Domain.Entities.Products.Parameters;
 
@@ -23,6 +29,12 @@ public sealed class Product
     private int _quantity;
 
     private decimal _cost;
+    
+    private readonly List<ProductInCart> _productInCarts = [];
+    
+    private readonly List<ProductInOrder> _productInOrders = [];
+    
+    private readonly List<ProductInCategory> _productInCategories = [];
 
     private readonly List<FavoriteProduct> _favorites = [];
     
@@ -154,6 +166,38 @@ public sealed class Product
         if (IsRemoved) return;
         
         _removedAt = parameters.TimeProvider.GetUtcNow();
+
+        foreach (var productInCategory in _productInCategories)
+        {
+            productInCategory.Remove(new RemoveProductInCategoryParameters
+            {
+                TimeProvider = parameters.TimeProvider,
+            });
+        }
+
+        foreach (var productInOrder in _productInOrders)
+        {
+            productInOrder.Remove(new RemoveProductInOrderParameters
+            {
+                TimeProvider = parameters.TimeProvider,
+            });
+        }
+
+        foreach (var productInCart in _productInCarts)
+        {
+            productInCart.Remove(new RemoveProductInCartParameters
+            {
+                TimeProvider = parameters.TimeProvider,
+            });
+        }
+
+        foreach (var favorite in _favorites)
+        {
+            favorite.Remove(new RemoveFavoriteProductParameters
+            {
+                TimeProvider = parameters.TimeProvider,
+            });
+        }
     }
 
     public void Restore(RestoreProductParameters parameters)

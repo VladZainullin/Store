@@ -11,6 +11,7 @@ internal sealed class ProductInOrderConfiguration : IEntityTypeConfiguration<Pro
         builder.Property(static pio => pio.Id).HasField("_id");
         builder.Property(static pio => pio.CreatedAt).HasField("_createdAt");
         builder.Property(static pio => pio.UpdatedAt).HasField("_updatedAt");
+        builder.Property(static pio => pio.RemovedAt).HasField("_removedAt");
         builder.Property(static pio => pio.Quantity).HasField("_quantity");
         builder.Property(static pio => pio.Cost).HasField("_cost");
 

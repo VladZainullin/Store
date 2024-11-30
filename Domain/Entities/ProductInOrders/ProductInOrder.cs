@@ -16,6 +16,7 @@ public sealed class ProductInOrder
 
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
+    private DateTimeOffset? _removedAt;
     
     private ProductInOrder()
     {
@@ -52,6 +53,10 @@ public sealed class ProductInOrder
     public DateTimeOffset CreatedAt => _createdAt;
 
     public DateTimeOffset UpdatedAt => _updatedAt;
+    
+    public DateTimeOffset? RemovedAt => _removedAt;
+    
+    public bool IsRemoved => _removedAt != default;
 
     public void SetOrder(SetProductInOrderOrderParameters parameters)
     {
@@ -63,6 +68,21 @@ public sealed class ProductInOrder
     {
         _product = parameters.Product;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void Remove(RemoveProductInOrderParameters parameters)
+    {
+        if (IsRemoved) return;
+        
+        _removedAt = parameters.TimeProvider.GetUtcNow();
+    }
+
+    public void Restore(RestoreProductInOrderParameters parameters)
+    {
+        if (!IsRemoved) return;
+
+        _removedAt = default;
+        _createdAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void IncrementProduct(IncrementProductInOrderProductQuantityParameters parameters)
