@@ -17,7 +17,9 @@ internal sealed class FavoriteProductConfiguration :
         builder.Property(static fp => fp.UpdatedAt).HasField("_updatedAt");
         builder.Property(static fp => fp.RemovedAt).HasField("_removedAt");
 
-        builder.HasOne(static fp => fp.Product).WithMany();
+        builder
+            .HasOne(static fp => fp.Product)
+            .WithMany(static p => p.Favorites);
         
         builder.ToTable("favorite_products");
     }
