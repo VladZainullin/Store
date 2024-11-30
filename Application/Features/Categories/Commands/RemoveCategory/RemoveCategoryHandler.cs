@@ -1,6 +1,7 @@
 using Application.Contracts.Features.Categories.Commands.RemoveCategory;
+using Application.Exceptions;
+using Domain.Entities.Categories;
 using Domain.Entities.Categories.Parameters;
-using Domain.Entities.Products.Parameters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
@@ -12,12 +13,11 @@ internal sealed class RemoveCategoryHandler(IDbContext context, TimeProvider tim
 {
     public async Task Handle(RemoveCategoryCommand request, CancellationToken cancellationToken)
     {
-        var category = await context.Categories
-            .AsTracking()
-            .Include(static c => c.Products)
-            .SingleOrDefaultAsync(c => c.Id == request.RouteDto.CategoryId, cancellationToken);
-        
-        if (ReferenceEquals(category, default)) return;
+        var category = await GetCategoryAsync(request.Route.CategoryId, cancellationToken);
+        if (ReferenceEquals(category, default))
+        {
+            throw new CategoryNotFoundException();
+        }
 
         category.Remove(new RemoveCategoryParameters
         {
@@ -25,5 +25,13 @@ internal sealed class RemoveCategoryHandler(IDbContext context, TimeProvider tim
         });
 
         await context.SaveChangesAsync(cancellationToken);
+    }
+
+    private Task<Category?> GetCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
+    {
+        return context.Categories
+            .AsTracking()
+            .Include(static c => c.Products)
+            .SingleOrDefaultAsync(c => c.Id == categoryId, cancellationToken);
     }
 }
