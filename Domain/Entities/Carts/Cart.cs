@@ -41,7 +41,7 @@ public sealed class Cart
 
     public DateTimeOffset UpdatedAt => _updatedAt;
 
-    public IReadOnlyCollection<ProductInCart> Products => _products.AsReadOnly();
+    public IReadOnlyList<ProductInCart> Products => _products.AsReadOnly();
 
     private void SetClient(SetCartClientParameters parameters)
     {

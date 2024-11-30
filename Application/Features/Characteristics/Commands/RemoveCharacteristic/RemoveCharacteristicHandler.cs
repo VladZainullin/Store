@@ -1,5 +1,6 @@
 using Application.Contracts.Features.Characteristics.Commands.RemoveCharacteristic;
 using Application.Exceptions;
+using Domain.Entities.Characteristics;
 using Domain.Entities.Characteristics.Parameters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,7 @@ internal sealed class RemoveCharacteristicHandler(
         RemoveCharacteristicCommand request,
         CancellationToken cancellationToken)
     {
-        var characteristic = await context.Characteristics
-            .AsTracking()
-            .SingleOrDefaultAsync(c => c.Id == request.Route.CharacteristicId, cancellationToken);
-
+        var characteristic = await GetCharacteristicAsync(request.Route.CharacteristicId, cancellationToken);
         if (ReferenceEquals(characteristic, default))
         {
             throw new CharacteristicNotFoundException();
@@ -31,5 +29,13 @@ internal sealed class RemoveCharacteristicHandler(
         });
         
         await context.SaveChangesAsync(cancellationToken);
+    }
+
+    private Task<Characteristic?> GetCharacteristicAsync(Guid characteristicId, CancellationToken cancellationToken)
+    {
+        return context.Characteristics
+            .AsTracking()
+            .Include(static c => c.Products)
+            .SingleOrDefaultAsync(c => c.Id == characteristicId, cancellationToken);
     }
 }
