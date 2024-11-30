@@ -36,6 +36,8 @@ public sealed class Characteristic
     public DateTimeOffset UpdatedAt => _updatedAt;
     
     public DateTimeOffset? RemovedAt => _removedAt;
+    
+    public bool IsRemoved => _removedAt != default;
 
     public void SetTitle(SetTitleForCharacteristicParameters parameters)
     {
