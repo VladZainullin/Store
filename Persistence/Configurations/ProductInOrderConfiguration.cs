@@ -15,7 +15,7 @@ internal sealed class ProductInOrderConfiguration : IEntityTypeConfiguration<Pro
         builder.Property(static pio => pio.Quantity).HasField("_quantity");
         builder.Property(static pio => pio.Cost).HasField("_cost");
 
-        builder.HasOne(static pio => pio.Product).WithMany();
+        builder.HasOne(static pio => pio.Product).WithMany(static p => p.ProductInOrders);
         builder.HasOne(static pio => pio.Order).WithMany(static o => o.Products);
         
         builder.ToTable("product_in_orders");

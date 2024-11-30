@@ -1,4 +1,6 @@
 using Domain.Entities.Characteristics.Parameters;
+using Domain.Entities.ProductCharacteristics;
+using Domain.Entities.ProductCharacteristics.Parameters;
 
 namespace Domain.Entities.Characteristics;
 
@@ -11,6 +13,8 @@ public sealed class Characteristic
     private DateTimeOffset _updatedAt;
     
     private DateTimeOffset? _removedAt;
+
+    private List<ProductCharacteristic> _products = [];
     
     private Characteristic()
     {
@@ -38,6 +42,8 @@ public sealed class Characteristic
     public DateTimeOffset? RemovedAt => _removedAt;
     
     public bool IsRemoved => _removedAt != default;
+    
+    public IReadOnlyList<ProductCharacteristic> Products => _products.AsReadOnly();
 
     public void SetTitle(SetTitleForCharacteristicParameters parameters)
     {
@@ -47,11 +53,23 @@ public sealed class Characteristic
 
     public void Remove(RemoveCharacteristicParameters parameters)
     {
+        if (IsRemoved) return;
+
+        foreach (var product in _products)
+        {
+            product.Remove(new RemoveProductCharacteristicParameters
+            {
+                TimeProvider = parameters.TimeProvider
+            });
+        }
+        
         _removedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void Restore(RestoreCharacteristicParameters parameters)
     {
+        if (!IsRemoved) return;
+        
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
     }

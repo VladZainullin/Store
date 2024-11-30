@@ -13,7 +13,7 @@ internal sealed class ProductInCategoryConfiguration :
         builder.Property(static pic => pic.CreatedAt).HasField("_createdAt");
         builder.Property(static pic => pic.RemovedAt).HasField("_removedAt");
 
-        builder.HasOne(static pic => pic.Product).WithMany();
+        builder.HasOne(static pic => pic.Product).WithMany(static p => p.ProductInCategories);
         builder.HasOne(static pic => pic.Category).WithMany();
         
         builder.ToTable("product_in_categories");

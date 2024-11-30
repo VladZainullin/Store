@@ -15,7 +15,7 @@ internal sealed class ProductCharacteristicConfiguration :
         builder.Property(static pc => pc.UpdatedAt).HasField("_updatedAt");
         builder.Property(static pc => pc.RemovedAt).HasField("_removedAt");
 
-        builder.HasOne(static pc => pc.Product).WithMany();
+        builder.HasOne(static pc => pc.Product).WithMany(static p => p.Characteristics);
         builder.HasOne(static pc => pc.Characteristic).WithMany();
         
         builder.ToTable("product_characteristics");
