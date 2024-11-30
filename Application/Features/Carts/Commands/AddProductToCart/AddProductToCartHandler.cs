@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Carts.Commands.AddProductToCart;
+using Application.Contracts.Features.Carts.Commands.IncrementProductToCart;
 using Domain.Entities.Carts;
 using Domain.Entities.Carts.Parameters;
 using Domain.Entities.Products;
@@ -11,9 +11,9 @@ namespace Application.Features.Carts.Commands.AddProductToCart;
 internal sealed class AddProductToCartHandler(
     IDbContext context,
     TimeProvider timeProvider) : 
-    IRequestHandler<AddProductToCartCommand>
+    IRequestHandler<IncrementProductToCartCommand>
 {
-    public async Task Handle(AddProductToCartCommand request, CancellationToken cancellationToken)
+    public async Task Handle(IncrementProductToCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await GetCartAsync(request.RouteDto.CartId, cancellationToken);
         if (ReferenceEquals(cart, default)) return;

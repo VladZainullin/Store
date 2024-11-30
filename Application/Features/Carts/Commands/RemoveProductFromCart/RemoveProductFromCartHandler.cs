@@ -1,4 +1,4 @@
-using Application.Contracts.Features.Carts.Commands.RemoveProductFromCart;
+using Application.Contracts.Features.Carts.Commands.DecrementProductFromCart;
 using Clients.Contracts;
 using Domain.Entities.Carts.Parameters;
 using MediatR;
@@ -11,9 +11,9 @@ internal sealed class RemoveProductFromCartHandler(
     IDbContext context,
     ICurrentClient<Guid> currentClient,
     TimeProvider timeProvider) : 
-    IRequestHandler<RemoveProductFromCartCommand>
+    IRequestHandler<DecrementProductFromCartCommand>
 {
-    public async Task Handle(RemoveProductFromCartCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DecrementProductFromCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await context.Carts
             .AsTracking()

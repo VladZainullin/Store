@@ -1,5 +1,5 @@
-using Application.Contracts.Features.Carts.Commands.AddProductToCart;
-using Application.Contracts.Features.Carts.Commands.RemoveProductFromCart;
+using Application.Contracts.Features.Carts.Commands.DecrementProductFromCart;
+using Application.Contracts.Features.Carts.Commands.IncrementProductToCart;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -7,22 +7,22 @@ namespace Web.Controllers;
 [Route("api/v1/cart/products/{productId:guid}")]
 public sealed class ProductInCartController : AppController
 {
-    [HttpPost]
-    public async Task<NoContentResult> AddProductToCartAsync(
-        [FromRoute] AddProductToCartRequestRouteDto route,
-        [FromBody] AddProductToCartRequestBodyDto body)
+    [HttpPut("increment")]
+    public async Task<NoContentResult> IncrementProductToCartAsync(
+        [FromRoute] IncrementProductToCartRequestRouteDto route,
+        [FromBody] IncrementProductToCartRequestBodyDto body)
     {
-        await Sender.Send(new AddProductToCartCommand(route, body), HttpContext.RequestAborted);
+        await Sender.Send(new IncrementProductToCartCommand(route, body), HttpContext.RequestAborted);
 
         return NoContent();
     }
 
-    [HttpDelete]
-    public async Task<NoContentResult> RemoveProductFromCartAsync(
-        [FromRoute] RemoveProductFromCartRequestRouteDto route,
-        [FromBody] RemoveProductFromCartRequestBodyDto body)
+    [HttpPut("decrement")]
+    public async Task<NoContentResult> DecrementProductFromCartAsync(
+        [FromRoute] DecrementProductFromCartRequestRouteDto route,
+        [FromBody] DecrementProductFromCartRequestBodyDto body)
     {
-        await Sender.Send(new RemoveProductFromCartCommand(route, body), HttpContext.RequestAborted);
+        await Sender.Send(new DecrementProductFromCartCommand(route, body), HttpContext.RequestAborted);
         
         return NoContent();
     }
