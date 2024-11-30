@@ -7,6 +7,15 @@ namespace Web.Controllers;
 public sealed class CharacteristicController : AppController
 {
     [HttpDelete]
+    public async Task<NoContentResult> RemoveCharacteristic(
+        RemoveCharacteristicRequestRouteDto route)
+    {
+        await Sender.Send(new RemoveCharacteristicCommand(route), HttpContext.RequestAborted);
+
+        return NoContent();
+    }
+    
+    [HttpDelete]
     public async Task<NoContentResult> RemoveCharacteristicAsync(
         [FromRoute] RemoveCharacteristicRequestRouteDto route)
     {
