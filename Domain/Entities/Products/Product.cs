@@ -98,12 +98,12 @@ public sealed class Product
     
     public decimal Cost => _cost;
     
-    public IReadOnlyCollection<FavoriteProduct> Favorites => _favorites.AsReadOnly();
     public IReadOnlyList<FavoriteProduct> Favorites => _favorites.AsReadOnly();
     
     public IReadOnlyList<ProductInCart> ProductInCarts => _productInCarts.AsReadOnly();
     
     public IReadOnlyList<ProductInOrder> ProductInOrders => _productInOrders.AsReadOnly();
+    
     public IReadOnlyList<ProductInCategory> ProductInCategories => _productInCategories.AsReadOnly();
     
     public IReadOnlyCollection<ProductCharacteristic> Characteristics => _characteristics.AsReadOnly();
