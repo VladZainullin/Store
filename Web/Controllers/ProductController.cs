@@ -1,4 +1,5 @@
 using Application.Contracts.Features.Products.Commands.FavoriteProduct;
+using Application.Contracts.Features.Products.Commands.RestoreProduct;
 using Application.Contracts.Features.Products.Commands.UnFavoriteProduct;
 using Application.Contracts.Features.Products.Commands.UpdateProduct;
 using Application.Contracts.Features.Products.Queries.GetProduct;
@@ -40,6 +41,15 @@ public sealed class ProductController : AppController
         [FromRoute] UnFavoriteProductRequestRouteDto routeDto)
     {
         await Sender.Send(new UnFavoriteProductCommand(routeDto), HttpContext.RequestAborted);
+
+        return NoContent();
+    }
+
+    [HttpPut("restore")]
+    public async Task<NoContentResult> RestoreProductAsync(
+        [FromRoute] RestoreProductRequestRouteDto route)
+    {
+        await Sender.Send(new RestoreProductCommand(route), HttpContext.RequestAborted);
 
         return NoContent();
     }
