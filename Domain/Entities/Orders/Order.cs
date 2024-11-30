@@ -1,4 +1,3 @@
-using Domain.Entities.Deliverers;
 using Domain.Entities.Orders.Parameters;
 using Domain.Entities.ProductInOrders;
 using Domain.Entities.ProductInOrders.Parameters;
@@ -15,12 +14,12 @@ public sealed class Order
     private DateTimeOffset _createdAt;
     private DateTimeOffset _updatedAt;
     
-    private Deliverer? _deliverer;
+    private Guid _delivererId;
 
     private readonly List<ProductInOrder> _products = [];
 
     private OrderStatus _status = OrderStatus.Created;
-    
+
     private Order()
     {
     }
@@ -55,8 +54,6 @@ public sealed class Order
     public DateTimeOffset UpdatedAt => _updatedAt;
     
     public OrderStatus Status => _status;
-    
-    public Deliverer? Deliverer => _deliverer;
     
     public IReadOnlyList<ProductInOrder> Products => _products.AsReadOnly();
 
@@ -95,7 +92,7 @@ public sealed class Order
     public void Delivering(DeliveringOrderParameters parameters)
     {
         _status = _status.ToDelivering();
-        _deliverer = parameters.Deliverer;
+        _delivererId = parameters.DelivererId;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
