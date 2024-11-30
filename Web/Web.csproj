@@ -11,6 +11,8 @@
       <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
       <PackageReference Include="Minio" />
       <PackageReference Include="Serilog.AspNetCore" />
+      <PackageReference Include="Serilog.Enrichers.Environment" />
+      <PackageReference Include="Serilog.Exceptions" />
       <PackageReference Include="Serilog.Sinks.Seq" />
     </ItemGroup>
 

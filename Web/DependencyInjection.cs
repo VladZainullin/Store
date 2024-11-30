@@ -13,7 +13,7 @@ internal static class DependencyInjection
     {
         if (!EF.IsDesignTime)
         {
-            services.AddOptions<MinioOptions>().BindConfiguration("MinioOptions");
+            services.AddOptions<MinioOptions>().BindConfiguration("Minio");
             services.AddMinio(s =>
             {
                 var serviceProvider = services.BuildServiceProvider();
