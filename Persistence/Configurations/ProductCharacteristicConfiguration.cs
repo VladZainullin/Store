@@ -10,7 +10,9 @@ internal sealed class ProductCharacteristicConfiguration :
     public void Configure(EntityTypeBuilder<ProductCharacteristic> builder)
     {
         builder.Property(static pc => pc.Id).HasField("_id");
+        builder.Property(static pc => pc.Value).HasField("_value");
         builder.Property(static pc => pc.CreatedAt).HasField("_createdAt");
+        builder.Property(static pc => pc.UpdatedAt).HasField("_updatedAt");
         builder.Property(static pc => pc.RemovedAt).HasField("_removedAt");
 
         builder.HasOne(static pc => pc.Product).WithMany();

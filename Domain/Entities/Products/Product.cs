@@ -228,7 +228,8 @@ public sealed class Product
         {
             Product = this,
             Characteristic = parameters.Characteristic,
-            TimeProvider = parameters.TimeProvider
+            TimeProvider = parameters.TimeProvider,
+            Value = parameters.Value
         });
         
         _characteristics.Add(newCharacteristic);
