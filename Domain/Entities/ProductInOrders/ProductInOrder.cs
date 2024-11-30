@@ -1,6 +1,7 @@
 using Domain.Entities.Orders;
 using Domain.Entities.ProductInOrders.Parameters;
 using Domain.Entities.Products;
+using Domain.Entities.Products.Parameters;
 
 namespace Domain.Entities.ProductInOrders;
 
@@ -83,6 +84,11 @@ public sealed class ProductInOrder
 
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
+        
+        _product.Restore(new RestoreProductParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
     }
 
     public void IncrementProduct(IncrementProductInOrderProductQuantityParameters parameters)
