@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-[Route("api/v1/cart")]
-public sealed class CartController : AppController
+[Route("api/v1/cart/products")]
+public sealed class ProductsInCartController : AppController
 {
     [HttpGet]
     public async Task<ActionResult<GetProductsInCartResponseDto>> GetProductsInCartAsync(
