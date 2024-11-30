@@ -1,6 +1,7 @@
 using Domain.Entities.Carts;
 using Domain.Entities.ProductInCarts.Parameters;
 using Domain.Entities.Products;
+using Domain.Entities.Products.Parameters;
 
 namespace Domain.Entities.ProductInCarts;
 
@@ -102,6 +103,11 @@ public sealed class ProductInCart
         
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
+        
+        _product.Restore(new RestoreProductParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
     }
 
     private void SetQuantity(SetQuantityForProductInCartParameters parameters)

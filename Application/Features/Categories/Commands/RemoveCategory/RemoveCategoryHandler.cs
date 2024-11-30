@@ -1,4 +1,5 @@
 using Application.Contracts.Features.Categories.Commands.RemoveCategory;
+using Domain.Entities.Categories.Parameters;
 using Domain.Entities.Products.Parameters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ internal sealed class RemoveCategoryHandler(IDbContext context, TimeProvider tim
         
         if (ReferenceEquals(category, default)) return;
 
-        category.Remove(new RemoveProductParameters
+        category.Remove(new RemoveCategoryParameters
         {
             TimeProvider = timeProvider
         });

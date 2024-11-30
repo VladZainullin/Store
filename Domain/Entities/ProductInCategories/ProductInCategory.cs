@@ -1,6 +1,8 @@
 using Domain.Entities.Categories;
+using Domain.Entities.Categories.Parameters;
 using Domain.Entities.ProductInCategories.Parameters;
 using Domain.Entities.Products;
+using Domain.Entities.Products.Parameters;
 
 namespace Domain.Entities.ProductInCategories;
 
@@ -51,5 +53,15 @@ public sealed class ProductInCategory
         
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
+        
+        _product.Restore(new RestoreProductParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
+        
+        _category.Restore(new RestoreCategoryParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
     }
 }

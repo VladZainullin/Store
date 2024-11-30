@@ -52,7 +52,7 @@ public sealed class Category
     
     public IReadOnlyList<ProductInCategory> Products => _products;
 
-    public void Remove(RemoveProductParameters parameters)
+    public void Remove(RemoveCategoryParameters parameters)
     {
         if (IsRemoved) return;
         
@@ -67,7 +67,7 @@ public sealed class Category
         }
     }
 
-    public void Restore(RestoreProductParameters parameters)
+    public void Restore(RestoreCategoryParameters parameters)
     {
         if (!IsRemoved) return;
 
