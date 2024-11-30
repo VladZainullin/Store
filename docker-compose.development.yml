@@ -79,7 +79,7 @@ services:
       Serilog__Using__3: "Serilog.Exceptions"
       Serilog__Using__4: "Serilog.Enrichers.Environment"
       Serilog__Using__5: "Serilog.Enrichers.AssemblyName"
-      Serilog__MinimumLevel: "Debug"
+      Serilog__MinimumLevel: "Warning"
       Serilog__WriteTo__0__Name: "Console"
       Serilog__WriteTo__0__Args__theme: "Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme::Code, Serilog.Sinks.Console"
       Serilog__WriteTo__1__Name: "File"
