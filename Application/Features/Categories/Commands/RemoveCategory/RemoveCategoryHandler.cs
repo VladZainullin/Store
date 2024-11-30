@@ -13,7 +13,9 @@ internal sealed class RemoveCategoryHandler(IDbContext context, TimeProvider tim
     {
         var category = await context.Categories
             .AsTracking()
+            .Include(static c => c.Products)
             .SingleOrDefaultAsync(c => c.Id == request.RouteDto.CategoryId, cancellationToken);
+        
         if (ReferenceEquals(category, default)) return;
 
         category.Remove(new RemoveProductParameters

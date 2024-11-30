@@ -11,6 +11,7 @@ internal sealed class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder.Property(static c => c.Id).HasField("_id").ValueGeneratedNever();
         builder.Property(static c => c.Title).HasField("_title");
         builder.Property(static c => c.UpdatedAt).HasField("_updatedAt");
+        builder.Property(static c => c.RemovedAt).HasField("_removedAt");
         builder.Property(static c => c.CreatedAt).HasField("_createdAt");
         builder.Property(static c => c.LogoId).HasField("_logoId");
         

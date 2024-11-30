@@ -49,12 +49,22 @@ public sealed class Category
     public DateTimeOffset? RemovedAt => _removedAt;
 
     public bool IsRemoved => _removedAt != default;
+    
+    public IReadOnlyList<ProductInCategory> Products => _products;
 
     public void Remove(RemoveProductParameters parameters)
     {
         if (IsRemoved) return;
         
         _removedAt = parameters.TimeProvider.GetUtcNow();
+
+        foreach (var product in _products)
+        {
+            product.Remove(new RemoveProductInCategoryParameters
+            {
+                TimeProvider = parameters.TimeProvider
+            });
+        }
     }
 
     public void Restore(RestoreProductParameters parameters)
