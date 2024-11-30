@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Minio;
+using Persistence;
 using Web.Middlewares;
 using Web.Options;
 
@@ -28,6 +29,8 @@ internal static class DependencyInjection
         {
             services.AddSingleton<IMinioClient>(s => new MinioClient());
         }
+
+        services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
         
         services.AddTransient<TimeProvider>(s => TimeProvider.System);
         

@@ -39,6 +39,8 @@ public static class Program
             {
                 app.UseHsts();
             }
+            
+            app.UseHealthChecks("/health");
 
             app.UseHttpsRedirection();
 
