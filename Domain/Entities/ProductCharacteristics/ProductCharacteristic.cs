@@ -1,6 +1,8 @@
 using Domain.Entities.Characteristics;
+using Domain.Entities.Characteristics.Parameters;
 using Domain.Entities.ProductCharacteristics.Parameters;
 using Domain.Entities.Products;
+using Domain.Entities.Products.Parameters;
 
 namespace Domain.Entities.ProductCharacteristics;
 
@@ -12,8 +14,6 @@ public sealed class ProductCharacteristic
 
     private Product _product = default!;
     private Characteristic _characteristic = default!;
-    
-    
 
     private DateTimeOffset _createdAt;
     
@@ -61,30 +61,50 @@ public sealed class ProductCharacteristic
 
     public void SetValue(SetValueForProductCharacteristicParameters parameters)
     {
+        if (IsRemoved) return;
+        
         _value = parameters.Value.Trim();
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
     
     public void SetProduct(SetProductForProductCharacteristicParameters parameters)
     {
+        if (IsRemoved) return;
+        
         _product = parameters.Product;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void SetCharacteristic(SetCharacteristicForProductCharacteristicParameters parameters)
     {
+        if (IsRemoved) return;
+        
         _characteristic = parameters.Characteristic;
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void Remove(RemoveProductCharacteristicParameters parameters)
     {
+        if (IsRemoved) return;
+        
         _removedAt = parameters.TimeProvider.GetUtcNow();
     }
 
     public void Restore(RestoreProductCharacteristicParameters parameters)
     {
+        if (!IsRemoved) return;
+        
         _removedAt = default;
         _createdAt = parameters.TimeProvider.GetUtcNow();
+        
+        _product.Restore(new RestoreProductParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
+        
+        _characteristic.Restore(new RestoreCharacteristicParameters
+        {
+            TimeProvider = parameters.TimeProvider
+        });
     }
 }
