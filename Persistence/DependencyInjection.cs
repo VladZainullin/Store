@@ -27,7 +27,8 @@ public static class DependencyInjection
                     ob.MigrationsHistoryTable(
                         HistoryRepository.DefaultTableName,
                         npgsqlConnectionStringBuilder.SearchPath);
-                });
+                })
+                .UseProjectables();
         });
         
         services.AddScoped<DbContext>(sp => sp.GetRequiredService<AppDbContext>());

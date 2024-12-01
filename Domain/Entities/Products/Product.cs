@@ -10,6 +10,7 @@ using Domain.Entities.ProductInOrders;
 using Domain.Entities.ProductInOrders.Parameters;
 using Domain.Entities.Products.Exceptions;
 using Domain.Entities.Products.Parameters;
+using EntityFrameworkCore.Projectables;
 
 namespace Domain.Entities.Products;
 
@@ -92,7 +93,8 @@ public sealed class Product
     
     public DateTimeOffset? RemovedAt => _removedAt;
     
-    public bool IsRemoved => _removedAt != default;
+    [Projectable]
+    public bool IsRemoved => RemovedAt != default;
 
     public int Quantity => _quantity;
     

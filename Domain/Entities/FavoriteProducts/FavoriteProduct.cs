@@ -1,6 +1,7 @@
 using Domain.Entities.FavoriteProducts.Parameters;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
+using EntityFrameworkCore.Projectables;
 
 namespace Domain.Entities.FavoriteProducts;
 
@@ -49,7 +50,8 @@ public sealed class FavoriteProduct
     
     public DateTimeOffset? RemovedAt => _removedAt;
 
-    public bool IsRemoved => _removedAt != default;
+    [Projectable]
+    public bool IsRemoved => RemovedAt != default;
 
     public void Remove(RemoveFavoriteProductParameters parameters)
     {

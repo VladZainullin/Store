@@ -2,6 +2,7 @@ using Domain.Entities.Carts;
 using Domain.Entities.ProductInCarts.Parameters;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
+using EntityFrameworkCore.Projectables;
 
 namespace Domain.Entities.ProductInCarts;
 
@@ -54,7 +55,8 @@ public sealed class ProductInCart
     
     public DateTimeOffset? RemovedAt => _removedAt;
     
-    public bool IsRemoved => _removedAt != default;
+    [Projectable]
+    public bool IsRemoved => RemovedAt != default;
     
     private void SetProduct(SetProductForProductInCartParameters parameters)
     {

@@ -3,6 +3,7 @@ using Domain.Entities.Characteristics.Parameters;
 using Domain.Entities.ProductCharacteristics.Parameters;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
+using EntityFrameworkCore.Projectables;
 
 namespace Domain.Entities.ProductCharacteristics;
 
@@ -57,7 +58,8 @@ public sealed class ProductCharacteristic
     
     public DateTimeOffset? RemovedAt => _removedAt;
 
-    public bool IsRemoved => _removedAt != default;
+    [Projectable]
+    public bool IsRemoved => RemovedAt != default;
 
     public void SetValue(SetValueForProductCharacteristicParameters parameters)
     {

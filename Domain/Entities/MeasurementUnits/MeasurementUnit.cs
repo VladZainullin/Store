@@ -1,4 +1,5 @@
 using Domain.Entities.MeasurementUnits.Parameters;
+using EntityFrameworkCore.Projectables;
 
 namespace Domain.Entities.MeasurementUnits;
 
@@ -44,7 +45,8 @@ public sealed class MeasurementUnit
     public DateTimeOffset UpdatedAt => _updatedAt;
     public DateTimeOffset? RemovedAt => _removedAt;
     
-    public bool IsRemoved => _removedAt != default;
+    [Projectable]
+    public bool IsRemoved => RemovedAt != default;
 
     public void SetShortTitle(SetShortTitleForMeasurementUnitParameters parameters)
     {

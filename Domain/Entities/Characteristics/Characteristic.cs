@@ -1,6 +1,7 @@
 using Domain.Entities.Characteristics.Parameters;
 using Domain.Entities.ProductCharacteristics;
 using Domain.Entities.ProductCharacteristics.Parameters;
+using EntityFrameworkCore.Projectables;
 
 namespace Domain.Entities.Characteristics;
 
@@ -41,7 +42,8 @@ public sealed class Characteristic
     
     public DateTimeOffset? RemovedAt => _removedAt;
     
-    public bool IsRemoved => _removedAt != default;
+    [Projectable]
+    public bool IsRemoved => RemovedAt != default;
     
     public IReadOnlyList<ProductCharacteristic> Products => _products.AsReadOnly();
 

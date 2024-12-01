@@ -2,7 +2,7 @@ using Domain.Entities.Categories.Exceptions;
 using Domain.Entities.Categories.Parameters;
 using Domain.Entities.ProductInCategories;
 using Domain.Entities.ProductInCategories.Parameters;
-using RemoveProductParameters = Domain.Entities.Products.Parameters.RemoveProductParameters;
+using EntityFrameworkCore.Projectables;
 
 namespace Domain.Entities.Categories;
 
@@ -48,7 +48,8 @@ public sealed class Category
     
     public DateTimeOffset? RemovedAt => _removedAt;
 
-    public bool IsRemoved => _removedAt != default;
+    [Projectable]
+    public bool IsRemoved => RemovedAt != default;
     
     public IReadOnlyList<ProductInCategory> Products => _products.AsReadOnly();
 

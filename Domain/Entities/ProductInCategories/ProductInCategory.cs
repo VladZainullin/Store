@@ -3,6 +3,7 @@ using Domain.Entities.Categories.Parameters;
 using Domain.Entities.ProductInCategories.Parameters;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
+using EntityFrameworkCore.Projectables;
 
 namespace Domain.Entities.ProductInCategories;
 
@@ -38,6 +39,7 @@ public sealed class ProductInCategory
     
     public DateTimeOffset? RemovedAt => _removedAt;
     
+    [Projectable]
     public bool IsRemoved => RemovedAt != default;
 
     public void Remove(RemoveProductInCategoryParameters parameters)

@@ -2,6 +2,7 @@ using Domain.Entities.Orders;
 using Domain.Entities.ProductInOrders.Parameters;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
+using EntityFrameworkCore.Projectables;
 
 namespace Domain.Entities.ProductInOrders;
 
@@ -57,7 +58,8 @@ public sealed class ProductInOrder
     
     public DateTimeOffset? RemovedAt => _removedAt;
     
-    public bool IsRemoved => _removedAt != default;
+    [Projectable]
+    public bool IsRemoved => RemovedAt != default;
 
     public void SetOrder(SetProductInOrderOrderParameters parameters)
     {
