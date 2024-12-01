@@ -5,6 +5,7 @@
 
     <ItemGroup>
       <PackageReference Include="EFCore.NamingConventions" />
+      <PackageReference Include="EntityFrameworkCore.Projectables" />
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
     </ItemGroup>

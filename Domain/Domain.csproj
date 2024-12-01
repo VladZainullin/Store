@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <PackageReference Include="Ardalis.SmartEnum" />
+    <PackageReference Include="EntityFrameworkCore.Projectables.Abstractions" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Update="EntityFrameworkCore.Projectables.Abstractions" Version="4.0.0-preview.4" />
   </ItemGroup>
 </Project>
