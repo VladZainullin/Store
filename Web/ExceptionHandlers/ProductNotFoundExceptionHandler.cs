@@ -11,7 +11,7 @@ internal sealed class ProductNotFoundExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
-        if (exception is not ProductNotFoundException) return true;
+        if (exception is not ProductNotFoundException) return false;
         
         const string contentType = "application/problem+json";
         const int responseStatusCode = StatusCodes.Status404NotFound;
@@ -24,6 +24,6 @@ internal sealed class ProductNotFoundExceptionHandler : IExceptionHandler
             Status = responseStatusCode,
         }, cancellationToken: cancellationToken);
             
-        return false;
+        return true;
     }
 }
