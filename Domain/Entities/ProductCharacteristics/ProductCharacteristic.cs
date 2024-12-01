@@ -39,6 +39,12 @@ public sealed class ProductCharacteristic
             Characteristic = parameters.Characteristic,
             TimeProvider = parameters.TimeProvider,
         });
+        
+        SetValue(new SetValueForProductCharacteristicParameters
+        {
+            Value = parameters.Value,
+            TimeProvider = parameters.TimeProvider,
+        });
 
         _createdAt = parameters.TimeProvider.GetUtcNow();
         _updatedAt = parameters.TimeProvider.GetUtcNow();

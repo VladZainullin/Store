@@ -16,6 +16,7 @@ internal sealed class AddCharacteristicToProductHandler(IDbContext context, Time
     {
         var product = await context.Products
             .AsTracking()
+            .Include(static p => p.Characteristics)
             .SingleOrDefaultAsync(p => p.Id == request.Route.ProductId, cancellationToken);
 
         if (ReferenceEquals(product, default))

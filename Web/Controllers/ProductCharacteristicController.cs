@@ -8,7 +8,7 @@ internal sealed class ProductCharacteristicController : AppController
 {
     [HttpDelete]
     public async Task<NoContentResult> RemoveProductCharacteristicAsync(
-        RemoveCharacteristicFromProductRouteDto route)
+        [FromRoute] RemoveCharacteristicFromProductRouteDto route)
     {
         await Sender.Send(new RemoveCharacteristicFromProductCommand(route), HttpContext.RequestAborted);
 

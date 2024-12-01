@@ -275,13 +275,16 @@ public sealed class Product
             .SingleOrDefault(pc => pc.Characteristic == parameters.Characteristic);
         if (!ReferenceEquals(characteristic, default))
         {
-            if (characteristic.IsRemoved)
+            characteristic.Restore(new RestoreProductCharacteristicParameters
             {
-                characteristic.Restore(new RestoreProductCharacteristicParameters
-                {
-                    TimeProvider = parameters.TimeProvider
-                });
-            }
+                TimeProvider = parameters.TimeProvider
+            });
+            
+            characteristic.SetValue(new SetValueForProductCharacteristicParameters
+            {
+                Value = parameters.Value,
+                TimeProvider = parameters.TimeProvider
+            });
             
             return;
         }
