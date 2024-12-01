@@ -14,7 +14,7 @@ internal sealed class ProductInCartConfiguration : IEntityTypeConfiguration<Prod
         builder.Property(static pic => pic.Quantity).HasField("_quantity");
         
         builder.HasOne(static pic => pic.Cart).WithMany(static c => c.Products);
-        builder.HasOne(static pic => pic.Product).WithMany();
+        builder.HasOne(static pic => pic.Product).WithMany(static p => p.ProductInCarts);
         
         builder.ToTable("product_in_carts");
     }
