@@ -34,6 +34,7 @@ internal static class DependencyInjection
         services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
 
         services
+            .AddExceptionHandler<ProductInCategoryNotFoundExceptionHandler>()
             .AddExceptionHandler<CharacteristicNotFoundExceptionHandler>()
             .AddExceptionHandler<CartNotFoundExceptionHandler>()
             .AddExceptionHandler<OrderNotFoundExceptionHandler>()
