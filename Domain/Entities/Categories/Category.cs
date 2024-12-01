@@ -50,7 +50,7 @@ public sealed class Category
 
     public bool IsRemoved => _removedAt != default;
     
-    public IReadOnlyList<ProductInCategory> Products => _products;
+    public IReadOnlyList<ProductInCategory> Products => _products.AsReadOnly();
 
     public void Remove(RemoveCategoryParameters parameters)
     {
@@ -86,7 +86,7 @@ public sealed class Category
         _updatedAt = parameters.TimeProvider.GetUtcNow();
     }
 
-    public Guid AddProduct(AddProductToCategoryParameters parameters)
+    public void AddProduct(AddProductToCategoryParameters parameters)
     {
         if (IsRemoved) throw new AddProductToRemovedCategoryException();
 
@@ -99,8 +99,6 @@ public sealed class Category
             {
                 TimeProvider = parameters.TimeProvider
             });
-            
-            return productInCategory.Id;
         }
 
         var newProductInCategory = new ProductInCategory(new CreateProductInCategoryParameters
@@ -113,8 +111,6 @@ public sealed class Category
         _products.Add(newProductInCategory);
 
         _updatedAt = parameters.TimeProvider.GetUtcNow();
-
-        return newProductInCategory.Id;
     }
 
     public void RemoveProduct(RemoveProductFromCategoryParameters parameters)

@@ -8,15 +8,15 @@ using Persistence.Contracts;
 namespace Application.Features.Categories.Commands.AddProductToCategory;
 
 public sealed class AddProductToCategoryHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<AddProductToCategoryCommand, AddProductToCategoryResponseDto>
+    IRequestHandler<AddProductToCategoryCommand>
 {
-    public async Task<AddProductToCategoryResponseDto> Handle(
+    public async Task Handle(
         AddProductToCategoryCommand request,
         CancellationToken cancellationToken)
     {
         var product = await context.Products
             .AsTracking()
-            .SingleOrDefaultAsync(p => p.Id == request.Route.ProductId, cancellationToken);
+            .SingleOrDefaultAsync(p => p.Id == request.Body.ProductId, cancellationToken);
 
         if (ReferenceEquals(product, default))
         {
@@ -32,17 +32,12 @@ public sealed class AddProductToCategoryHandler(IDbContext context, TimeProvider
             throw new CategoryNotFoundException();
         }
         
-        var productInCategoryId = category.AddProduct(new AddProductToCategoryParameters
+        category.AddProduct(new AddProductToCategoryParameters
         {
             Product = product,
             TimeProvider = timeProvider
         });
 
         await context.SaveChangesAsync(cancellationToken);
-
-        return new AddProductToCategoryResponseDto
-        {
-            ProductInCategoryId = productInCategoryId
-        };
     }
 }
