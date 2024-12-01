@@ -42,6 +42,8 @@ internal static class DependencyInjection
             .AddExceptionHandler<ProductNotFoundExceptionHandler>();
         services.AddProblemDetails();
         
+        services.AddOpenApi();
+        
         services.AddTransient<TimeProvider>(s => TimeProvider.System);
         
         services.AddHsts(static configureOptions =>

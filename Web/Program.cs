@@ -49,8 +49,11 @@ public static class Program
             app.UseSerilogRequestLogging();
 
             app.UseHealthChecks("/health");
+
+            app.MapOpenApi();
             
             app.UseMiddleware<TransactionMiddleware>();
+            
             app.MapControllers();
 
             await app.RunAsync();
