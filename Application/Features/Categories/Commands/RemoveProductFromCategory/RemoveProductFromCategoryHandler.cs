@@ -25,6 +25,7 @@ public sealed class RemoveProductFromCategoryHandler(IDbContext context, TimePro
         
         var category = await context.Categories
             .AsTracking()
+            .Include(p => p.Products)
             .SingleOrDefaultAsync(c => c.Id == request.Route.CategoryId, cancellationToken);
 
         if (ReferenceEquals(category, default))
