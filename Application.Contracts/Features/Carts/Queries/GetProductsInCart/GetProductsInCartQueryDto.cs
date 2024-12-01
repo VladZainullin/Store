@@ -1,3 +1,4 @@
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 namespace Application.Contracts.Features.Carts.Queries.GetProductsInCart;
 
 public sealed class GetProductsInCartQueryDto
