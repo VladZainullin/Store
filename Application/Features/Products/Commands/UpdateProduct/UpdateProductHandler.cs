@@ -1,4 +1,5 @@
 using Application.Contracts.Features.Products.Commands.UpdateProduct;
+using Application.Exceptions;
 using Domain.Entities.Products.Parameters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ public sealed class UpdateProductHandler(IDbContext context, TimeProvider timePr
         var product = await context.Products
             .AsTracking()
             .SingleOrDefaultAsync(p => p.Id == request.RouteDto.ProductId, cancellationToken);
-        if (ReferenceEquals(product, default)) return;
+        if (ReferenceEquals(product, default)) throw new ProductNotFoundException();
         
         product.SetTitle(new SetProductTitleParameters
         {

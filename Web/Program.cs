@@ -35,6 +35,8 @@ public static class Program
             var migrationContext = scope.ServiceProvider.GetRequiredService<IMigrationContext>();
             await migrationContext.MigrateAsync();
             
+            app.UseExceptionHandler();
+            
             if (app.Environment.IsProduction())
             {
                 app.UseHsts();
