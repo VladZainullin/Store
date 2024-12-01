@@ -9,7 +9,7 @@ internal sealed class ProductInCategoryConfiguration :
 {
     public void Configure(EntityTypeBuilder<ProductInCategory> builder)
     {
-        builder.Property(static pic => pic.Id).HasField("_id");
+        builder.Property(static pic => pic.Id).HasField("_id").ValueGeneratedNever();
         builder.Property(static pic => pic.CreatedAt).HasField("_createdAt");
         builder.Property(static pic => pic.RemovedAt).HasField("_removedAt");
 

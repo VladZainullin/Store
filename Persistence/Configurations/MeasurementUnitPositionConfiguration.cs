@@ -8,7 +8,7 @@ internal sealed class MeasurementUnitPositionConfiguration : IEntityTypeConfigur
 {
     public void Configure(EntityTypeBuilder<MeasurementUnitPosition> builder)
     {
-        builder.Property(static mu => mu.Id).HasField("_id");
+        builder.Property(static mu => mu.Id).HasField("_id").ValueGeneratedNever();
         builder.Property(static mu => mu.Value).HasField("_value");
         builder.Property(static mu => mu.CreatedAt).HasField("_createdAt");
         builder.Property(static mu => mu.UpdatedAt).HasField("_updatedAt");

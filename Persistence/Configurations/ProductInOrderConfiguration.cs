@@ -8,7 +8,7 @@ internal sealed class ProductInOrderConfiguration : IEntityTypeConfiguration<Pro
 {
     public void Configure(EntityTypeBuilder<ProductInOrder> builder)
     {
-        builder.Property(static pio => pio.Id).HasField("_id");
+        builder.Property(static pio => pio.Id).HasField("_id").ValueGeneratedNever();
         builder.Property(static pio => pio.CreatedAt).HasField("_createdAt");
         builder.Property(static pio => pio.UpdatedAt).HasField("_updatedAt");
         builder.Property(static pio => pio.RemovedAt).HasField("_removedAt");

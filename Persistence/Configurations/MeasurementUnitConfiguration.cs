@@ -8,7 +8,7 @@ internal sealed class MeasurementUnitConfiguration : IEntityTypeConfiguration<Me
 {
     public void Configure(EntityTypeBuilder<MeasurementUnit> builder)
     {
-        builder.Property(static mu => mu.Id).HasField("_id");
+        builder.Property(static mu => mu.Id).HasField("_id").ValueGeneratedNever();
         builder.Property(static mu => mu.ShortTitle).HasField("_shortTitle");
         builder.Property(static mu => mu.FullTitle).HasField("_fullTitle");
         builder.Property(static mu => mu.CreatedAt).HasField("_createdAt");
