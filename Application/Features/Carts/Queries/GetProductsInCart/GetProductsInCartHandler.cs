@@ -14,7 +14,10 @@ internal sealed class GetProductsInCartHandler(IDbContext context, ICurrentClien
         CancellationToken cancellationToken)
     {
         var queryable = context.ProductInCarts
-            .Where(pic => pic.Cart.ClientId == currentClient.ClientId && !pic.IsRemoved);
+            .Where(pic =>
+                pic.Cart.ClientId == currentClient.ClientId
+                && !pic.IsRemoved
+                && !pic.Product.IsRemoved);
 
         if (request.Query.Skip > 0)
         {
