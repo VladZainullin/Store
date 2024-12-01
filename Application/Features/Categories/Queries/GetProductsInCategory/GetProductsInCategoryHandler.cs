@@ -42,8 +42,7 @@ internal sealed class GetProductsInCategoryHandler(IDbContext context, ICurrentC
                     QuantityInStock = p.Quantity,
                     QuantityInCart = p.ProductInCarts
                         .Where(pic => pic.Cart.ClientId == currentClient.ClientId)
-                        .Select(static pic => pic.Quantity)
-                        .Single()
+                        .Sum(static pic => pic.Quantity)
                 })
                 .ToListAsync(cancellationToken)
         };
