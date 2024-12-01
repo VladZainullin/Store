@@ -1,11 +1,12 @@
 using Application.Contracts.Features.Categories.Queries.GetProductsInCategory;
+using Clients.Contracts;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Categories.Queries.GetProductsInCategory;
 
-internal sealed class GetProductsInCategoryHandler(IDbContext context) : 
+internal sealed class GetProductsInCategoryHandler(IDbContext context, ICurrentClient<Guid> currentClient) :
     IRequestHandler<GetProductsInCategoryQuery, GetProductsInCategoryResponseDto>
 {
     public async Task<GetProductsInCategoryResponseDto> Handle(
@@ -14,8 +15,11 @@ internal sealed class GetProductsInCategoryHandler(IDbContext context) :
     {
         var queryable = context.ProductInCategories
             .AsNoTracking()
-            .Where(pic => pic.Category.Id == request.Route.CategoryId)
-            .Select(pic => pic.Product);
+            .Where(pic =>
+                pic.Category.Id == request.Route.CategoryId
+                && !pic.IsRemoved)
+            .Select(static pic => pic.Product)
+            .Where(static p => !p.IsRemoved);
 
         if (request.Query.Skip > 0)
         {
@@ -30,12 +34,16 @@ internal sealed class GetProductsInCategoryHandler(IDbContext context) :
         return new GetProductsInCategoryResponseDto
         {
             Products = await queryable
-                .Select(static p => new GetProductsInCategoryResponseDto.ProductDto
+                .Select(p => new GetProductsInCategoryResponseDto.ProductDto
                 {
                     ProductId = p.Id,
                     Title = p.Title,
                     Cost = p.Cost,
-                    Quantity = p.Quantity
+                    QuantityInStock = p.Quantity,
+                    QuantityInCart = p.ProductInCarts
+                        .Where(pic => pic.Cart.ClientId == currentClient.ClientId)
+                        .Select(static pic => pic.Quantity)
+                        .Single()
                 })
                 .ToListAsync(cancellationToken)
         };

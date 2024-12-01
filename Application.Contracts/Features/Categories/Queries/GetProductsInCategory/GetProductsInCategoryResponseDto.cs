@@ -12,6 +12,7 @@ public sealed class GetProductsInCategoryResponseDto
 
         public required decimal Cost { get; init; }
 
-        public required int Quantity { get; init; }
+        public required int QuantityInStock { get; init; }
+        public required int QuantityInCart { get; init; }
     }
 }
