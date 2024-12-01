@@ -18,11 +18,18 @@ internal sealed class ProductNotFoundExceptionHandler : IExceptionHandler
         
         httpContext.Response.ContentType = contentType;
         httpContext.Response.StatusCode = responseStatusCode;
-        await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
+        var problemDetails = new ProblemDetails
         {
+            Type = "https://datatracker.ietf.org/doc/html/rfc9110#section-15.5.5",
             Title = exception.Message,
             Status = responseStatusCode,
-        }, cancellationToken: cancellationToken);
+            Extensions =
+            {
+                ["traceId"] = httpContext.TraceIdentifier,
+            }
+        };
+        
+        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken: cancellationToken);
             
         return true;
     }
