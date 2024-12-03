@@ -1,6 +1,7 @@
 using Application;
 using Persistence;
 using Persistence.Contracts;
+using Scalar.AspNetCore;
 using Serilog;
 using Web.Middlewares;
 
@@ -49,8 +50,8 @@ public static class Program
             app.UseSerilogRequestLogging();
 
             app.UseHealthChecks("/health");
-
-            app.MapOpenApi();
+            
+            app.MapScalarApiReference();
             
             app.UseMiddleware<TransactionMiddleware>();
             
