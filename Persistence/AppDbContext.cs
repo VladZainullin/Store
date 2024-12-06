@@ -19,7 +19,8 @@ public sealed class AppDbContext(DbContextOptions options) : DbContext(options)
             .ApplyConfiguration(new ProductInOrderConfiguration())
             .ApplyConfiguration(new FavoriteProductConfiguration())
             .ApplyConfiguration(new CharacteristicConfiguration())
-            .ApplyConfiguration(new ProductCharacteristicConfiguration());
+            .ApplyConfiguration(new ProductCharacteristicConfiguration())
+            .ApplyConfiguration(new AddressConfiguration());
         
         base.OnModelCreating(modelBuilder);
     }
