@@ -101,7 +101,14 @@ public sealed class Address
 
     public void SetTitle(SetTitleForAddressParameters parameters)
     {
-        if (parameters.Title == default) return;
+        if (parameters.Title == default)
+        {
+            if (Title == default) return;
+            
+            _title = parameters.Title?.Trim();
+            _updatedAt = parameters.TimeProvider.GetUtcNow();
+            return;
+        }
         
         if (parameters.Title == string.Empty) throw new SetEmptyTitleForAddressException();
         
