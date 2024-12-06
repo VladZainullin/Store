@@ -1,4 +1,5 @@
 using Application.Contracts.Features.Addresses.Commands.CreateAddress;
+using Application.Contracts.Features.Addresses.Commands.RemoveAddress;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
@@ -13,5 +14,14 @@ public sealed class AddressesController : AppController
         var response = await Sender.Send(new CreateAddressCommand(body), HttpContext.RequestAborted);
         
         return StatusCode(StatusCodes.Status201Created, response);
+    }
+
+    [HttpDelete("{addressId:guid}")]
+    public async Task<ActionResult> RemoveAddressAsync(
+        [FromRoute] RemoveAddressRequestRouteDto route)
+    {
+        await Sender.Send(new RemoveAddressCommand(route), HttpContext.RequestAborted);
+    
+        return NoContent();
     }
 }
