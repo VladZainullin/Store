@@ -1,3 +1,4 @@
+using Domain.Entities.Addresses;
 using Domain.Entities.Carts;
 using Domain.Entities.Categories;
 using Domain.Entities.Characteristics;
@@ -26,6 +27,8 @@ public interface IDbContext
     IDbSet<ProductInCategory> ProductInCategories { get; }
     
     IDbSet<Characteristic> Characteristics { get; }
+    
+    IDbSet<Address> Addresses { get; }
     
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

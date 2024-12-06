@@ -1,12 +1,12 @@
 // ReSharper disable UnusedAutoPropertyAccessor.Global
-namespace Domain.Entities.Addresses.Parameters;
+namespace Application.Contracts.Features.Addresses.Commands.CreateAddress;
 
-public readonly struct CreateAddressParameters
+public sealed class CreateAddressRequestBodyDto
 {
     public required string? Title { get; init; }
-    
+
     public required string City { get; init; }
-    
+
     public required string Street { get; init; }
 
     public required string House { get; init; }
@@ -16,8 +16,4 @@ public readonly struct CreateAddressParameters
     public required string Number { get; init; }
 
     public required string? Comment { get; init; }
-
-    public required Guid ClientId { get; init; }
-
-    public required TimeProvider TimeProvider { get; init; }
 }

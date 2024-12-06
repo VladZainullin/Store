@@ -1,3 +1,4 @@
+using Domain.Entities.Addresses;
 using Domain.Entities.Carts;
 using Domain.Entities.Categories;
 using Domain.Entities.Characteristics;
@@ -29,6 +30,7 @@ internal sealed class DbContextAdapter(AppDbContext context) :
     
     public IDbSet<ProductInCategory> ProductInCategories { get; } = new DbSetAdapter<ProductInCategory>(context);
     public IDbSet<Characteristic> Characteristics { get; } = new DbSetAdapter<Characteristic>(context);
+    public IDbSet<Address> Addresses { get; } = new DbSetAdapter<Address>(context);
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {
