@@ -13,6 +13,7 @@ internal sealed class AddressConfiguration :
         
         builder.Property(static c => c.Title).HasField("_title");
         
+        builder.Property(static c => c.City).HasField("_city");
         builder.Property(static c => c.Street).HasField("_street");
         builder.Property(static c => c.House).HasField("_house");
         builder.Property(static c => c.Root).HasField("_root");
