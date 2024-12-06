@@ -2,7 +2,7 @@ using Application.Contracts.Features.Orders.Commands.CreateOrder;
 using Application.Exceptions;
 using Clients.Contracts;
 using Domain.Entities.Carts.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -14,7 +14,7 @@ internal sealed class CreateOrderHandler(
     ICurrentClient<Guid> currentClient) : 
     IRequestHandler<CreateOrderCommand, CreateOrderResponseDto>
 {
-    public async Task<CreateOrderResponseDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+    public async ValueTask<CreateOrderResponseDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         var cart = await context.Carts
             .AsTracking()

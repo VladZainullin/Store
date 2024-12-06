@@ -1,16 +1,15 @@
 using Application.Contracts.Features.Categories.Commands.RestoreProductFromCategory;
 using Application.Exceptions;
 using Domain.Entities.ProductInCategories.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Categories.Commands.RestoreProductFromCategory;
 
-internal sealed class RestoreProductFromCategoryHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<RestoreProductFromCategoryCommand>
+internal sealed class RestoreProductFromCategoryHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<RestoreProductFromCategoryCommand>
 {
-    public async Task Handle(
+    public async ValueTask Handle(
         RestoreProductFromCategoryCommand request,
         CancellationToken cancellationToken)
     {

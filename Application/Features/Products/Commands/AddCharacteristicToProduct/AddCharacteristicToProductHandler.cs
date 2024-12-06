@@ -1,16 +1,15 @@
 using Application.Contracts.Features.Products.Commands.AddCharacteristicToProduct;
 using Application.Exceptions;
 using Domain.Entities.Products.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Products.Commands.AddCharacteristicToProduct;
 
-internal sealed class AddCharacteristicToProductHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<AddCharacteristicToProductCommand>
+internal sealed class AddCharacteristicToProductHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<AddCharacteristicToProductCommand>
 {
-    public async Task Handle(
+    public async ValueTask Handle(
         AddCharacteristicToProductCommand request,
         CancellationToken cancellationToken)
     {

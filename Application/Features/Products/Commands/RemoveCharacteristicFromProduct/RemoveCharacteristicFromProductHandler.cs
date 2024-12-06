@@ -1,16 +1,16 @@
 using Application.Contracts.Features.Products.Commands.RemoveCharacteristicFromProduct;
 using Application.Exceptions;
 using Domain.Entities.Products.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Products.Commands.RemoveCharacteristicFromProduct;
 
 internal sealed class RemoveCharacteristicFromProductHandler(IDbContext context, TimeProvider timeProvider)
-    : IRequestHandler<RemoveCharacteristicFromProductCommand>
+    : Abstractions.IRequestHandler<RemoveCharacteristicFromProductCommand>
 {
-    public async Task Handle(
+    public async ValueTask Handle(
         RemoveCharacteristicFromProductCommand request,
         CancellationToken cancellationToken)
     {

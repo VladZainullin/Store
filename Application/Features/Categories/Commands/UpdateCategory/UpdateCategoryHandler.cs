@@ -1,15 +1,14 @@
 using Application.Contracts.Features.Categories.Commands.UpdateCategory;
 using Domain.Entities.Categories.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Categories.Commands.UpdateCategory;
 
-internal sealed class UpdateCategoryHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<UpdateCategoryCommand>
+internal sealed class UpdateCategoryHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<UpdateCategoryCommand>
 {
-    public async Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = await context.Categories
             .AsTracking()

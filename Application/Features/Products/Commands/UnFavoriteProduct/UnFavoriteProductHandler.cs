@@ -2,7 +2,7 @@ using Application.Contracts.Features.Products.Commands.UnFavoriteProduct;
 using Application.Exceptions;
 using Clients.Contracts;
 using Domain.Entities.Products.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -11,10 +11,9 @@ namespace Application.Features.Products.Commands.UnFavoriteProduct;
 internal sealed class UnFavoriteProductHandler(
     IDbContext context,
     TimeProvider timeProvider,
-    ICurrentClient<Guid> currentClient) : 
-    IRequestHandler<UnFavoriteProductCommand>
+    ICurrentClient<Guid> currentClient) : Abstractions.IRequestHandler<UnFavoriteProductCommand>
 {
-    public async Task Handle(UnFavoriteProductCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(UnFavoriteProductCommand request, CancellationToken cancellationToken)
     {
         var product = await context.Products
             .AsTracking()

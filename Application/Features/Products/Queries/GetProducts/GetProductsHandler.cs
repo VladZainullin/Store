@@ -1,6 +1,6 @@
 using Application.Contracts.Features.Products.Queries.GetProducts;
 using Clients.Contracts;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -9,7 +9,7 @@ namespace Application.Features.Products.Queries.GetProducts;
 internal sealed class GetProductsHandler(IDbContext context, ICurrentClient<Guid> currentClient) :
     IRequestHandler<GetProductsQuery, GetProductsResponseDto>
 {
-    public async Task<GetProductsResponseDto> Handle(GetProductsQuery request, CancellationToken cancellationToken)
+    public async ValueTask<GetProductsResponseDto> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
         var queryable = context.Products.AsNoTracking();
         

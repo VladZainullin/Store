@@ -2,7 +2,7 @@ using Application.Contracts.Features.Products.Commands.FavoriteProduct;
 using Application.Exceptions;
 using Clients.Contracts;
 using Domain.Entities.Products.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -11,10 +11,9 @@ namespace Application.Features.Products.Commands.FavoriteProduct;
 internal sealed class FavoriteProductHandler(
     IDbContext context,
     TimeProvider timeProvider,
-    ICurrentClient<Guid> currentClient) : 
-    IRequestHandler<FavoriteProductCommand>
+    ICurrentClient<Guid> currentClient) : Abstractions.IRequestHandler<FavoriteProductCommand>
 {
-    public async Task Handle(
+    public async ValueTask Handle(
         FavoriteProductCommand request,
         CancellationToken cancellationToken)
     {

@@ -1,16 +1,15 @@
 using Application.Contracts.Features.Categories.Commands.AddProductToCategory;
 using Application.Exceptions;
 using Domain.Entities.Categories.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Categories.Commands.AddProductToCategory;
 
-public sealed class AddProductToCategoryHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<AddProductToCategoryCommand>
+public sealed class AddProductToCategoryHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<AddProductToCategoryCommand>
 {
-    public async Task Handle(
+    public async ValueTask Handle(
         AddProductToCategoryCommand request,
         CancellationToken cancellationToken)
     {

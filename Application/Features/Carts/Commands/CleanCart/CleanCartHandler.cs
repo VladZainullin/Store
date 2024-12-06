@@ -1,7 +1,7 @@
 using Application.Contracts.Features.Carts.Commands.CleanCart;
 using Clients.Contracts;
 using Domain.Entities.Carts.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -10,9 +10,9 @@ namespace Application.Features.Carts.Commands.CleanCart;
 internal sealed class CleanCartHandler(
     IDbContext context,
     ICurrentClient<Guid> currentClient,
-    TimeProvider timeProvider) : IRequestHandler<CleanCartCommand>
+    TimeProvider timeProvider) : Abstractions.IRequestHandler<CleanCartCommand>
 {
-    public async Task Handle(CleanCartCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(CleanCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await context.Carts
             .AsTracking()

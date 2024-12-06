@@ -1,15 +1,15 @@
 using Application.Contracts.Features.Products.Commands.UpdateProduct;
 using Application.Exceptions;
 using Domain.Entities.Products.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Products.Commands.UpdateProduct;
 
-public sealed class UpdateProductHandler(IDbContext context, TimeProvider timeProvider) : IRequestHandler<UpdateProductCommand>
+public sealed class UpdateProductHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<UpdateProductCommand>
 {
-    public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         var product = await context.Products
             .AsTracking()

@@ -1,7 +1,7 @@
 using Application.Contracts.Features.Carts.Commands.DecrementProductFromCart;
 using Clients.Contracts;
 using Domain.Entities.Carts.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -10,10 +10,9 @@ namespace Application.Features.Carts.Commands.RemoveProductFromCart;
 internal sealed class RemoveProductFromCartHandler(
     IDbContext context,
     ICurrentClient<Guid> currentClient,
-    TimeProvider timeProvider) : 
-    IRequestHandler<DecrementProductFromCartCommand>
+    TimeProvider timeProvider) : Abstractions.IRequestHandler<DecrementProductFromCartCommand>
 {
-    public async Task Handle(DecrementProductFromCartCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(DecrementProductFromCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await context.Carts
             .AsTracking()

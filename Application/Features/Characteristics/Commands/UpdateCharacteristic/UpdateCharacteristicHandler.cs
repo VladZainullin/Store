@@ -1,16 +1,15 @@
 using Application.Contracts.Features.Characteristics.Commands.UpdateCharacteristic;
 using Application.Exceptions;
 using Domain.Entities.Characteristics.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Characteristics.Commands.UpdateCharacteristic;
 
-internal sealed class UpdateCharacteristicHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<UpdateCharacteristicCommand>
+internal sealed class UpdateCharacteristicHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<UpdateCharacteristicCommand>
 {
-    public async Task Handle(UpdateCharacteristicCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(UpdateCharacteristicCommand request, CancellationToken cancellationToken)
     {
         var characteristic = await context.Characteristics
             .AsTracking()

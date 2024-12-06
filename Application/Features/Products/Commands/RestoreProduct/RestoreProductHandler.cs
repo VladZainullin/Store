@@ -2,16 +2,15 @@ using Application.Contracts.Features.Products.Commands.RestoreProduct;
 using Application.Exceptions;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Products.Commands.RestoreProduct;
 
-internal sealed class RestoreProductHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<RestoreProductCommand>
+internal sealed class RestoreProductHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<RestoreProductCommand>
 {
-    public async Task Handle(RestoreProductCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(RestoreProductCommand request, CancellationToken cancellationToken)
     {
         var product = await GetProductAsnc(request.Route.ProductId, cancellationToken);
 

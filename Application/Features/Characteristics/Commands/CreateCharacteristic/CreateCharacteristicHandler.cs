@@ -1,7 +1,7 @@
 using Application.Contracts.Features.Characteristics.Commands.CreateCharacteristic;
 using Domain.Entities.Characteristics;
 using Domain.Entities.Characteristics.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -10,7 +10,7 @@ namespace Application.Features.Characteristics.Commands.CreateCharacteristic;
 internal sealed class CreateCharacteristicHandler(IDbContext context, TimeProvider timeProvider) : 
     IRequestHandler<CreateCharacteristicCommand, CreateCharacteristicResponseDto>
 {
-    public async Task<CreateCharacteristicResponseDto> Handle(
+    public async ValueTask<CreateCharacteristicResponseDto> Handle(
         CreateCharacteristicCommand request,
         CancellationToken cancellationToken)
     {

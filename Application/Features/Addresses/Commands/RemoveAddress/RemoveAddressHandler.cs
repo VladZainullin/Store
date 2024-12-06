@@ -1,17 +1,16 @@
 using Application.Contracts.Features.Addresses.Commands.RemoveAddress;
 using Application.Exceptions;
-using Clients.Contracts;
 using Domain.Entities.Addresses.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Addresses.Commands.RemoveAddress;
 
 internal sealed class RemoveAddressHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<RemoveAddressCommand>
+    ICommandHandler<RemoveAddressCommand>
 {
-    public async Task Handle(RemoveAddressCommand request, CancellationToken cancellationToken)
+    public async ValueTask<Unit> Handle(RemoveAddressCommand request, CancellationToken cancellationToken)
     {
         var address = await context.Addresses
             .AsTracking()
@@ -23,5 +22,7 @@ internal sealed class RemoveAddressHandler(IDbContext context, TimeProvider time
         {
             TimeProvider = timeProvider
         });
+        
+        return Unit.Value;
     }
 }

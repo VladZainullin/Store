@@ -1,5 +1,5 @@
 using Application.Contracts.Features.Categories.Queries.GetCategoryLogoUploadUrl;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Minio;
 using Minio.DataModel.Args;
@@ -10,7 +10,7 @@ namespace Application.Features.Categories.Queries.GetCategoryLogoUploadUrl;
 internal sealed class GetCategoryLogoUploadUrlHandler(IMinioClient minioClient, IDbContext context) : 
     IRequestHandler<GetCategoryLogoUploadUrlQuery, GetCategoryLogoUploadUrlResponseDto>
 {
-    public async Task<GetCategoryLogoUploadUrlResponseDto> Handle(GetCategoryLogoUploadUrlQuery request, CancellationToken cancellationToken)
+    public async ValueTask<GetCategoryLogoUploadUrlResponseDto> Handle(GetCategoryLogoUploadUrlQuery request, CancellationToken cancellationToken)
     {
         var category = await context.Categories
             .AsTracking()

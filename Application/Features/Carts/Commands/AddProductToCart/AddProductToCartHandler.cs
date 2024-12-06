@@ -2,7 +2,7 @@ using Application.Contracts.Features.Carts.Commands.IncrementProductToCart;
 using Domain.Entities.Carts;
 using Domain.Entities.Carts.Parameters;
 using Domain.Entities.Products;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -10,10 +10,9 @@ namespace Application.Features.Carts.Commands.AddProductToCart;
 
 internal sealed class AddProductToCartHandler(
     IDbContext context,
-    TimeProvider timeProvider) : 
-    IRequestHandler<IncrementProductToCartCommand>
+    TimeProvider timeProvider) : Abstractions.IRequestHandler<IncrementProductToCartCommand>
 {
-    public async Task Handle(IncrementProductToCartCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(IncrementProductToCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await GetCartAsync(request.RouteDto.CartId, cancellationToken);
         if (ReferenceEquals(cart, default)) return;

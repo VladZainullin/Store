@@ -1,5 +1,5 @@
 using Application.Contracts.Features.Categories.Queries.GetCategories;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -8,7 +8,7 @@ namespace Application.Features.Categories.Queries.GetCategories;
 internal sealed class GetCategoriesHandler(IDbContext context) :
     IRequestHandler<GetCategoriesQuery, GetCategoriesResponseDto>
 {
-    public async Task<GetCategoriesResponseDto> Handle(
+    public async ValueTask<GetCategoriesResponseDto> Handle(
         GetCategoriesQuery request,
         CancellationToken cancellationToken)
     {

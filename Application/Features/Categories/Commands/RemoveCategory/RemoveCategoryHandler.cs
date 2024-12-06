@@ -2,16 +2,15 @@ using Application.Contracts.Features.Categories.Commands.RemoveCategory;
 using Application.Exceptions;
 using Domain.Entities.Categories;
 using Domain.Entities.Categories.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Categories.Commands.RemoveCategory;
 
-internal sealed class RemoveCategoryHandler(IDbContext context, TimeProvider timeProvider) :
-    IRequestHandler<RemoveCategoryCommand>
+internal sealed class RemoveCategoryHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<RemoveCategoryCommand>
 {
-    public async Task Handle(RemoveCategoryCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(RemoveCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = await GetCategoryAsync(request.Route.CategoryId, cancellationToken);
         if (ReferenceEquals(category, default))

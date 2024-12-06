@@ -1,5 +1,5 @@
 using Application.Contracts.Features.Orders.Queries.GetProductsInOrder;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -8,7 +8,7 @@ namespace Application.Features.Orders.Queries.GetProductsInOrder;
 internal sealed class GetProductsInOrderHandler(IDbContext context) : 
     IRequestHandler<GetProductsInOrderQuery, GetProductsInOrderResponseDto>
 {
-    public async Task<GetProductsInOrderResponseDto> Handle(
+    public async ValueTask<GetProductsInOrderResponseDto> Handle(
         GetProductsInOrderQuery request,
         CancellationToken cancellationToken)
     {

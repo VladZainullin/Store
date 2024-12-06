@@ -1,7 +1,7 @@
 using Application.Contracts.Features.Products.Commands.CreateProduct;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
-using MediatR;
+using Mediator;
 using Persistence.Contracts;
 
 namespace Application.Features.Products.Commands.CreateProduct;
@@ -9,7 +9,7 @@ namespace Application.Features.Products.Commands.CreateProduct;
 internal sealed class CreateProductHandler(IDbContext context, TimeProvider timeProvider)
     : IRequestHandler<CreateProductCommand, CreateProductResponseDto>
 {
-    public async Task<CreateProductResponseDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async ValueTask<CreateProductResponseDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var createProductParameters = new CreateProductParameters
         {

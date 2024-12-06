@@ -1,16 +1,15 @@
 using Application.Contracts.Features.Categories.Commands.RemoveProductFromCategory;
 using Application.Exceptions;
 using Domain.Entities.Categories.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Categories.Commands.RemoveProductFromCategory;
 
-public sealed class RemoveProductFromCategoryHandler(IDbContext context, TimeProvider timeProvider) : 
-    IRequestHandler<RemoveProductFromCategoryCommand>
+public sealed class RemoveProductFromCategoryHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<RemoveProductFromCategoryCommand>
 {
-    public async Task Handle(
+    public async ValueTask Handle(
         RemoveProductFromCategoryCommand request,
         CancellationToken cancellationToken)
     {

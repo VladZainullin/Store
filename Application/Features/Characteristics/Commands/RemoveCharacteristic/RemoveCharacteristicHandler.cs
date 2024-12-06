@@ -2,7 +2,7 @@ using Application.Contracts.Features.Characteristics.Commands.RemoveCharacterist
 using Application.Exceptions;
 using Domain.Entities.Characteristics;
 using Domain.Entities.Characteristics.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -10,10 +10,9 @@ namespace Application.Features.Characteristics.Commands.RemoveCharacteristic;
 
 internal sealed class RemoveCharacteristicHandler(
     IDbContext context,
-    TimeProvider timeProvider) : 
-    IRequestHandler<RemoveCharacteristicCommand>
+    TimeProvider timeProvider) : Abstractions.IRequestHandler<RemoveCharacteristicCommand>
 {
-    public async Task Handle(
+    public async ValueTask Handle(
         RemoveCharacteristicCommand request,
         CancellationToken cancellationToken)
     {

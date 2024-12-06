@@ -1,6 +1,6 @@
 using Application.Contracts.Features.Categories.Queries.GetProductsInCategory;
 using Clients.Contracts;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -9,7 +9,7 @@ namespace Application.Features.Categories.Queries.GetProductsInCategory;
 internal sealed class GetProductsInCategoryHandler(IDbContext context, ICurrentClient<Guid> currentClient) :
     IRequestHandler<GetProductsInCategoryQuery, GetProductsInCategoryResponseDto>
 {
-    public async Task<GetProductsInCategoryResponseDto> Handle(
+    public async ValueTask<GetProductsInCategoryResponseDto> Handle(
         GetProductsInCategoryQuery request,
         CancellationToken cancellationToken)
     {

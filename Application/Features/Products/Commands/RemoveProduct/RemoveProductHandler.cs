@@ -1,15 +1,15 @@
 using Application.Contracts.Features.Products.Commands.RemoveProduct;
 using Domain.Entities.Products;
 using Domain.Entities.Products.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
 namespace Application.Features.Products.Commands.RemoveProduct;
 
-internal sealed class RemoveProductHandler(IDbContext context, TimeProvider timeProvider) : IRequestHandler<RemoveProductCommand>
+internal sealed class RemoveProductHandler(IDbContext context, TimeProvider timeProvider) : Abstractions.IRequestHandler<RemoveProductCommand>
 {
-    public async Task Handle(RemoveProductCommand request, CancellationToken cancellationToken)
+    public async ValueTask Handle(RemoveProductCommand request, CancellationToken cancellationToken)
     {
         var product = await GetProductAsync(request.RouteDto.ProductId, cancellationToken);
         

@@ -1,5 +1,6 @@
-using Application.Contracts.Features.Categories.Queries.GetCategoryLogoUploadUrl;
-using MediatR;
+using Application.Contracts.Features.Categories.Queries.GetCategoryLogoGetUrl;
+
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Minio;
 using Minio.DataModel.Args;
@@ -9,9 +10,9 @@ namespace Application.Features.Categories.Queries.GetCategoryLogoGetUrl;
 
 internal sealed class GetCategoryLogoGetUrl(
     IDbContext context,
-    IMinioClient minioClient) : IRequestHandler<GetCategoryLogoUploadUrlQuery, GetCategoryLogoUploadUrlResponseDto>
+    IMinioClient minioClient) : IRequestHandler<GetCategoryLogoGetUrlCommand, GetCategoryLogoGetUrlResponseDto>
 {
-    public async Task<GetCategoryLogoUploadUrlResponseDto> Handle(GetCategoryLogoUploadUrlQuery request, CancellationToken cancellationToken)
+    public async ValueTask<GetCategoryLogoGetUrlResponseDto> Handle(GetCategoryLogoGetUrlCommand request, CancellationToken cancellationToken)
     {
         var category = await context.Categories
             .AsTracking()
@@ -26,9 +27,9 @@ internal sealed class GetCategoryLogoGetUrl(
             .WithBucket("categories")
             .WithExpiry(60 * 60));
 
-        return new GetCategoryLogoUploadUrlResponseDto
+        return new GetCategoryLogoGetUrlResponseDto
         {
-            Url = presignedUrl
+            Logo = presignedUrl
         };
     }
 }

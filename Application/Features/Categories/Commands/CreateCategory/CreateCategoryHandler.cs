@@ -1,7 +1,7 @@
 using Application.Contracts.Features.Categories.Commands.CreateCategory;
 using Domain.Entities.Categories;
 using Domain.Entities.Categories.Parameters;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -12,7 +12,7 @@ internal sealed class CreateCategoryHandler(
     TimeProvider timeProvider) :
     IRequestHandler<CreateCategoryCommand, CreateCategoryResponseDto>
 {
-    public async Task<CreateCategoryResponseDto> Handle(CreateCategoryCommand request,
+    public async ValueTask<CreateCategoryResponseDto> Handle(CreateCategoryCommand request,
         CancellationToken cancellationToken)
     {
         var oldCategory = await context.Categories

@@ -1,4 +1,4 @@
-using MediatR;
+using Mediator;
 
 namespace Application.Contracts.Features.Products.Queries.GetProducts;
 

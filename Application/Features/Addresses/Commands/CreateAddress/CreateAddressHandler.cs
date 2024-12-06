@@ -2,7 +2,7 @@ using Application.Contracts.Features.Addresses.Commands.CreateAddress;
 using Clients.Contracts;
 using Domain.Entities.Addresses;
 using Domain.Entities.Addresses.Parameters;
-using MediatR;
+using Mediator;
 using Persistence.Contracts;
 
 namespace Application.Features.Addresses.Commands.CreateAddress;
@@ -13,7 +13,7 @@ internal sealed class CreateAddressHandler(
     TimeProvider timeProvider) : 
     IRequestHandler<CreateAddressCommand, CreateAddressResponseDto>
 {
-    public async Task<CreateAddressResponseDto> Handle(
+    public async ValueTask<CreateAddressResponseDto> Handle(
         CreateAddressCommand request,
         CancellationToken cancellationToken)
     {

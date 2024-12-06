@@ -1,6 +1,6 @@
 using Application.Contracts.Features.Orders.Queries.GetOrders;
 using Clients.Contracts;
-using MediatR;
+using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contracts;
 
@@ -9,7 +9,7 @@ namespace Application.Features.Orders.Queries.GetOrders;
 internal sealed class GetOrdersHandler(IDbContext context, ICurrentClient<Guid> currentClient) : 
     IRequestHandler<GetOrdersQuery, GetOrdersResponseDto>
 {
-    public async Task<GetOrdersResponseDto> Handle(
+    public async ValueTask<GetOrdersResponseDto> Handle(
         GetOrdersQuery request,
         CancellationToken cancellationToken)
     {
