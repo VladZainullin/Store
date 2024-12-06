@@ -97,7 +97,7 @@ public sealed class Address
     public DateTimeOffset? RemovedAt => _removedAt;
     
     [Projectable]
-    public bool IsRemoved => _removedAt != default;
+    public bool IsRemoved => RemovedAt != default;
 
     public void SetTitle(SetTitleForAddressParameters parameters)
     {
