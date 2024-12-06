@@ -50,8 +50,15 @@ public static class Program
             app.UseSerilogRequestLogging();
 
             app.UseHealthChecks("/health");
-            
-            app.MapScalarApiReference();
+
+            app.MapOpenApi();
+            app.MapScalarApiReference(static s =>
+            {
+                s.Theme = ScalarTheme.None;
+                s.HiddenClients = true;
+                s.HideDownloadButton = true;
+                s.HideDarkModeToggle = false;
+            });
             
             app.UseMiddleware<TransactionMiddleware>();
             
