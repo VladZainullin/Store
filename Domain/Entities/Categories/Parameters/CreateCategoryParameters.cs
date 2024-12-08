@@ -1,6 +1,6 @@
 namespace Domain.Entities.Categories.Parameters;
 
-public readonly struct CreateCategoryParameters
+public sealed class CreateCategoryParameters
 {
     public required string Title { get; init; }
 

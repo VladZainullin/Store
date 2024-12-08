@@ -3,7 +3,7 @@ using Domain.Entities.Products;
 
 namespace Domain.Entities.ProductInCategories.Parameters;
 
-public readonly struct CreateProductInCategoryParameters
+public sealed class CreateProductInCategoryParameters
 {
     public required Product Product { get; init; }
 

@@ -1,6 +1,6 @@
 namespace Domain.Entities.Products.Parameters;
 
-public readonly struct CreateProductParameters
+public sealed class CreateProductParameters
 {
     public required string Title { get; init; }
 
