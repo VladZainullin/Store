@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Minio;
 using Persistence;
-using Web.ExceptionHandlers;
 using Web.Middlewares;
 using Web.Options;
 
@@ -32,14 +31,6 @@ internal static class DependencyInjection
         }
 
         services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
-
-        services
-            .AddExceptionHandler<ProductInCategoryNotFoundExceptionHandler>()
-            .AddExceptionHandler<CharacteristicNotFoundExceptionHandler>()
-            .AddExceptionHandler<CartNotFoundExceptionHandler>()
-            .AddExceptionHandler<OrderNotFoundExceptionHandler>()
-            .AddExceptionHandler<CategoryNotFoundExceptionHandler>()
-            .AddExceptionHandler<ProductNotFoundExceptionHandler>();
         services.AddProblemDetails();
         
         services.AddTransient<TimeProvider>(s => TimeProvider.System);
