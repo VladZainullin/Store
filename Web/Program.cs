@@ -1,7 +1,6 @@
 using Application;
 using Persistence;
 using Persistence.Contracts;
-using Scalar.AspNetCore;
 using Serilog;
 using Web.Middlewares;
 
@@ -11,18 +10,14 @@ public static class Program
 {
     public static async Task Main(string[] args)
     {
-        var configuration = new ConfigurationBuilder()
-            .AddEnvironmentVariables()
-            .Build();
-
-        await using var logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(configuration)
+        var builder = WebApplication.CreateBuilder(args);
+        
+        var logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
             .CreateLogger();
-
+        
         try
         {
-            var builder = WebApplication.CreateBuilder(args);
-
             builder.Host.UseSerilog(logger);
 
             builder.Services
@@ -37,28 +32,12 @@ public static class Program
             await migrationContext.MigrateAsync();
             
             app.UseExceptionHandler();
-            
-            if (app.Environment.IsProduction())
-            {
-                app.UseHsts();
-            }
-            
-            app.UseHealthChecks("/health");
 
             app.UseHttpsRedirection();
 
             app.UseSerilogRequestLogging();
 
             app.UseHealthChecks("/health");
-
-            app.MapOpenApi();
-            app.MapScalarApiReference(static s =>
-            {
-                s.Theme = ScalarTheme.None;
-                s.HiddenClients = true;
-                s.HideDownloadButton = true;
-                s.HideDarkModeToggle = false;
-            });
             
             app.UseMiddleware<TransactionMiddleware>();
             

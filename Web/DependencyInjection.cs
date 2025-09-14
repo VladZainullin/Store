@@ -42,22 +42,7 @@ internal static class DependencyInjection
             .AddExceptionHandler<ProductNotFoundExceptionHandler>();
         services.AddProblemDetails();
         
-        services.AddOpenApi();
-        
         services.AddTransient<TimeProvider>(s => TimeProvider.System);
-        
-        services.AddHsts(static configureOptions =>
-        {
-            configureOptions.Preload = true;
-            configureOptions.IncludeSubDomains = true;
-            configureOptions.MaxAge = TimeSpan.FromDays(60);
-        });
-        
-        services.AddHttpsRedirection(static options =>
-        {
-            options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
-            options.HttpsPort = 443;
-        });
 
         services.AddHealthChecks();
 
