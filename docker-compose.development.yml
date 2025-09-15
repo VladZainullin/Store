@@ -1,30 +1,52 @@
 name: "store"
 
 services:
+  sso:
+    image: quay.io/keycloak/keycloak:26.3.4
+    container_name: sso
+    ports:
+      - "8080:8080"
+    command: start-dev
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://database:5432/store
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: 123456
+      KC_DB_SCHEMA: sso
+      KC_DB_DATABASE: store
+    depends_on:
+      - database
+    networks:
+      - database-sso-bridge
+    restart: unless-stopped
+  
   database:
     image: postgres:14.8-alpine3.18
     container_name: database
-    environment:
-      POSTGRES_DB: "postgres"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "123456"
     volumes:
       - database_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
       - database-api-bridge
+      - database-sso-bridge
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "123456"
         
   seq:
     image: datalust/seq:2024.3
     container_name: seq
-    environment:
-      - ACCEPT_EULA=Y
     ports:
       - "8020:80"
       - "5341:5341"
     volumes:
       - seq_data:/var/lib/seq/data
+    environment:
+      - ACCEPT_EULA=Y
   
   minio:
     image: 'bitnami/minio:2024.11.7'
@@ -32,13 +54,13 @@ services:
     ports:
       - '9000:9000'
       - '9001:9001'
-    environment:
-      - MINIO_ROOT_USER=minio-root-user
-      - MINIO_ROOT_PASSWORD=minio-root-password
     networks:
       - minio-api-bridge
     volumes:
       - minio_data:/var/lib/minio/data
+    environment:
+      - MINIO_ROOT_USER=minio-root-user
+      - MINIO_ROOT_PASSWORD=minio-root-password
         
   api:
     image: store
@@ -96,9 +118,12 @@ networks:
     driver: bridge
   database-api-bridge:
     driver: bridge
+  database-sso-bridge:
+    driver: bridge
 
 volumes:
   database_data:
   seq_data:
   minio_data:
   keycloak_data:
+  sso_data:
