@@ -67,8 +67,6 @@ internal static class DependencyInjection
 
         services.AddHealthChecks();
 
-        services.AddScoped<TransactionMiddleware>();
-
         return services;
     }
 }
