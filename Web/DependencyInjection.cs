@@ -33,7 +33,7 @@ internal static class DependencyInjection
         }
 
         services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
-
+        
         services
             .AddAuthentication(static options =>
             {
@@ -42,7 +42,6 @@ internal static class DependencyInjection
             .AddJwtBearer(static options =>
             {
                 options.Authority = "http://localhost:8080/realms/development";
-                options.Audience = "store-backend";
                 options.Events = new JwtBearerEvents
                 {
                     OnAuthenticationFailed = context =>
@@ -54,10 +53,8 @@ internal static class DependencyInjection
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateAudience = true,
-                    ValidateIssuer = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true,
+                    ValidAudience = "store-backend",
+                    ValidIssuer = "store-frontend",
                 };
             });
 
