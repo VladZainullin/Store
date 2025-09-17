@@ -2,7 +2,6 @@ using Application;
 using Persistence;
 using Persistence.Contracts;
 using Serilog;
-using Web.Middlewares;
 
 namespace Web;
 
