@@ -1,6 +1,5 @@
 using Application;
 using Persistence;
-using Persistence.Contracts;
 using Serilog;
 
 namespace Web;
@@ -25,10 +24,6 @@ public static class Program
                 .AddWebServices();
 
             await using var app = builder.Build();
-
-            await using var scope = app.Services.CreateAsyncScope();
-            var migrationContext = scope.ServiceProvider.GetRequiredService<IMigrationContext>();
-            await migrationContext.MigrateAsync();
 
             app.UseHttpsRedirection();
 
