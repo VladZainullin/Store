@@ -7,6 +7,7 @@
       <PackageReference Include="Bogus" />
       <PackageReference Include="HotChocolate.AspNetCore" />
       <PackageReference Include="HotChocolate.AspNetCore.CommandLine" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

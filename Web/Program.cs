@@ -30,18 +30,17 @@ public static class Program
             await using var scope = app.Services.CreateAsyncScope();
             var migrationContext = scope.ServiceProvider.GetRequiredService<IMigrationContext>();
             await migrationContext.MigrateAsync();
-            
-            app.UseExceptionHandler();
 
             app.UseHttpsRedirection();
 
             app.UseSerilogRequestLogging();
+            
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseHealthChecks("/health");
             
-            app.UseMiddleware<TransactionMiddleware>();
-            
-            app.MapControllers();
+            app.MapGet("hello", () => "Hello World").RequireAuthorization();
 
             await app.RunAsync();
         }

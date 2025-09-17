@@ -8,11 +8,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddMediator(static c =>
-        {
-            c.Namespace = "Application";
-            c.ServiceLifetime = ServiceLifetime.Transient;
-        });
         
         services.AddScoped<ICurrentClient<Guid>, CurrentClientMock>();
         services.AddScoped<ICurrentDeliverer<Guid>, CurrentDelivererMock>();

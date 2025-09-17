@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-      <PackageReference Include="Mediator.Abstractions" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Features" />
     </ItemGroup>
 </Project>
