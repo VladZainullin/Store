@@ -25,10 +25,7 @@
         "Serilog__MinimumLevel": "Information",
         "Serilog__WriteTo__0__Name": "Console",
         "Serilog__WriteTo__0__Args__theme": "Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme::Code, Serilog.Sinks.Console",
-        "Serilog__WriteTo__1__Name": "File",
-        "Serilog__WriteTo__1__Args__path": "Logs/log-.txt",
-        "Serilog__WriteTo__1__Args__rollingInterval": "Hour",
-        "Serilog__Properties__ApplicationName": "Store.Categories.DesignTime"
+        "Serilog__Properties__ApplicationName": "Store"
       }
     }
   }
