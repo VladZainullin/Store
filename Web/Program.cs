@@ -18,6 +18,15 @@ public static class Program
         {
             builder.Host.UseSerilog(logger);
 
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Host.UseDefaultServiceProvider(static options =>
+                {
+                    options.ValidateOnBuild = true;
+                    options.ValidateScopes = true;
+                });
+            }
+
             builder.Services
                 .AddPersistenceServices()
                 .AddApplicationServices()
@@ -43,7 +52,7 @@ public static class Program
         }
         catch (Exception e)
         {
-            logger.Fatal("Application not started. {error}", e);
+            logger.Fatal(e, "Application not started");
         }
     }
 }
