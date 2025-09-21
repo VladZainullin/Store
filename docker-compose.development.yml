@@ -1,6 +1,67 @@
 name: "store"
 
 services:
+  opensearch-node1:
+    image: opensearchproject/opensearch:3
+    container_name: opensearch-node1
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node1
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true  # along with the memlock settings below, disables swapping
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m  # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=P@ss2408word. # Sets the demo admin user password when using demo configuration, required for OpenSearch 2.12 and higher
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536  # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600  # required for Performance Analyzer
+    networks:
+      - opensearch-net
+
+  opensearch-node2:
+    image: opensearchproject/opensearch:3
+    container_name: opensearch-node2
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node2
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=P@ss2408word.
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data2:/usr/share/opensearch/data
+    networks:
+      - opensearch-net
+
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:3
+    container_name: opensearch-dashboards
+    ports:
+      - 5601:5601
+    expose:
+      - '5601'
+    environment:
+      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
+    networks:
+      - opensearch-net
+
   sso:
     image: quay.io/keycloak/keycloak:26.3.4
     container_name: sso
@@ -37,7 +98,7 @@ services:
       POSTGRES_DB: "postgres"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "123456"
-        
+  
   seq:
     image: datalust/seq:2024.3
     container_name: seq
@@ -62,7 +123,7 @@ services:
     environment:
       - MINIO_ROOT_USER=minio-root-user
       - MINIO_ROOT_PASSWORD=minio-root-password
-        
+  
   api:
     image: store
     container_name: store
@@ -113,7 +174,7 @@ services:
     networks:
       - database-api-bridge
       - minio-api-bridge
-        
+
 networks:
   minio-api-bridge:
     driver: bridge
@@ -121,6 +182,7 @@ networks:
     driver: bridge
   database-sso-bridge:
     driver: bridge
+  opensearch-net:
 
 volumes:
   database_data:
@@ -128,3 +190,5 @@ volumes:
   minio_data:
   keycloak_data:
   sso_data:
+  opensearch-data1:
+  opensearch-data2:
