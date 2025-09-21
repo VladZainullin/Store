@@ -1,4 +1,5 @@
 using Application;
+using HotChocolate.AspNetCore;
 using Persistence;
 using Serilog;
 
@@ -9,11 +10,11 @@ public static class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        
+
         var logger = new LoggerConfiguration()
             .ReadFrom.Configuration(builder.Configuration)
             .CreateLogger();
-        
+
         try
         {
             builder.Host.UseSerilog(logger);
@@ -37,12 +38,16 @@ public static class Program
             app.UseHttpsRedirection();
 
             app.UseSerilogRequestLogging();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseHealthChecks("/health");
-            
+
+            app.MapGraphQL().WithOptions(new GraphQLServerOptions
+            {
+                Tool = { Enable = false }
+            });
             app.MapGet("hello", () => "Hello World").RequireAuthorization();
 
             await app.RunAsync();

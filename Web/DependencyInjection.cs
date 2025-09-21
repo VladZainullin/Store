@@ -5,7 +5,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Minio;
 using Persistence;
+using Web.ObjectTypes;
 using Web.Options;
+using Web.TypeExtensions;
 
 namespace Web;
 
@@ -62,6 +64,11 @@ internal static class DependencyInjection
             .SetFallbackPolicy(new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .Build());
+
+        builder.Services
+            .AddGraphQLServer()
+            .AddQueryType<Query>()
+            .AddTypeExtension<OrderQueryTypeExtension>();
 
         builder.Services.AddTransient<TimeProvider>(s => TimeProvider.System);
 
