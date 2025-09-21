@@ -50,7 +50,7 @@ public static class Program
             });
             app.MapGet("hello", () => "Hello World").RequireAuthorization();
 
-            await app.RunAsync();
+            await app.RunWithGraphQLCommandsAsync(args);
         }
         catch (HostAbortedException)
         {
