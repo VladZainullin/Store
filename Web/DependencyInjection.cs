@@ -11,14 +11,14 @@ namespace Web;
 
 internal static class DependencyInjection
 {
-    public static IServiceCollection AddWebServices(this IServiceCollection services)
+    public static IHostApplicationBuilder AddWeb(this IHostApplicationBuilder builder)
     {
         if (!EF.IsDesignTime)
         {
-            services.AddOptions<MinioOptions>().BindConfiguration("Minio");
-            services.AddMinio(s =>
+            builder.Services.AddOptions<MinioOptions>().BindConfiguration("Minio");
+            builder.Services.AddMinio(s =>
             {
-                var serviceProvider = services.BuildServiceProvider();
+                var serviceProvider = builder.Services.BuildServiceProvider();
                 var minioOptionsSnapshot = serviceProvider.GetRequiredService<IOptionsSnapshot<MinioOptions>>();
                 var minioOptions = minioOptionsSnapshot.Value;
 
@@ -29,12 +29,12 @@ internal static class DependencyInjection
         }
         else
         {
-            services.AddSingleton<IMinioClient>(s => new MinioClient());
+            builder.Services.AddSingleton<IMinioClient>(s => new MinioClient());
         }
 
-        services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
+        builder.Services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
         
-        services
+        builder.Services
             .AddAuthentication(static options =>
             {
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,15 +58,15 @@ internal static class DependencyInjection
                 };
             });
 
-        services.AddAuthorizationBuilder()
+        builder.Services.AddAuthorizationBuilder()
             .SetFallbackPolicy(new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .Build());
 
-        services.AddTransient<TimeProvider>(s => TimeProvider.System);
+        builder.Services.AddTransient<TimeProvider>(s => TimeProvider.System);
 
-        services.AddHealthChecks();
+        builder.Services.AddHealthChecks();
 
-        return services;
+        return builder;
     }
 }

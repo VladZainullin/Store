@@ -27,10 +27,10 @@ public static class Program
                 });
             }
 
-            builder.Services
-                .AddPersistenceServices()
-                .AddApplicationServices()
-                .AddWebServices();
+            builder
+                .AddPersistence()
+                .AddApplication()
+                .AddWeb();
 
             await using var app = builder.Build();
 

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Npgsql;
 using Persistence.Contracts;
@@ -9,10 +10,10 @@ namespace Persistence;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddPersistenceServices(this IServiceCollection services)
+    public static IHostApplicationBuilder AddPersistence(this IHostApplicationBuilder builder)
     {
-        services.AddOptions<NpgsqlConnectionStringBuilder>().BindConfiguration("Postgres");
-        services.AddDbContextPool<AppDbContext>((sp, options) =>
+        builder.Services.AddOptions<NpgsqlConnectionStringBuilder>().BindConfiguration("Postgres");
+        builder.Services.AddDbContextPool<AppDbContext>((sp, options) =>
         {
             var npgsqlConnectionStringBuilderOptions = sp.GetRequiredService<IOptions<NpgsqlConnectionStringBuilder>>();
             var npgsqlConnectionStringBuilder = npgsqlConnectionStringBuilderOptions.Value;
@@ -31,12 +32,12 @@ public static class DependencyInjection
                 .UseProjectables();
         });
         
-        services.AddScoped<DbContext>(sp => sp.GetRequiredService<AppDbContext>());
-        services.AddScoped<DbContextAdapter>();
-        services.AddScoped<IDbContext>(sp => sp.GetRequiredService<DbContextAdapter>());
-        services.AddScoped<IMigrationContext>(sp => sp.GetRequiredService<DbContextAdapter>());
-        services.AddScoped<ITransactionContext>(sp => sp.GetRequiredService<DbContextAdapter>());
+        builder.Services.AddScoped<DbContext>(sp => sp.GetRequiredService<AppDbContext>());
+        builder.Services.AddScoped<DbContextAdapter>();
+        builder.Services.AddScoped<IDbContext>(sp => sp.GetRequiredService<DbContextAdapter>());
+        builder.Services.AddScoped<IMigrationContext>(sp => sp.GetRequiredService<DbContextAdapter>());
+        builder.Services.AddScoped<ITransactionContext>(sp => sp.GetRequiredService<DbContextAdapter>());
         
-        return services;
+        return builder;
     }
 }

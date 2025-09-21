@@ -1,18 +1,18 @@
 using System.Reflection;
 using Clients.Contracts;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IHostApplicationBuilder AddApplication(this IHostApplicationBuilder builder)
     {
+        builder.Services.AddScoped<ICurrentClient<Guid>, CurrentClientMock>();
+        builder.Services.AddScoped<ICurrentDeliverer<Guid>, CurrentDelivererMock>();
         
-        services.AddScoped<ICurrentClient<Guid>, CurrentClientMock>();
-        services.AddScoped<ICurrentDeliverer<Guid>, CurrentDelivererMock>();
-        
-        return services;
+        return builder;
     }
     
     private sealed class CurrentClientMock : ICurrentClient<Guid>
