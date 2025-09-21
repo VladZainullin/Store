@@ -1,6 +1,6 @@
 {
   "subgraph": "Main",
   "http": {
-    "baseAddress": "https://localhost:7065/graphql"
+    "baseAddress": "http://localhost:7065/graphql"
   }
 }

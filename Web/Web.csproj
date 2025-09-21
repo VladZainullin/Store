@@ -4,7 +4,6 @@
       <ProjectReference Include="..\Persistence\Persistence.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Bogus" />
       <PackageReference Include="HotChocolate.AspNetCore" />
       <PackageReference Include="HotChocolate.AspNetCore.CommandLine" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
@@ -14,11 +13,8 @@
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
       <PackageReference Include="Minio" />
-      <PackageReference Include="Scalar.AspNetCore" />
       <PackageReference Include="Serilog.AspNetCore" />
       <PackageReference Include="Serilog.Enrichers.Environment" />
-      <PackageReference Include="Serilog.Exceptions" />
-      <PackageReference Include="Serilog.Sinks.Seq" />
     </ItemGroup>
 
 </Project>
