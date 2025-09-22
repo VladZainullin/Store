@@ -39,16 +39,12 @@ public static class Program
 
             app.UseSerilogRequestLogging();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
-
             app.UseHealthChecks("/health");
 
             app.MapGraphQL().WithOptions(new GraphQLServerOptions
             {
                 Tool = { Enable = false }
             });
-            app.MapGet("hello", () => "Hello World").RequireAuthorization();
 
             await app.RunWithGraphQLCommandsAsync(args);
         }

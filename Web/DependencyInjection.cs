@@ -7,6 +7,7 @@ using Minio;
 using Persistence;
 using Web.ObjectTypes;
 using Web.Options;
+using Web.Services;
 using Web.TypeExtensions;
 
 namespace Web;
@@ -35,23 +36,15 @@ internal static class DependencyInjection
         }
 
         builder.Services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
+
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddScoped<CurrentUser>();
         
         builder.Services
-            .AddAuthentication(static options =>
-            {
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(static options =>
             {
                 options.Authority = "http://localhost:8080/realms/development";
-                options.Events = new JwtBearerEvents
-                {
-                    OnAuthenticationFailed = context =>
-                    {
-                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                        return Task.CompletedTask;
-                    }
-                };
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -67,6 +60,7 @@ internal static class DependencyInjection
 
         builder.Services
             .AddGraphQLServer()
+            .AddAuthorization()
             .AddQueryType<Query>()
             .AddTypeExtension<OrderQueryTypeExtension>();
 
