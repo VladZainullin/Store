@@ -109,20 +109,21 @@ services:
       - seq_data:/var/lib/seq/data
     environment:
       - ACCEPT_EULA=Y
-  
-  minio:
-    image: 'bitnami/minio:2024.11.7'
-    container_name: minio
+        
+  s3:
+    image: quay.io/minio/minio:RELEASE.2025-07-23T15-54-02Z
+    container_name: s3
+    command: server /data --console-address ":9001"
     ports:
-      - '9000:9000'
-      - '9001:9001'
-    networks:
-      - minio-api-bridge
+      - "9000:9000"
+      - "9001:9001"
     volumes:
-      - minio_data:/var/lib/minio/data
+      - minio_data:/data
+    networks:
+      - s3-api-bridge
     environment:
-      - MINIO_ROOT_USER=minio-root-user
-      - MINIO_ROOT_PASSWORD=minio-root-password
+      MINIO_ROOT_USER: "admin"
+      MINIO_ROOT_PASSWORD: "Secure123$"
   
   api:
     image: store
@@ -170,13 +171,13 @@ services:
     depends_on:
       - database
       - seq
-      - minio
+      - s3
     networks:
       - database-api-bridge
-      - minio-api-bridge
+      - s3-api-bridge
 
 networks:
-  minio-api-bridge:
+  s3-api-bridge:
     driver: bridge
   database-api-bridge:
     driver: bridge
