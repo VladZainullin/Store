@@ -35,8 +35,6 @@ internal static class DependencyInjection
             builder.Services.AddSingleton<IMinioClient>(s => new MinioClient());
         }
 
-        builder.Services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
-
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddScoped<CurrentUser>();
         

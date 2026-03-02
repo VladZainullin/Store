@@ -39,8 +39,6 @@ public static class Program
 
             app.UseSerilogRequestLogging();
 
-            app.UseHealthChecks("/health");
-
             app.MapGraphQL().WithOptions(new GraphQLServerOptions
             {
                 Tool = { Enable = false }
