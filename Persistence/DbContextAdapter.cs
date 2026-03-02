@@ -17,20 +17,20 @@ internal sealed class DbContextAdapter(AppDbContext context) :
     IMigrationContext,
     ITransactionContext
 {
-    public IDbSet<Category> Categories { get; } = new DbSetAdapter<Category>(context);
+    public IDbSet<Category> Categories { get; } = new DbSetAdapter<AppDbContext, Category>(context);
     
-    public IDbSet<Product> Products { get; } = new DbSetAdapter<Product>(context);
+    public IDbSet<Product> Products { get; } = new DbSetAdapter<AppDbContext, Product>(context);
     
-    public IDbSet<Cart> Carts { get; } = new DbSetAdapter<Cart>(context);
+    public IDbSet<Cart> Carts { get; } = new DbSetAdapter<AppDbContext, Cart>(context);
     
-    public IDbSet<ProductInCart> ProductInCarts { get; } = new DbSetAdapter<ProductInCart>(context);
-    public IDbSet<Order> Orders { get; } = new DbSetAdapter<Order>(context);
+    public IDbSet<ProductInCart> ProductInCarts { get; } = new DbSetAdapter<AppDbContext, ProductInCart>(context);
+    public IDbSet<Order> Orders { get; } = new DbSetAdapter<AppDbContext, Order>(context);
     
-    public IDbSet<ProductInOrder> ProductInOrders { get; } = new DbSetAdapter<ProductInOrder>(context);
+    public IDbSet<ProductInOrder> ProductInOrders { get; } = new DbSetAdapter<AppDbContext, ProductInOrder>(context);
     
-    public IDbSet<ProductInCategory> ProductInCategories { get; } = new DbSetAdapter<ProductInCategory>(context);
-    public IDbSet<Characteristic> Characteristics { get; } = new DbSetAdapter<Characteristic>(context);
-    public IDbSet<Address> Addresses { get; } = new DbSetAdapter<Address>(context);
+    public IDbSet<ProductInCategory> ProductInCategories { get; } = new DbSetAdapter<AppDbContext, ProductInCategory>(context);
+    public IDbSet<Characteristic> Characteristics { get; } = new DbSetAdapter<AppDbContext, Characteristic>(context);
+    public IDbSet<Address> Addresses { get; } = new DbSetAdapter<AppDbContext, Address>(context);
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {

@@ -5,51 +5,67 @@ using Persistence.Contracts;
 
 namespace Persistence;
 
-internal class DbSetAdapter<T>(DbContext context) : IDbSet<T> where T : class
+internal class DbSetAdapter<TContext, TEntity>(TContext context) : IDbSet<TEntity>
+    where TEntity : class
+    where TContext : DbContext
 {
-    private readonly DbSet<T> _set = context.Set<T>();
-    
-    public void Update(T entity)
+    private LocalViewAdapter<TContext, TEntity>? _local;
+    private readonly DbSet<TEntity> _set = context.Set<TEntity>();
+
+    public virtual void Update(TEntity entity)
     {
         _set.Update(entity);
     }
 
-    public void UpdateRange(IEnumerable<T> entities)
+    public virtual void UpdateRange(IEnumerable<TEntity> entities)
     {
         _set.UpdateRange(entities);
     }
 
-    public void Add(T entity)
+    public virtual void Add(TEntity entity)
     {
         _set.Add(entity);
     }
 
-    public void AddRange(IEnumerable<T> entities)
+    public virtual void AddRange(IEnumerable<TEntity> entities)
     {
         _set.AddRange(entities);
     }
 
-    public void Remove(T entity)
+    public virtual void Remove(TEntity entity)
     {
         _set.Remove(entity);
     }
 
-    public void RemoveRange(IEnumerable<T> entities)
+    public virtual void RemoveRange(IEnumerable<TEntity> entities)
     {
         _set.RemoveRange(entities);
     }
 
-    public IEnumerator<T> GetEnumerator()
+    public virtual void Attach(TEntity entity)
     {
-        return ((IQueryable<T>)_set).GetEnumerator();
+        _set.Attach(entity);
     }
 
-    public Type ElementType => ((IQueryable<T>)_set).ElementType;
-    public Expression Expression => ((IQueryable<T>)_set).Expression;
-    public IQueryProvider Provider => ((IQueryable<T>)_set).Provider;
-    public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = new CancellationToken())
+    public virtual void AttachRanga(IEnumerable<TEntity> entities)
     {
-        return ((IAsyncEnumerable<T>)_set).GetAsyncEnumerator(cancellationToken);
+        _set.AttachRange(entities);
+    }
+
+    public ILocalView<TEntity> Local => _local ??= new LocalViewAdapter<TContext, TEntity>(context);
+
+    public virtual IEnumerator<TEntity> GetEnumerator()
+    {
+        return ((IQueryable<TEntity>)_set).GetEnumerator();
+    }
+
+    public virtual Type ElementType => ((IQueryable<TEntity>)_set).ElementType;
+    public virtual Expression Expression => ((IQueryable<TEntity>)_set).Expression;
+    public virtual IQueryProvider Provider => ((IQueryable<TEntity>)_set).Provider;
+
+    public virtual IAsyncEnumerator<TEntity> GetAsyncEnumerator(CancellationToken cancellationToken)
+    {
+        return ((IAsyncEnumerable<TEntity>)_set).GetAsyncEnumerator(cancellationToken);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
