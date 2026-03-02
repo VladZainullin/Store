@@ -69,8 +69,6 @@ internal static class DependencyInjection
 
         builder.Services.AddTransient<TimeProvider>(s => TimeProvider.System);
 
-        builder.Services.AddHealthChecks();
-
         return builder;
     }
 }
