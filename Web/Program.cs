@@ -17,21 +17,11 @@ public static class Program
 
         try
         {
-            builder.Host.UseSerilog(logger);
-
-            if (builder.Environment.IsDevelopment())
-            {
-                builder.Host.UseDefaultServiceProvider(static options =>
-                {
-                    options.ValidateOnBuild = true;
-                    options.ValidateScopes = true;
-                });
-            }
-
             builder
                 .AddPersistence()
-                .AddApplication()
-                .AddWeb();
+                .AddApplication();
+
+            builder.AddWeb();
 
             await using var app = builder.Build();
 

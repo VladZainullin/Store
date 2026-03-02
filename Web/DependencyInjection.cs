@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Minio;
-using Persistence;
+using Serilog;
 using Web.ObjectTypes;
 using Web.Options;
 using Web.Services;
@@ -14,8 +13,19 @@ namespace Web;
 
 internal static class DependencyInjection
 {
-    public static IHostApplicationBuilder AddWeb(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddWeb(this WebApplicationBuilder builder)
     {
+        builder.Services.AddSerilog();
+
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Host.UseDefaultServiceProvider(static options =>
+            {
+                options.ValidateOnBuild = true;
+                options.ValidateScopes = true;
+            });
+        }
+        
         if (!EF.IsDesignTime)
         {
             builder.Services.AddOptions<MinioOptions>().BindConfiguration("Minio");
