@@ -15,7 +15,7 @@ internal sealed class AppDesignTimeDbContextFactory : IDesignTimeDbContextFactor
             .AddJsonFile("./Properties/launchSettings.json")
             .Build();
 
-        var environmentVariablesSection = configuration.GetSection("profiles:https:environmentVariables");
+        var environmentVariablesSection = configuration.GetSection("profiles:Development:environmentVariables");
         
         var connectionString = environmentVariablesSection
             .GetChildren()
