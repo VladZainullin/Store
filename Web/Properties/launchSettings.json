@@ -10,7 +10,7 @@
 
         "Postgres__Host": "localhost",
         "Postgres__Port": "5432",
-        "Postgres__Username": "postgres",
+        "Postgres__Username": "developer",
         "Postgres__Password": "123456",
         "Postgres__SearchPath": "store",
         "Postgres__Database": "store",
