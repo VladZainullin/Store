@@ -51,11 +51,6 @@ internal static class DependencyInjection
                 };
             });
 
-        builder.Services.AddAuthorizationBuilder()
-            .SetFallbackPolicy(new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
-                .Build());
-
         builder.Services
             .AddGraphQLServer()
             .AddAuthorization()

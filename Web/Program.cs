@@ -38,10 +38,15 @@ public static class Program
             app.UseHttpsRedirection();
 
             app.UseSerilogRequestLogging();
+            
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseStaticFiles();
 
             app.MapGraphQL().WithOptions(new GraphQLServerOptions
             {
-                Tool = { Enable = false }
+                Tool = { ServeMode = GraphQLToolServeMode.Embedded }
             });
 
             await app.RunWithGraphQLCommandsAsync(args);
