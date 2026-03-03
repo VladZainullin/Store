@@ -2,6 +2,7 @@ using Domain.Entities.Addresses;
 using Domain.Entities.Carts;
 using Domain.Entities.Categories;
 using Domain.Entities.Characteristics;
+using Domain.Entities.MeasurementUnits;
 using Domain.Entities.Orders;
 using Domain.Entities.ProductInCarts;
 using Domain.Entities.ProductInCategories;
@@ -29,6 +30,8 @@ public interface IDbContext
     IDbSet<Characteristic> Characteristics { get; }
     
     IDbSet<Address> Addresses { get; }
+    
+    IDbSet<MeasurementUnit> MeasurementUnits { get; }
     
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

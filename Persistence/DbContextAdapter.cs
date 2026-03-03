@@ -2,6 +2,7 @@ using Domain.Entities.Addresses;
 using Domain.Entities.Carts;
 using Domain.Entities.Categories;
 using Domain.Entities.Characteristics;
+using Domain.Entities.MeasurementUnits;
 using Domain.Entities.Orders;
 using Domain.Entities.ProductInCarts;
 using Domain.Entities.ProductInCategories;
@@ -31,6 +32,8 @@ internal sealed class DbContextAdapter(AppDbContext context) :
     public IDbSet<ProductInCategory> ProductInCategories { get; } = new DbSetAdapter<AppDbContext, ProductInCategory>(context);
     public IDbSet<Characteristic> Characteristics { get; } = new DbSetAdapter<AppDbContext, Characteristic>(context);
     public IDbSet<Address> Addresses { get; } = new DbSetAdapter<AppDbContext, Address>(context);
+    
+    public IDbSet<MeasurementUnit> MeasurementUnits { get; } = new DbSetAdapter<AppDbContext, MeasurementUnit>(context);
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {
