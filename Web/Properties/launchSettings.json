@@ -13,7 +13,7 @@
         "Postgres__Username": "developer",
         "Postgres__Password": "123456",
         "Postgres__SearchPath": "store",
-        "Postgres__Database": "store",
+        "Postgres__Database": "development",
 
         "Minio__AccessKey": "store",
         "Minio__SecretKey": "pSX5Lps2l5HoogAXrX9UYl29WauJ6mLKPOt93HMF",
