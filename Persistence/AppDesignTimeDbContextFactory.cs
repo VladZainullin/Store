@@ -16,21 +16,29 @@ internal sealed class AppDesignTimeDbContextFactory : IDesignTimeDbContextFactor
             .Build();
 
         var environmentVariablesSection = configuration.GetSection("profiles:Development:environmentVariables");
-        
-        var connectionString = environmentVariablesSection
+
+        var postgresSections = environmentVariablesSection
             .GetChildren()
             .Where(static section => section.Key.StartsWith("Postgres__"))
-            .Select(static section => section.Key.Replace("Postgres__", string.Empty) + ':' + section.Value)
-            .Aggregate(static (firstPart, secondPart) => firstPart + secondPart);
+            .ToList();
+
+        var searchPath = postgresSections
+            .Where(static section => section.Key.EndsWith("SearchPath"))
+            .Select(static section => section.Value)
+            .SingleOrDefault();
+        
+        var connectionString = postgresSections
+            .Select(static section => section.Key.Replace("Postgres__", string.Empty) + '=' + section.Value)
+            .Aggregate(static (firstPart, secondPart) => firstPart + ';' + secondPart);
 
         var dbContextOptionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-
+        
         dbContextOptionsBuilder
             .UseSnakeCaseNamingConvention()
-            .UseNpgsql(connectionString, static builder =>
+            .UseNpgsql(connectionString, builder =>
             {
                 builder.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName);
-                builder.MigrationsHistoryTable(HistoryRepository.DefaultTableName);
+                builder.MigrationsHistoryTable(HistoryRepository.DefaultTableName, searchPath);
             });
         
         return new AppDbContext(dbContextOptionsBuilder.Options);
