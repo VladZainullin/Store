@@ -13,27 +13,28 @@ using Persistence.Contracts;
 
 namespace Persistence;
 
-internal sealed class DbContextAdapter(AppDbContext context) : 
+internal sealed class DbContextAdapter<TContext>(TContext context) : 
     IDbContext,
     IMigrationContext,
     ITransactionContext
+    where TContext : DbContext
 {
-    public IDbSet<Category> Categories { get; } = new DbSetAdapter<AppDbContext, Category>(context);
+    public IDbSet<Category> Categories { get; } = new DbSetAdapter<TContext, Category>(context);
     
-    public IDbSet<Product> Products { get; } = new DbSetAdapter<AppDbContext, Product>(context);
+    public IDbSet<Product> Products { get; } = new DbSetAdapter<TContext, Product>(context);
     
-    public IDbSet<Cart> Carts { get; } = new DbSetAdapter<AppDbContext, Cart>(context);
+    public IDbSet<Cart> Carts { get; } = new DbSetAdapter<TContext, Cart>(context);
     
-    public IDbSet<ProductInCart> ProductInCarts { get; } = new DbSetAdapter<AppDbContext, ProductInCart>(context);
-    public IDbSet<Order> Orders { get; } = new DbSetAdapter<AppDbContext, Order>(context);
+    public IDbSet<ProductInCart> ProductInCarts { get; } = new DbSetAdapter<TContext, ProductInCart>(context);
+    public IDbSet<Order> Orders { get; } = new DbSetAdapter<TContext, Order>(context);
     
-    public IDbSet<ProductInOrder> ProductInOrders { get; } = new DbSetAdapter<AppDbContext, ProductInOrder>(context);
+    public IDbSet<ProductInOrder> ProductInOrders { get; } = new DbSetAdapter<TContext, ProductInOrder>(context);
     
-    public IDbSet<ProductInCategory> ProductInCategories { get; } = new DbSetAdapter<AppDbContext, ProductInCategory>(context);
-    public IDbSet<Characteristic> Characteristics { get; } = new DbSetAdapter<AppDbContext, Characteristic>(context);
-    public IDbSet<Address> Addresses { get; } = new DbSetAdapter<AppDbContext, Address>(context);
+    public IDbSet<ProductInCategory> ProductInCategories { get; } = new DbSetAdapter<TContext, ProductInCategory>(context);
+    public IDbSet<Characteristic> Characteristics { get; } = new DbSetAdapter<TContext, Characteristic>(context);
+    public IDbSet<Address> Addresses { get; } = new DbSetAdapter<TContext, Address>(context);
     
-    public IDbSet<MeasurementUnit> MeasurementUnits { get; } = new DbSetAdapter<AppDbContext, MeasurementUnit>(context);
+    public IDbSet<MeasurementUnit> MeasurementUnits { get; } = new DbSetAdapter<TContext, MeasurementUnit>(context);
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {

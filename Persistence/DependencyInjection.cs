@@ -17,10 +17,11 @@ public static class DependencyInjection
         builder.Services.AddPooledDbContextFactory<AppDbContext>(ConfigureDbContext);
         
         builder.Services.AddScoped<DbContext>(sp => sp.GetRequiredService<AppDbContext>());
-        builder.Services.AddScoped<DbContextAdapter>();
-        builder.Services.AddScoped<IDbContext>(sp => sp.GetRequiredService<DbContextAdapter>());
-        builder.Services.AddScoped<IMigrationContext>(sp => sp.GetRequiredService<DbContextAdapter>());
-        builder.Services.AddScoped<ITransactionContext>(sp => sp.GetRequiredService<DbContextAdapter>());
+        builder.Services.AddScoped<DbContextAdapter<AppDbContext>>();
+        builder.Services.AddScoped<IDbContext>(sp => sp.GetRequiredService<DbContextAdapter<AppDbContext>>());
+        builder.Services.AddScoped<IMigrationContext>(sp => sp.GetRequiredService<DbContextAdapter<AppDbContext>>());
+        builder.Services.AddScoped<ITransactionContext>(sp => sp.GetRequiredService<DbContextAdapter<AppDbContext>>());
+        builder.Services.AddSingleton<IDbContextFactory, DbContextFactoryAdapter<AppDbContext>>();
         
         return builder;
     }
